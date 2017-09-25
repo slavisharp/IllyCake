@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class DeletableEntity : IDeletableEntity
+    public abstract class DeletableEntity : IDeletableEntity
     {
         public bool IsDeleted { get; set; }
 
