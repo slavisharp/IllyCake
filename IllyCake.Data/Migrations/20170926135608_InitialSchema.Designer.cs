@@ -12,7 +12,7 @@ using System;
 namespace IllyCake.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170925135941_InitialSchema")]
+    [Migration("20170926135608_InitialSchema")]
     partial class InitialSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -154,7 +154,7 @@ namespace IllyCake.Web.Data.Migrations
 
                     b.HasIndex("ImageId");
 
-                    b.ToTable("CakeImage");
+                    b.ToTable("CakeImages");
                 });
 
             modelBuilder.Entity("IllyCake.Data.Models.ImageFile", b =>
@@ -426,7 +426,7 @@ namespace IllyCake.Web.Data.Migrations
                     b.HasOne("IllyCake.Data.Models.Quote", "Quote")
                         .WithMany("AuditTrails")
                         .HasForeignKey("QuoteId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("IllyCake.Data.Models.ApplicationUser", "User")
                         .WithMany()

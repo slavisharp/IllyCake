@@ -128,7 +128,7 @@ namespace IllyCake.Web.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CakeImage",
+                name: "CakeImages",
                 columns: table => new
                 {
                     CakeId = table.Column<int>(type: "int", nullable: false),
@@ -136,15 +136,15 @@ namespace IllyCake.Web.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CakeImage", x => new { x.CakeId, x.ImageId });
+                    table.PrimaryKey("PK_CakeImages", x => new { x.CakeId, x.ImageId });
                     table.ForeignKey(
-                        name: "FK_CakeImage_Cakes_CakeId",
+                        name: "FK_CakeImages_Cakes_CakeId",
                         column: x => x.CakeId,
                         principalTable: "Cakes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CakeImage_ImageFiles_ImageId",
+                        name: "FK_CakeImages_ImageFiles_ImageId",
                         column: x => x.ImageId,
                         principalTable: "ImageFiles",
                         principalColumn: "Id",
@@ -171,7 +171,7 @@ namespace IllyCake.Web.Data.Migrations
                         column: x => x.QuoteId,
                         principalTable: "Quotes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_QuoteAuditTrails_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -239,8 +239,8 @@ namespace IllyCake.Web.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CakeImage_ImageId",
-                table: "CakeImage",
+                name: "IX_CakeImages_ImageId",
+                table: "CakeImages",
                 column: "ImageId");
 
             migrationBuilder.CreateIndex(
@@ -284,7 +284,7 @@ namespace IllyCake.Web.Data.Migrations
                 table: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CakeImage");
+                name: "CakeImages");
 
             migrationBuilder.DropTable(
                 name: "Paragraphs");

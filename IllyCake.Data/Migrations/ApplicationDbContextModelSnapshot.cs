@@ -153,7 +153,7 @@ namespace IllyCake.Web.Data.Migrations
 
                     b.HasIndex("ImageId");
 
-                    b.ToTable("CakeImage");
+                    b.ToTable("CakeImages");
                 });
 
             modelBuilder.Entity("IllyCake.Data.Models.ImageFile", b =>
@@ -425,7 +425,7 @@ namespace IllyCake.Web.Data.Migrations
                     b.HasOne("IllyCake.Data.Models.Quote", "Quote")
                         .WithMany("AuditTrails")
                         .HasForeignKey("QuoteId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("IllyCake.Data.Models.ApplicationUser", "User")
                         .WithMany()

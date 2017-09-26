@@ -47,6 +47,13 @@
                 .HasOne(ci => ci.Cake)
                 .WithMany(i => i.Images)
                 .HasForeignKey(ci => ci.CakeId);
+
+            //Quote Audit Trail
+            builder.Entity<QuoteAuditTrail>()
+                .HasOne(q => q.Quote)
+                .WithMany(q => q.AuditTrails)
+                .HasForeignKey(q => q.QuoteId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         public override int SaveChanges()
