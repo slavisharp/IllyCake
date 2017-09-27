@@ -5,18 +5,15 @@
 
     using Models;
     using Microsoft.EntityFrameworkCore;
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
 
     public class Repository<T> : IRepository<T>
         where T : class
     {
         public Repository(DbContext context)
         {
-            if (context == null)
-            {
-                throw new ArgumentException("An instance of DbContext is required to use this repository.", nameof(context));
-            }
-
-            this.Context = context;
+            this.Context = context ?? throw new ArgumentException("An instance of DbContext is required to use this repository.", nameof(context));
             this.DbSet = this.Context.Set<T>();
         }
 
@@ -37,9 +34,29 @@
             return this.DbSet.Find(id);
         }
 
+        public Task<T> GetByIdAsync(object id)
+        {
+            return this.DbSet.FindAsync(id);
+        }
+
         public void Add(T entity)
         {
             this.DbSet.Add(entity);
+        }
+
+        public Task AddAsync(T entity)
+        {
+            return this.DbSet.AddAsync(entity);
+        }
+
+        public void AddRange(IEnumerable<T> entities)
+        {
+            this.DbSet.AddRange(entities);
+        }
+
+        public Task AddRangeAsync(IEnumerable<T> entities)
+        {
+            return this.DbSet.AddRangeAsync(entities);
         }
 
         /// <summary>
@@ -73,6 +90,11 @@
         public void Save()
         {
             this.Context.SaveChanges();
+        }
+
+        public Task SaveAsync()
+        {
+            return this.Context.SaveChangesAsync();
         }
     }
 }

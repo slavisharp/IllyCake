@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using IllyCake.Web.Controllers;
-
 namespace Microsoft.AspNetCore.Mvc
 {
+    using IllyCake.Web.Controllers;
+    
     public static class UrlHelperExtensions
     {
         public static string EmailConfirmationLink(this IUrlHelper urlHelper, string userId, string code, string scheme)

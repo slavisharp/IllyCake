@@ -24,12 +24,15 @@
         public string Path { get; set; }
         
         [InverseProperty("TumbImage")]
-        public virtual ICollection<BlogPost> BlogPostTumbImages { get; set; }
+        public virtual ICollection<BlogPost> BlogPosts { get; set; }
 
         [InverseProperty("Image")]
-        public virtual ICollection<Paragraph> ParagraphImages { get; set; }
+        public virtual ICollection<Paragraph> Paragraphs { get; set; }
 
         [InverseProperty("Image")]
         public virtual ICollection<CakeImage> CakeImages { get; set; }
+
+        [InverseProperty("MainImage")]
+        public virtual ICollection<HomePage> HomePages { get; set; }
     }
 }

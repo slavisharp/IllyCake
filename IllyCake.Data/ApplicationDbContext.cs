@@ -1,10 +1,12 @@
 ﻿namespace IllyCake.Data
 {
-    using IllyCake.Data.Models;
-    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Linq;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+    using IllyCake.Data.Models;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -33,33 +35,37 @@
             base.OnModelCreating(builder);
 
             // Application User
-            builder.Entity<ApplicationUser>()
-                .HasIndex(u => u.IsDeleted);
+            BuildApplicationUser(builder);
 
             // Cake Images
-            builder.Entity<CakeImage>()
-                .HasKey(ci => new { ci.CakeId, ci.ImageId });
-            builder.Entity<CakeImage>()
-                .HasOne(ci => ci.Image)
-                .WithMany(i => i.CakeImages)
-                .HasForeignKey(ci => ci.ImageId);
-            builder.Entity<CakeImage>()
-                .HasOne(ci => ci.Cake)
-                .WithMany(i => i.Images)
-                .HasForeignKey(ci => ci.CakeId);
+            BuildCakeImages(builder);
 
-            //Quote Audit Trail
-            builder.Entity<QuoteAuditTrail>()
-                .HasOne(q => q.Quote)
-                .WithMany(q => q.AuditTrails)
-                .HasForeignKey(q => q.QuoteId)
-                .OnDelete(DeleteBehavior.Restrict);
+            // Quote Audit Trail
+            BuildQuoteAuditTrails(builder);
         }
 
         public override int SaveChanges()
         {
             this.ApplyAuditInfoRules();
             return base.SaveChanges();
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            this.ApplyAuditInfoRules();
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
+        public override int SaveChanges(bool acceptAllChangesOnSuccess)
+        {
+            this.ApplyAuditInfoRules();
+            return base.SaveChanges(acceptAllChangesOnSuccess);
+        }
+
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            this.ApplyAuditInfoRules();
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
 
         private void ApplyAuditInfoRules()
@@ -78,6 +84,35 @@
                     entity.Modified = DateTime.UtcNow;
                 }
             }
+        }
+        
+        private static void BuildApplicationUser(ModelBuilder builder)
+        {
+            builder.Entity<ApplicationUser>()
+                .HasIndex(u => u.IsDeleted);
+        }
+
+        private static void BuildCakeImages(ModelBuilder builder)
+        {
+            builder.Entity<CakeImage>()
+                .HasKey(ci => new { ci.CakeId, ci.ImageId });
+            builder.Entity<CakeImage>()
+                .HasOne(ci => ci.Image)
+                .WithMany(i => i.CakeImages)
+                .HasForeignKey(ci => ci.ImageId);
+            builder.Entity<CakeImage>()
+                .HasOne(ci => ci.Cake)
+                .WithMany(i => i.Images)
+                .HasForeignKey(ci => ci.CakeId);
+        }
+
+        private static void BuildQuoteAuditTrails(ModelBuilder builder)
+        {
+            builder.Entity<QuoteAuditTrail>()
+                .HasOne(q => q.Quote)
+                .WithMany(q => q.AuditTrails)
+                .HasForeignKey(q => q.QuoteId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

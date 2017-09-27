@@ -1,12 +1,13 @@
 ﻿namespace IllyCake.Web.Controllers
 {
+    using System;
+    using System.Diagnostics;
+    using Microsoft.AspNetCore.Mvc;
+
     using IllyCake.Data;
     using IllyCake.Data.Models;
     using IllyCake.Data.Repository;
     using IllyCake.Web.Models;
-    using Microsoft.AspNetCore.Mvc;
-    using System;
-    using System.Diagnostics;
 
     public class HomeController : BaseController
     {
@@ -16,18 +17,7 @@
 
         public IActionResult Index()
         {
-            var repo = new Repository<Cake>(base.dbContext);
-            var entity = new Cake()
-            {
-                Created = DateTime.Now,
-                DeletedOn = null,
-                Description = "First Cake",
-                IsDeleted = false,
-                Modified = DateTime.Now,
-                Name = "First Cake"
-            };
-            repo.Add(entity);
-            repo.Save();
+            TestCreateDb();
             return View();
         }
 
@@ -48,6 +38,22 @@
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        
+        private void TestCreateDb()
+        {
+            var repo = new Repository<Cake>(base.dbContext);
+            var entity = new Cake()
+            {
+                Created = DateTime.Now,
+                DeletedOn = null,
+                Description = "First Cake",
+                IsDeleted = false,
+                Modified = DateTime.Now,
+                Name = "First Cake"
+            };
+            repo.Add(entity);
+            repo.Save();
         }
     }
 }
