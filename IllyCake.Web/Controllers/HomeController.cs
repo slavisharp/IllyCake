@@ -18,7 +18,7 @@
 
         public IActionResult Index()
         {
-            TestCreateDb();
+            //TestCreateDb();
             return View();
         }
 

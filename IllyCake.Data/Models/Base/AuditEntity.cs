@@ -10,9 +10,8 @@
 
         [Required]
         public AuditActionType ActionType { get; set; }
-
+        
         [Required]
-        [MaxLength(1000)]
         public string Description { get; set; }
 
         [Required]
