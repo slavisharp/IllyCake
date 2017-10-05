@@ -1,6 +1,7 @@
 ﻿namespace IllyCake.Web
 {
     using IllyCake.Common.Services;
+    using IllyCake.Common.Settings;
     using IllyCake.Data;
     using IllyCake.Data.Models;
 
@@ -26,16 +27,20 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddConfigOptions<AppSettings>(Configuration, "Configuration");
+            ConfigureDataServices(services);
+            ConfigureWebServices(services);
+            ConfigureUserServices(services);
+        }
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
+        private static void ConfigureUserServices(IServiceCollection services)
+        {
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+        }
 
+        private static void ConfigureWebServices(IServiceCollection services)
+        {
             services.AddMvc();
 
             services.AddResponseCompression(options =>
@@ -44,6 +49,16 @@
                 options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "image/svg+xml" });
             });
             services.Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Fastest);
+        }
+
+        private void ConfigureDataServices(IServiceCollection services)
+        {
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +83,11 @@
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "areas",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                  );
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

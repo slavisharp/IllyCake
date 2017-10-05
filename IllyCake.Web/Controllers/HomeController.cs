@@ -8,10 +8,11 @@
     using IllyCake.Data.Models;
     using IllyCake.Data.Repository;
     using IllyCake.Web.Models;
+    using IllyCake.Common.Settings;
 
     public class HomeController : BaseController
     {
-        public HomeController(ApplicationDbContext contex) : base(contex)
+        public HomeController(ApplicationDbContext contex, AppSettings appSettings) : base(contex, appSettings)
         {
         }
 
