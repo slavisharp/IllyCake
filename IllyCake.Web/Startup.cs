@@ -1,19 +1,13 @@
 ﻿namespace IllyCake.Web
 {
-    using IllyCake.Common.Services;
     using IllyCake.Common.Settings;
-    using IllyCake.Data;
-    using IllyCake.Data.Models;
+    using IllyCake.Web.Config;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.ResponseCompression;
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using System.IO.Compression;
-    using System.Linq;
+    using System;
 
     public class Startup
     {
@@ -28,41 +22,13 @@
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddConfigOptions<AppSettings>(Configuration, "Configuration");
-            ConfigureDataServices(services);
-            ConfigureWebServices(services);
-            ConfigureUserServices(services);
+            DataServicesConfig.ConfigureDataServices(services, Configuration);
+            WebServicesConfig.ConfigureWebServices(services);
+            UserServicesConfig.ConfigureUserServices(services);
         }
-
-        private static void ConfigureUserServices(IServiceCollection services)
-        {
-            // Add application services.
-            services.AddTransient<IEmailSender, EmailSender>();
-        }
-
-        private static void ConfigureWebServices(IServiceCollection services)
-        {
-            services.AddMvc();
-
-            services.AddResponseCompression(options =>
-            {
-                options.Providers.Add<GzipCompressionProvider>();
-                options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "image/svg+xml" });
-            });
-            services.Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Fastest);
-        }
-
-        private void ConfigureDataServices(IServiceCollection services)
-        {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-        }
-
+                
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider, AppSettings settings)
         {
             if (env.IsDevelopment())
             {
@@ -92,6 +58,8 @@
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            RolesInitializer.InitializeRoles(serviceProvider, settings.UserRoles);
         }
     }
 }

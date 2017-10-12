@@ -1,0 +1,13 @@
+﻿<ul class="nav navbar-nav">
+    <li><a asp-area="" asp-controller="Home" asp-action="Index">Начало</a></li>
+    <li><a asp-area="" asp-controller="Quote" asp-action="Index">Заявка</a></li>
+    <li><a asp-area="" asp-controller="Cakes" asp-action="Index">Торти</a></li>
+    <li><a asp-area="" asp-controller="Blog" asp-action="Index">Блог</a></li>
+    <li><a asp-area="" asp-controller="Home" asp-action="About">За нас</a></li>
+    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Контакти</a></li>
+    @if (ViewBag.IsAdmin != null && (bool)ViewBag.IsAdmin == true)
+    {
+        <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Админ</a></li>
+    }
+</ul>
+@await Html.PartialAsync("_LoginPartial")

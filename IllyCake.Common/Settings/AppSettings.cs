@@ -2,6 +2,8 @@
 {
     public class AppSettings
     {
+        public string AdminRole { get; set; }
+
         public string[] UserRoles { get; set; }
 
         public CommonSettings Common { get; set; }

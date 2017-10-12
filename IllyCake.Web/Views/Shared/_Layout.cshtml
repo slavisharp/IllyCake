@@ -1,7 +1,9 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="bg">
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="Content-Language" content="bg">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     @RenderSection("Meta", required: false)
     <environment include="Development">
@@ -13,15 +15,12 @@
     @RenderSection("Styles", required: false)
 </head>
 <body>
-    <ul class="nav navbar-nav">
-        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-        <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-    </ul>
-    @await Html.PartialAsync("_LoginPartial")
-    <div class="container body-content">
+    <header>
+        @await Html.PartialAsync("_MenuPartial")
+    </header>
+    <section class="container body-content">
         @RenderBody()
-    </div>
+    </section>
     <footer></footer>
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
