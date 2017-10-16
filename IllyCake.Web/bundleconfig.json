@@ -1,14 +1,13 @@
-﻿// Configure bundling and minification for the project.
-// More info at https://go.microsoft.com/fwlink/?LinkId=808241
+﻿// MAIN SITE BUNDLES
 [
   {
-    "outputFileName": "wwwroot/css/main.min.css",     //ALL SITE CSS MINIFIED FOR LIFE AND STAGING
+    "outputFileName": "wwwroot/css/main.min.css", //ALL SITE CSS MINIFIED FOR LIFE AND STAGING
     "inputFiles": [
       "wwwroot/css/main.css"
     ]
   },
   {
-    "outputFileName": "wwwroot/js/full-site.min.js",     // ALL SCRIPTS(WITH LIBRARIES) MINIFIED FOR LIVE VERSION
+    "outputFileName": "wwwroot/js/full-site.min.js", // ALL SCRIPTS(WITH LIBRARIES) MINIFIED FOR LIVE VERSION
     "inputFiles": [
       "wwwroot/lib/jquery/dist/jquery.min.js",
       "wwwroot/js/site.min.js"
@@ -20,7 +19,7 @@
     "sourceMap": false
   },
   {
-    "outputFileName": "wwwroot/js/site.min.js",     // SITE SCRYPTS MINIFIED FOR STAGING
+    "outputFileName": "wwwroot/js/site.min.js", // SITE SCRYPTS MINIFIED FOR STAGING
     "inputFiles": [
       "wwwroot/js/site.js"
     ],
@@ -31,9 +30,32 @@
     "sourceMap": true
   },
   {
-    "outputFileName": "wwwroot/js/site.js",     // UNMINIFIED SITE SCRIPTS FOR DEV
+    "outputFileName": "wwwroot/js/site.js", // UNMINIFIED SITE SCRIPTS FOR DEV
     "inputFiles": [
       "Scripts/**/*.js"
+    ],
+    "minify": {
+      "enabled": false,
+      "renameLocals": false
+    },
+    "sourceMap": true
+  },
+  // ADMIN AREA BUNDLES
+  {
+    "outputFileName": "wwwroot/js/admin.min.js", // MINIFIED ADMIN SCRIPTS FOR DEV
+    "inputFiles": [
+      "wwwroot/js/admin.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": true
+  }, 
+  {
+    "outputFileName": "wwwroot/js/admin.js", // UNMINIFIED ADMIN SCRIPTS FOR DEV
+    "inputFiles": [
+      "Areas/Admin/Scripts/**/*.js"
     ],
     "minify": {
       "enabled": false,

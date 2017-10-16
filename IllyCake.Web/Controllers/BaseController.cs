@@ -2,23 +2,27 @@
 {
     using IllyCake.Common.Settings;
     using IllyCake.Data;
-    using IllyCake.Data.Models;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Filters;
 
     public class BaseController : Controller
     {
         protected ApplicationDbContext dbContext;
         protected AppSettings appSettings;
-        protected bool IsAdmin;
 
-        public BaseController(ApplicationDbContext context, AppSettings appSettings, UserManager<ApplicationUser> userManager,
-          SignInManager<ApplicationUser> signInManager)
+        public BaseController(ApplicationDbContext context, AppSettings appSettings)
         {
             this.dbContext = context;
             this.appSettings = appSettings;
-            //this.IsAdmin = userManager.IsInRoleAsync(Us)
-            //ViewBag.IsAdmin = this.IsAdmin;
+        }
+
+        protected bool IsAdmin { get; set; }
+
+        public override void OnActionExecuted(ActionExecutedContext context)
+        {
+            base.OnActionExecuted(context);
+            this.IsAdmin = base.User != null && base.User.IsInRole(this.appSettings.AdminRole);
+            ViewBag.IsAdmin = this.IsAdmin;
         }
     }
 }

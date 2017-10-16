@@ -25,10 +25,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Styles\" />
     <Folder Include="Areas\Admin\ViewModels\CakeViewModels\" />
+    <Folder Include="Areas\Admin\ViewModels\BlogViewModels\" />
+    <Folder Include="Areas\Admin\ViewModels\HomeViewModels\" />
+    <Folder Include="Areas\Admin\ViewModels\QuoteViewModels\" />
     <Folder Include="Areas\Admin\Views\BlogPosts\" />
     <Folder Include="Areas\Admin\Views\Cakes\" />
-    <Folder Include="Areas\Admin\Views\Home\" />
     <Folder Include="Areas\Admin\Views\Quotes\" />
     <Folder Include="ViewModels\HomePageViewModels\" />
     <Folder Include="ViewModels\BlogPostViewModels\" />

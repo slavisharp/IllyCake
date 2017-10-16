@@ -1,0 +1,36 @@
+﻿<nav class="navbar navbar-expand-md navbar-light bg-light rounded mb-3">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav text-md-center nav-justified w-100">
+            <li class="nav-item active">
+                <i class="fa fa-home" aria-hidden="true"></i>
+                <a class="nav-link d-inline-block" asp-area="Admin" asp-controller="Home" asp-action="Index">Начало</a>
+            </li>
+            <li class="nav-item">
+                <i class="fa fa-list" aria-hidden="true"></i>
+                <a class="nav-link d-inline-block" asp-area="Admin" asp-controller="Quotes" asp-action="Index">Заявки</a>
+            </li>
+            <li class="nav-item">
+                <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                <a class="nav-link d-inline-block" asp-area="Admin" asp-controller="Cakes" asp-action="Index">Торти</a>
+            </li>
+            <li class="nav-item">
+                <i class="fa fa-address-card" aria-hidden="true"></i>
+                <a class="nav-link d-inline-block" asp-area="Admin" asp-controller="Blog" asp-action="Index">Блог</a>
+            </li>
+            <li class="nav-item">
+                <i class="fa fa-sitemap" aria-hidden="true"></i>
+                <a class="nav-link d-inline-block" asp-area="" asp-controller="Home" asp-action="Index">Към сайта</a>
+            </li>
+            <li class="nav-item">
+                <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+                    <div class="nav-item text-center">
+                        <button type="submit" class="btn btn-link navbar-btn nav-link d-inline-block fa fa-sign-out fa-2x"></button>
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
