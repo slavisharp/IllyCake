@@ -1,9 +1,7 @@
-namespace IllyCake.Web.Services
+namespace IllyCake.Common.Services
 {
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
-
-    using IllyCake.Common.Services;
 
     public static class EmailSenderExtensions
     {

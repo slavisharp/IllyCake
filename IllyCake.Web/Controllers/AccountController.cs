@@ -13,7 +13,6 @@
     using IllyCake.Common.Services;
     using IllyCake.Data.Models;
     using IllyCake.Web.Models.AccountViewModels;
-    using IllyCake.Web.Services;
     
     [Authorize]
     [Route("[controller]/[action]")]

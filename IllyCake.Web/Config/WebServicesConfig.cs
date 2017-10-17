@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.ResponseCompression;
     using Microsoft.Extensions.DependencyInjection;
+    using NonFactors.Mvc.Grid;
     using System.IO.Compression;
     using System.Linq;
 
@@ -11,7 +12,7 @@
         internal static void ConfigureWebServices(IServiceCollection services)
         {
             services.AddMvc();
-
+            services.AddMvcGrid();
             services.AddResponseCompression(options =>
             {
                 options.Providers.Add<GzipCompressionProvider>();

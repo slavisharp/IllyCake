@@ -15,7 +15,6 @@
     using IllyCake.Common.Services;
     using IllyCake.Data.Models;
     using IllyCake.Web.Models.ManageViewModels;
-    using IllyCake.Web.Services;
     
     [Authorize]
     [Route("[controller]/[action]")]

@@ -8,9 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Runtime" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="2.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" PrivateAssets="All" />
+    <PackageReference Include="NonFactors.Grid.Core.Mvc6" Version="2.1.1" />
+    <PackageReference Include="NonFactors.Grid.Mvc6" Version="2.1.1" />
+    <PackageReference Include="TagHelperSamples.Bootstrap" Version="2.0.30" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,16 +29,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Styles\" />
     <Folder Include="Areas\Admin\ViewModels\CakeViewModels\" />
     <Folder Include="Areas\Admin\ViewModels\BlogViewModels\" />
     <Folder Include="Areas\Admin\ViewModels\HomeViewModels\" />
     <Folder Include="Areas\Admin\ViewModels\QuoteViewModels\" />
-    <Folder Include="Areas\Admin\Views\BlogPosts\" />
-    <Folder Include="Areas\Admin\Views\Cakes\" />
-    <Folder Include="Areas\Admin\Views\Quotes\" />
     <Folder Include="ViewModels\HomePageViewModels\" />
-    <Folder Include="ViewModels\BlogPostViewModels\" />
     <Folder Include="ViewModels\CakeViewModels\" />
     <Folder Include="ViewModels\QuoteViewModels\" />
   </ItemGroup>

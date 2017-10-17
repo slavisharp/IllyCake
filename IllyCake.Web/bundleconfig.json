@@ -51,7 +51,7 @@
       "renameLocals": true
     },
     "sourceMap": true
-  }, 
+  },
   {
     "outputFileName": "wwwroot/js/admin.js", // UNMINIFIED ADMIN SCRIPTS FOR DEV
     "inputFiles": [
@@ -62,5 +62,9 @@
       "renameLocals": false
     },
     "sourceMap": true
+  },
+  {
+    "outputFileName": "wwwroot/css/admin.min.css", // ADMIN STYLES MINIFIED
+    "inputFiles": ["wwwroot/css/admin.css"]
   }
 ]
