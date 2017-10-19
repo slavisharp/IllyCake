@@ -11,7 +11,7 @@
     public class Repository<T> : IRepository<T>
         where T : class
     {
-        public Repository(DbContext context)
+        public Repository(ApplicationDbContext context)
         {
             this.Context = context ?? throw new ArgumentException("An instance of DbContext is required to use this repository.", nameof(context));
             this.DbSet = this.Context.Set<T>();

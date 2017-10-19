@@ -6,8 +6,7 @@
 
     public class CakesController : AdminController
     {
-        public CakesController(ApplicationDbContext dbContext, AppSettings appSettings)
-            :base(dbContext, appSettings)
+        public CakesController(AppSettings appSettings) : base(appSettings)
         {
         }
 

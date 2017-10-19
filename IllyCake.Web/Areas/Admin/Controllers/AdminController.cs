@@ -10,8 +10,7 @@
     [Authorize(Roles = "Admin")]
     public class AdminController : BaseController
     {
-        public AdminController(ApplicationDbContext dbContext, AppSettings appSettings) 
-            :base(dbContext, appSettings)
+        public AdminController(AppSettings appSettings) : base(appSettings)
         {
 
         }

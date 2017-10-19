@@ -7,12 +7,10 @@
 
     public class BaseController : Controller
     {
-        protected ApplicationDbContext dbContext;
         protected AppSettings appSettings;
 
-        public BaseController(ApplicationDbContext context, AppSettings appSettings)
+        public BaseController(AppSettings appSettings)
         {
-            this.dbContext = context;
             this.appSettings = appSettings;
         }
 

@@ -2,6 +2,7 @@
 {
     using IllyCake.Data;
     using IllyCake.Data.Models;
+    using IllyCake.Data.Repository;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
@@ -25,6 +26,8 @@
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         }
     }
 }

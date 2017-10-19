@@ -6,8 +6,7 @@
 
     public class BlogPostsController : AdminController
     {
-        public BlogPostsController(ApplicationDbContext dbContext, AppSettings appSettings)
-            :base(dbContext, appSettings)
+        public BlogPostsController(AppSettings appSettings) : base(appSettings)
         {
         }
 

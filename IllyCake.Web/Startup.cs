@@ -25,6 +25,7 @@
             DataServicesConfig.ConfigureDataServices(services, Configuration);
             WebServicesConfig.ConfigureWebServices(services);
             UserServicesConfig.ConfigureUserServices(services);
+            ApplicationServicesConfig.ConfigureAppServices(services);
         }
                 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

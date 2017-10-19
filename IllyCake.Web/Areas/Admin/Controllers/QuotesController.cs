@@ -6,8 +6,7 @@
 
     public class QuotesController : AdminController
     {
-        public QuotesController(ApplicationDbContext dbContext, AppSettings appSettings)
-            :base(dbContext, appSettings)
+        public QuotesController(AppSettings appSettings) : base(appSettings)
         {
         }
 
