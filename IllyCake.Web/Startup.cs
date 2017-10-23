@@ -22,6 +22,7 @@
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddConfigOptions<AppSettings>(Configuration, "Configuration");
+            services.AddMemoryCache();
             DataServicesConfig.ConfigureDataServices(services, Configuration);
             WebServicesConfig.ConfigureWebServices(services);
             UserServicesConfig.ConfigureUserServices(services);
