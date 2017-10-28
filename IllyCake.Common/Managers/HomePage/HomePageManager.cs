@@ -17,12 +17,12 @@
 
         public IRepository<HomePage> Repository => this.repository;
 
-        public HomePage Create(ICreateModel input)
+        public HomePage Create(IHomePageCreateModel input)
         {
             throw new NotImplementedException();
         }
 
-        public Task<HomePage> CreateAsync(ICreateModel input)
+        public Task<HomePage> CreateAsync(IHomePageCreateModel input)
         {
             throw new NotImplementedException();
         }
@@ -37,22 +37,22 @@
             throw new NotImplementedException();
         }
 
-        public IQueryable<HomePage> Search(ISearchModel search)
+        public IQueryable<HomePage> Search(IHomePageSearchModel search)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IQueryable<HomePage>> SearchAsync(ISearchModel search)
+        public Task<IQueryable<HomePage>> SearchAsync(IHomePageSearchModel search)
         {
             throw new NotImplementedException();
         }
 
-        public HomePage Update(IUpdateModel input)
+        public HomePage Update(IHomePageUpdateModel input)
         {
             throw new NotImplementedException();
         }
 
-        public Task<HomePage> UpdateAsync(IUpdateModel input)
+        public Task<HomePage> UpdateAsync(IHomePageUpdateModel input)
         {
             throw new NotImplementedException();
         }

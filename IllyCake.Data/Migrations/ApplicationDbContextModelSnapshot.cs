@@ -89,6 +89,14 @@ namespace IllyCake.Web.Data.Migrations
 
                     b.Property<bool>("IsDeleted");
 
+                    b.Property<int>("LastState");
+
+                    b.Property<string>("MetaDescription")
+                        .HasMaxLength(150);
+
+                    b.Property<string>("MetaKeyWords")
+                        .HasMaxLength(200);
+
                     b.Property<DateTime?>("Modified");
 
                     b.Property<string>("ShortDescription")
@@ -107,6 +115,9 @@ namespace IllyCake.Web.Data.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired();
+
+                    b.Property<string>("VideoUrl")
+                        .HasMaxLength(1000);
 
                     b.Property<int>("ViewCount");
 
@@ -194,6 +205,10 @@ namespace IllyCake.Web.Data.Migrations
                     b.Property<string>("Extension")
                         .HasMaxLength(127);
 
+                    b.Property<string>("GuidName")
+                        .IsRequired()
+                        .HasMaxLength(127);
+
                     b.Property<string>("MimeType")
                         .HasMaxLength(127);
 
@@ -204,6 +219,8 @@ namespace IllyCake.Web.Data.Migrations
                     b.Property<string>("Path")
                         .IsRequired()
                         .HasMaxLength(200);
+
+                    b.Property<DateTime>("UploadedDate");
 
                     b.HasKey("Id");
 
@@ -226,6 +243,9 @@ namespace IllyCake.Web.Data.Migrations
                         .IsRequired();
 
                     b.Property<int>("Type");
+
+                    b.Property<string>("VideoUrl")
+                        .HasMaxLength(1000);
 
                     b.HasKey("Id");
 
@@ -256,6 +276,8 @@ namespace IllyCake.Web.Data.Migrations
 
                     b.Property<decimal?>("Price");
 
+                    b.Property<string>("PrivateNotes");
+
                     b.Property<int>("Status");
 
                     b.Property<string>("UserId")
@@ -278,8 +300,7 @@ namespace IllyCake.Web.Data.Migrations
                     b.Property<int>("ActionType");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(1000);
+                        .IsRequired();
 
                     b.Property<string>("QuoteId")
                         .IsRequired();
@@ -294,6 +315,19 @@ namespace IllyCake.Web.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("QuoteAuditTrails");
+                });
+
+            modelBuilder.Entity("IllyCake.Data.Models.QuoteImage", b =>
+                {
+                    b.Property<string>("QuoteId");
+
+                    b.Property<int>("ImageId");
+
+                    b.HasKey("QuoteId", "ImageId");
+
+                    b.HasIndex("ImageId");
+
+                    b.ToTable("QuoteImage");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -468,6 +502,19 @@ namespace IllyCake.Web.Data.Migrations
                     b.HasOne("IllyCake.Data.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("IllyCake.Data.Models.QuoteImage", b =>
+                {
+                    b.HasOne("IllyCake.Data.Models.ImageFile", "Image")
+                        .WithMany("QuoteImages")
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("IllyCake.Data.Models.Quote", "Quote")
+                        .WithMany("Images")
+                        .HasForeignKey("QuoteId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

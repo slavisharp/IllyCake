@@ -1,6 +1,5 @@
 ﻿namespace IllyCake.Web.Config
 {
-    using System;
     using Microsoft.Extensions.DependencyInjection;
     using IllyCake.Common.Managers;
 
@@ -9,6 +8,9 @@
         internal static void ConfigureAppServices(IServiceCollection services)
         {
             services.AddTransient<IHomePageManager, HomePageManager>();
+            services.AddTransient<IBlogPostManager, BlogPostManager>();
+            services.AddTransient<IQuoteManager, QuoteManager>();
+            services.AddTransient<IImageManager, ImageManager>();
         }
     }
 }

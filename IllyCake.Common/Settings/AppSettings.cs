@@ -6,11 +6,19 @@
 
         public string[] UserRoles { get; set; }
 
-        public CommonSettings Common { get; set; }
+        public URLSettings URLS { get; set; }
     }
 
-    public class CommonSettings
+    public class URLSettings
     {
         public string WebAddressDomain { get; set; }
+
+        public string BlogImagesRelativePath { get; set; }
+
+        public string CakeImagesRelativePath { get; set; }
+
+        public string HomePaeImagesRelativePath { get; set; }
+
+        public string QuoteImagesRelativePath { get; set; }
     }
 }

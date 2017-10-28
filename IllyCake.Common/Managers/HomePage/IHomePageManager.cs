@@ -9,17 +9,17 @@
     {
         IRepository<HomePage> Repository { get; }
 
-        IQueryable<HomePage> Search(ISearchModel search);
+        IQueryable<HomePage> Search(IHomePageSearchModel search);
 
-        Task<IQueryable<HomePage>> SearchAsync(ISearchModel search);
+        Task<IQueryable<HomePage>> SearchAsync(IHomePageSearchModel search);
 
-        HomePage Create(ICreateModel input);
+        HomePage Create(IHomePageCreateModel input);
 
-        Task<HomePage> CreateAsync(ICreateModel input);
+        Task<HomePage> CreateAsync(IHomePageCreateModel input);
 
-        HomePage Update(IUpdateModel input);
+        HomePage Update(IHomePageUpdateModel input);
 
-        Task<HomePage> UpdateAsync(IUpdateModel input);
+        Task<HomePage> UpdateAsync(IHomePageUpdateModel input);
 
         bool Delete(int id);
 

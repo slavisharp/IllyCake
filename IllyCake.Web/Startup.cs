@@ -39,8 +39,10 @@
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error/Index");
             }
+
+            app.UseStatusCodePagesWithReExecute("/Error/Index", "?statusCode={0}");
 
             app.UseResponseCompression();
 

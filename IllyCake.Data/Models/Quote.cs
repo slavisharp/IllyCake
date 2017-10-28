@@ -19,6 +19,8 @@
         [Required]
         public string Description { get; set; }
 
+        public string PrivateNotes { get; set; }
+
         [Required]
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
@@ -28,6 +30,9 @@
         public QuoteStatus Status { get; set; }
 
         public DateTime? DateCompleted { get; set; }
+
+        [InverseProperty("Quote")]
+        public virtual ICollection<QuoteImage> Images { get; set; }
 
         [InverseProperty("Quote")]
         public virtual ICollection<QuoteAuditTrail> AuditTrails { get; set; }

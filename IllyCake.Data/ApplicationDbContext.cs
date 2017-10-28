@@ -40,6 +40,9 @@
             // Cake Images
             BuildCakeImages(builder);
 
+            // Quote Images
+            BuilQuoteImages(builder);
+
             // Quote Audit Trail
             BuildQuoteAuditTrails(builder);
         }
@@ -85,7 +88,7 @@
                 }
             }
         }
-        
+
         private static void BuildApplicationUser(ModelBuilder builder)
         {
             builder.Entity<ApplicationUser>()
@@ -104,6 +107,20 @@
                 .HasOne(ci => ci.Cake)
                 .WithMany(i => i.Images)
                 .HasForeignKey(ci => ci.CakeId);
+        }
+
+        private void BuilQuoteImages(ModelBuilder builder)
+        {
+            builder.Entity<QuoteImage>()
+                .HasKey(ci => new { ci.QuoteId, ci.ImageId });
+            builder.Entity<QuoteImage>()
+                .HasOne(ci => ci.Image)
+                .WithMany(i => i.QuoteImages)
+                .HasForeignKey(ci => ci.ImageId);
+            builder.Entity<QuoteImage>()
+                .HasOne(ci => ci.Quote)
+                .WithMany(i => i.Images)
+                .HasForeignKey(ci => ci.QuoteId);
         }
 
         private static void BuildQuoteAuditTrails(ModelBuilder builder)

@@ -22,6 +22,9 @@
         public int TumbImageId { get; set; }
         public virtual ImageFile TumbImage { get; set; }
 
+        [MaxLength(1000)]
+        public string VideoUrl { get; set; }
+
         [Required]
         [MaxLength(500)]
         public string ShortDescription { get; set; }
@@ -32,9 +35,18 @@
         public DateTime? Modified { get; set; }
 
         [Required]
+        public BlogPostStates LastState { get; set; }
+
+        [Required]
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
 
         public int ViewCount { get; set; }
+
+        [MaxLength(150)]
+        public string MetaDescription { get; set; }
+
+        [MaxLength(200)]
+        public string MetaKeyWords { get; set; }
     }
 }

@@ -12,6 +12,9 @@
 
         public int? ImageId { get; set; }
         public virtual ImageFile Image { get; set; }
+        
+        [MaxLength(1000)]
+        public string VideoUrl { get; set; }
 
         [Required]
         public ParagraphType Type { get; set; }
@@ -26,6 +29,8 @@
 
     public enum ParagraphType
     {
-        Default = 1
+        Default = 1,
+        WithImage = 2,
+        WithVideo = 3
     }
 }
