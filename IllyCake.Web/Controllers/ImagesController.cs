@@ -5,7 +5,9 @@
     using IllyCake.Web.ViewModels;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using System.Collections.Generic;
     using System.IO;
+    using System.Threading.Tasks;
 
     public class ImagesController : BaseController
     {
@@ -17,16 +19,28 @@
         }
 
         [HttpPost]
-        public JsonResult UploadQuoteImage(IFormFile image)
+        public async Task<IActionResult> UploadQuoteImage()
         {
-            byte[] imageBytes = null;
-            using (BinaryReader reader = new BinaryReader(image.OpenReadStream()))
+            var images = this.Request.Form.Files;
+            if (images == null || images.Count == 0)
             {
-                imageBytes = reader.ReadBytes((int)image.Length);
+                return BadRequest("Няма избрани файлове!");
             }
 
-            var imageResult = this.imageManager.AddImage(appSettings.URLS.QuoteImagesRelativePath, image.FileName, image.ContentType, image.Length, imageBytes);
-            return Json(new ImageFileViewModel() { Id = imageResult.Id, Name = imageResult.Name, RelativePath = imageResult.Path });
+            byte[] imageBytes = null;
+            IList<ImageFileViewModel> imagesResult = new List<ImageFileViewModel>(images.Count);
+            foreach (var image in images)
+            {
+                using (BinaryReader reader = new BinaryReader(image.OpenReadStream()))
+                {
+                    imageBytes = reader.ReadBytes((int)image.Length);
+                }
+
+                var imageResult = await this.imageManager.AddQuoteImageAsync(image.FileName, image.ContentType, image.Length, imageBytes);
+                imagesResult.Add(new ImageFileViewModel() { Id = imageResult.Id, Name = imageResult.Name, RelativePath = imageResult.Path });
+            }
+
+            return Json(imagesResult);
         }
     }
 }

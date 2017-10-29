@@ -1,9 +1,10 @@
 ﻿namespace IllyCake.Common.Managers
 {
     using IllyCake.Data.Models;
+    using System.Threading.Tasks;
 
     public interface IImageManager
     {
-        ImageFile AddImage(string relativePath, string fileName, string contentType, long length, byte[] imageBytes);
+        Task<ImageFile> AddQuoteImageAsync(string fileName, string contentType, long length, byte[] imageBytes);
     }
 }

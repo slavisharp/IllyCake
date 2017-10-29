@@ -15,10 +15,18 @@
 
         public string BlogImagesRelativePath { get; set; }
 
+        public string BlogImagesFileRelativePath { get; set; }
+
         public string CakeImagesRelativePath { get; set; }
+
+        public string CakeImagesFileRelativePath { get; set; }
 
         public string HomePaeImagesRelativePath { get; set; }
 
+        public string HomePaeImagesFileRelativePath { get; set; }
+
         public string QuoteImagesRelativePath { get; set; }
+
+        public string QuoteImagesFileRelativePath { get; set; }
     }
 }
