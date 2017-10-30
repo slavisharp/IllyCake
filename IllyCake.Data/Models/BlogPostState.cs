@@ -1,6 +1,7 @@
 ﻿namespace IllyCake.Data.Models
 {
     using System;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public class BlogPostState
@@ -21,8 +22,13 @@
 
     public enum BlogPostStates
     {
+        [DisplayName("Чернова")]
         Draft = 1,
+
+        [DisplayName("Публикуван")]
         Published = 2,
+
+        [DisplayName("Архивиран")]
         Archived = 3
     }
 }

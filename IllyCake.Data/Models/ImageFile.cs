@@ -38,12 +38,12 @@
         public virtual ICollection<Paragraph> Paragraphs { get; set; }
 
         [InverseProperty("Image")]
-        public virtual ICollection<CakeImage> CakeImages { get; set; }
+        public virtual ICollection<ProductImage> ProductImages { get; set; }
 
         [InverseProperty("Image")]
         public virtual ICollection<QuoteImage> QuoteImages { get; set; }
 
-        [InverseProperty("MainImage")]
+        [InverseProperty("BackgroundImage")]
         public virtual ICollection<HomePage> HomePages { get; set; }
     }
 }

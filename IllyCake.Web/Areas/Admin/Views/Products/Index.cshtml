@@ -1,0 +1,24 @@
+﻿@model IEnumerable<ProductListViewModel>
+@{
+    ViewBag.Title = "Продукти";
+}
+
+<h2>Продукти</h2>
+
+@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.Name).Titled("Име");
+        columns.Add(model => model.Price).Titled("Цена");
+        columns.Add(model => model.Category).Titled("Категория").Filterable(false);
+        columns.Add(model => model.Type).Titled("Тип");
+        columns.Add(model => model.Created).Titled("Създаден").Filterable(false); ;
+        columns.Add(model => model.Modified).Titled("Модифициран").Filterable(false);
+        columns.Add(model => model.OrderedCount).Titled("Поръчани бройки").Filterable(false); ;
+        columns.Add(model => model.ShowOnHomePage).Titled("Акцентиран");
+    })
+    .Filterable()
+    .Sortable()
+    .Pageable(p => { p.RowsPerPage = 20; })
+)

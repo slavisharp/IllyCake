@@ -17,9 +17,9 @@
 
         public string BlogImagesFileRelativePath { get; set; }
 
-        public string CakeImagesRelativePath { get; set; }
+        public string ProductImagesRelativePath { get; set; }
 
-        public string CakeImagesFileRelativePath { get; set; }
+        public string ProductImagesFileRelativePath { get; set; }
 
         public string HomePaeImagesRelativePath { get; set; }
 

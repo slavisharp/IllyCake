@@ -18,17 +18,35 @@
 
         public DbSet<BlogPost> BlogPosts { get; set; }
 
-        public DbSet<Cake> Cakes { get; set; }
+        public DbSet<BlogPostState> BlogPostStates { get; set; }
 
         public DbSet<ImageFile> ImageFiles { get; set; }
 
-        public DbSet<CakeImage> CakeImages { get; set; }
+        public DbSet<HomePage> HomePages { get; set; }
+
+        public DbSet<ImageFile> Images { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderAuditTrail> OrderAuditTrails { get; set; }
+
+        public DbSet<OrderItem> OrderItems { get; set; }
 
         public DbSet<Paragraph> Paragraphs { get; set; }
+
+        public DbSet<Product> Products { get; set; }
+
+        public DbSet<ProductCategory> ProductCategories { get; set; }
+
+        public DbSet<ProductImage> ProductImages { get; set; }
 
         public DbSet<Quote> Quotes { get; set; }
 
         public DbSet<QuoteAuditTrail> QuoteAuditTrails { get; set; }
+
+        public DbSet<QuoteComment> QuoteComments { get; set; }
+
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -37,16 +55,23 @@
             // Application User
             BuildApplicationUser(builder);
 
-            // Cake Images
-            BuildCakeImages(builder);
+            // Product Images
+            BuildProductImages(builder);
 
             // Quote Images
             BuilQuoteImages(builder);
 
             // Quote Audit Trail
             BuildQuoteAuditTrails(builder);
+
+            // Shopping Cart
+            BuildShoppingCart(builder);
+
+            // Order Audit Trail
+            BuildOrderAuditTrails(builder);
         }
 
+        #region Save Changes
         public override int SaveChanges()
         {
             this.ApplyAuditInfoRules();
@@ -88,6 +113,7 @@
                 }
             }
         }
+        #endregion
 
         private static void BuildApplicationUser(ModelBuilder builder)
         {
@@ -95,18 +121,18 @@
                 .HasIndex(u => u.IsDeleted);
         }
 
-        private static void BuildCakeImages(ModelBuilder builder)
+        private static void BuildProductImages(ModelBuilder builder)
         {
-            builder.Entity<CakeImage>()
-                .HasKey(ci => new { ci.CakeId, ci.ImageId });
-            builder.Entity<CakeImage>()
+            builder.Entity<ProductImage>()
+                .HasKey(ci => new { ci.ProductId, ci.ImageId });
+            builder.Entity<ProductImage>()
                 .HasOne(ci => ci.Image)
-                .WithMany(i => i.CakeImages)
+                .WithMany(i => i.ProductImages)
                 .HasForeignKey(ci => ci.ImageId);
-            builder.Entity<CakeImage>()
-                .HasOne(ci => ci.Cake)
+            builder.Entity<ProductImage>()
+                .HasOne(ci => ci.Product)
                 .WithMany(i => i.Images)
-                .HasForeignKey(ci => ci.CakeId);
+                .HasForeignKey(ci => ci.ProductId);
         }
 
         private void BuilQuoteImages(ModelBuilder builder)
@@ -130,6 +156,22 @@
                 .WithMany(q => q.AuditTrails)
                 .HasForeignKey(q => q.QuoteId)
                 .OnDelete(DeleteBehavior.Restrict);
+        }
+
+        private static void BuildOrderAuditTrails(ModelBuilder builder)
+        {
+            builder.Entity<OrderAuditTrail>()
+                .HasOne(o => o.Order)
+                .WithMany(o => o.AuditTrails)
+                .HasForeignKey(o => o.OrderId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+
+        private static void BuildShoppingCart(ModelBuilder builder)
+        {
+            builder.Entity<ShoppingCart>()
+                .HasIndex(s => s.SessionKey)
+                .IsUnique(true);
         }
     }
 }

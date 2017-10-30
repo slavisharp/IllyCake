@@ -1,9 +1,9 @@
 ﻿namespace IllyCake.Data.Models
 {
-    public class CakeImage
+    public class ProductImage
     {
-        public int CakeId { get; set; }
-        public Cake Cake { get; set; }
+        public int ProductId { get; set; }
+        public Product Product { get; set; }
 
         public int ImageId { get; set; }
         public ImageFile Image { get; set; }

@@ -11,6 +11,9 @@
             services.AddTransient<IBlogPostManager, BlogPostManager>();
             services.AddTransient<IQuoteManager, QuoteManager>();
             services.AddTransient<IImageManager, ImageManager>();
+            services.AddTransient<IOrderManger, OrderManager>();
+            services.AddTransient<ICartManager, CartManager>();
+            services.AddTransient<IProductManager, ProductManager>();
         }
     }
 }

@@ -9,14 +9,19 @@
                     <i class="fa fa-home" aria-hidden="true"></i> Начало
                 </a>
             </li>
-            <li class="nav-item" asp-is-active-link asp-controller="Quotes">
+            @*<li class="nav-item" asp-is-active-link asp-controller="Quotes">
                 <a class="nav-link" asp-is-active-link asp-area="Admin" asp-controller="Quotes" asp-action="Index">
                     <i class="fa fa-list" aria-hidden="true"></i> Заявки
                 </a>
+            </li>*@
+            <li class="nav-item" asp-is-active-link asp-controller="Quotes">
+                <a class="nav-link" asp-is-active-link asp-area="Admin" asp-controller="Orders" asp-action="Index">
+                    <i class="fa fa-shopping-bag" aria-hidden="true"></i> Поръчки
+                </a>
             </li>
-            <li class="nav-item" asp-is-active-link asp-controller="Cakes">
-                <a class="nav-link" asp-area="Admin" asp-controller="Cakes" asp-action="Index">
-                    <i class="fa fa-birthday-cake" aria-hidden="true"></i> Торти
+            <li class="nav-item" asp-is-active-link asp-controller="Products">
+                <a class="nav-link" asp-area="Admin" asp-controller="Products" asp-action="Index">
+                    <i class="fa fa-birthday-cake" aria-hidden="true"></i> Продукти
                 </a>
             </li>
             <li class="nav-item" asp-is-active-link asp-controller="BlogPosts">
@@ -32,7 +37,7 @@
             <li class="nav-item">
                 <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
                     <div class="nav-item text-center">
-                        <button type="submit" class="btn btn-link navbar-btn nav-link d-inline-block fa fa-sign-out fa-2x"></button>
+                        <button title="Изход" type="submit" class="btn btn-link navbar-btn nav-link d-inline-block fa fa-sign-out fa-2x"></button>
                     </div>
                 </form>
             </li>

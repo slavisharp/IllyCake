@@ -29,14 +29,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\ViewModels\CakeViewModels\" />
     <Folder Include="Areas\Admin\ViewModels\BlogViewModels\" />
     <Folder Include="Areas\Admin\ViewModels\HomeViewModels\" />
     <Folder Include="Areas\Admin\ViewModels\QuoteViewModels\" />
     <Folder Include="ViewModels\HomePageViewModels\" />
-    <Folder Include="ViewModels\CakeViewModels\" />
+    <Folder Include="ViewModels\ProductViewModels\" />
     <Folder Include="wwwroot\images\blog\" />
-    <Folder Include="wwwroot\images\cake\" />
+    <Folder Include="wwwroot\images\product\" />
     <Folder Include="wwwroot\images\home\" />
     <Folder Include="wwwroot\images\quote\" />
     <Folder Include="wwwroot\videos\" />

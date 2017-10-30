@@ -21,8 +21,10 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(CreateQuoteViewModel input)
         {
+
             return RedirectToAction(nameof(this.Details));
         }
 

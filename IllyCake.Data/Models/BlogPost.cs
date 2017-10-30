@@ -28,6 +28,8 @@
         [Required]
         [MaxLength(500)]
         public string ShortDescription { get; set; }
+                
+        public bool ShowOnHomePage { get; set; }
 
         [Required]
         public DateTime Created { get; set; }
