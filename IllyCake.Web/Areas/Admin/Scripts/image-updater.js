@@ -1,5 +1,5 @@
 ﻿$(function () {
-    $('.image-updater').change(function () {
+    $('.product-image-updater').change(function () {
         var formData = new FormData(),
             $this = $(this),
             files = $this.get(0).files,
