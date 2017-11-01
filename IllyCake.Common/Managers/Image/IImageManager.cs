@@ -6,5 +6,6 @@
     public interface IImageManager
     {
         Task<ImageFile> AddQuoteImageAsync(string fileName, string contentType, long length, byte[] imageBytes);
+        Task<ImageFile> AddProductImageAsync(string fileName, string contentType, long length, byte[] imageBytes);
     }
 }

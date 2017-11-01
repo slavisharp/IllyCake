@@ -12,9 +12,10 @@ using System;
 namespace IllyCake.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171101153554_DiscountSchema")]
+    partial class DiscountSchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -157,15 +158,11 @@ namespace IllyCake.Web.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(20);
+                    b.Property<string>("Code");
 
                     b.Property<int>("DiscountPercentage");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
@@ -404,7 +401,6 @@ namespace IllyCake.Web.Data.Migrations
                     b.Property<DateTime?>("Modified");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(100);
 
                     b.HasKey("Id");

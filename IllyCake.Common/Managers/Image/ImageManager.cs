@@ -20,6 +20,12 @@
             this.env = env;
             this.repository = repo;
         }
+        
+        public async Task<ImageFile> AddProductImageAsync(string fileName, string contentType, long length, byte[] imageBytes)
+        {
+            return await AddImageSync(
+                this.settings.URLS.ProductImagesRelativePath, this.settings.URLS.ProductImagesFileRelativePath, fileName, contentType, length, imageBytes);
+        }
 
         public async Task<ImageFile> AddQuoteImageAsync(string fileName, string contentType, long length, byte[] imageBytes)
         {

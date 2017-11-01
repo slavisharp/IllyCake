@@ -31,11 +31,14 @@
         [Required]
         public DateTime UploadedDate { get; set; }
         
-        [InverseProperty("TumbImage")]
+        [InverseProperty("ThumbImage")]
         public virtual ICollection<BlogPost> BlogPosts { get; set; }
 
         [InverseProperty("Image")]
         public virtual ICollection<Paragraph> Paragraphs { get; set; }
+
+        [InverseProperty("ThumbImage")]
+        public virtual ICollection<Product> ProductThumbImages { get; set; }
 
         [InverseProperty("Image")]
         public virtual ICollection<ProductImage> ProductImages { get; set; }

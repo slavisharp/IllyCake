@@ -1,0 +1,54 @@
+﻿@model ProductCreateViewModel
+@using IllyCake.Data.Models;
+@{
+    ViewBag.Title = "Добавяне на продукт";
+    var categories = ViewBag.Categories as IEnumerable<SelectListItem>;
+}
+<section>
+    <header>
+        <h2>Добавяне на нов продукт</h2>
+    </header>
+    <form class="inner-content" method="post" asp-area="Admin" asp-controller="Products" asp-action="Create" asp-antiforgery="true">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="form-group row">
+                    <label asp-for="Name" class="col-4 col-form-label"></label>
+                    <div class="col-8">
+                        <input asp-for="Name" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Price" class="col-4 col-form-label"></label>
+                    <div class="col-8">
+                        <input asp-for="Price" type="number" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Type" class="col-4 col-form-label"></label>
+                    <div class="col-8">
+                        <select asp-for="Type" asp-items="Html.GetEnumSelectList<ProductType>()" type="number" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="CategoryId" class="col-4 col-form-label"></label>
+                    <div class="col-8">
+                        <select asp-for="CategoryId" asp-items="categories" type="number" class="form-control"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group row">
+                    <label for="thumb-image-selection" class="col-4 col-form-label">Главно изображение</label>
+                    <div class="col-8 file-selection-container">
+                        <input id="thumb-image-selection" data-target="#thumb-image-container" type="file" class="hidden" />
+                        <label for="thumb-image-selection" class="file-selection-label">Избери файл</label>
+                    </div>
+                </div>
+                <div id="thumb-image-container"></div>
+            </div>
+        </div>
+        <div class="text-center">
+            <input type="submit" value="Добави" class="btn btn-success" />
+        </div>
+    </form>
+</section>

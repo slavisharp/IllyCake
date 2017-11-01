@@ -1,0 +1,38 @@
+﻿@import "_variables.less";
+
+.container{
+    padding: 15px;
+}
+
+.navbar-custom {
+    background-color: @colorHeaderBackground;
+    padding: 0;
+
+    .navbar-brand,
+    .navbar-text {
+        color: @colorTextDefault;
+    }
+
+    .navbar-nav {
+        .nav-link {
+            padding-top: 1rem;
+            color: @colorTextDefault;
+        }
+
+        .nav-item {
+            &.active, &:hover {
+                background: @colorHeaderBackgroundActive;
+            }
+        }
+    }
+    
+    .nav-item.active .nav-link,
+    .nav-item:hover .nav-link {
+        color: @colorTextDefault;
+    }
+}
+
+.btn-success {
+    background-color: @colorGreenBackground;
+    border-color: @colorGreenBackground;
+}

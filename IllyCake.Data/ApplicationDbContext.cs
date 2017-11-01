@@ -20,6 +20,8 @@
 
         public DbSet<BlogPostState> BlogPostStates { get; set; }
 
+        public DbSet<DiscountCoupon> DiscountCoupons { get; set; }
+
         public DbSet<ImageFile> ImageFiles { get; set; }
 
         public DbSet<HomePage> HomePages { get; set; }
@@ -55,8 +57,8 @@
             // Application User
             BuildApplicationUser(builder);
 
-            // Product Images
-            BuildProductImages(builder);
+            // Product
+            BuildProduct(builder);
 
             // Quote Images
             BuilQuoteImages(builder);
@@ -121,7 +123,7 @@
                 .HasIndex(u => u.IsDeleted);
         }
 
-        private static void BuildProductImages(ModelBuilder builder)
+        private static void BuildProduct(ModelBuilder builder)
         {
             builder.Entity<ProductImage>()
                 .HasKey(ci => new { ci.ProductId, ci.ImageId });
@@ -133,6 +135,23 @@
                 .HasOne(ci => ci.Product)
                 .WithMany(i => i.Images)
                 .HasForeignKey(ci => ci.ProductId);
+
+            builder.Entity<ProductDiscountCoupon>()
+                .HasKey(ci => new { ci.ProductId, ci.DiscountCouponId });
+            builder.Entity<ProductDiscountCoupon>()
+                .HasOne(ci => ci.DiscountCoupon)
+                .WithMany(i => i.Products)
+                .HasForeignKey(ci => ci.DiscountCouponId);
+            builder.Entity<ProductDiscountCoupon>()
+                .HasOne(ci => ci.Product)
+                .WithMany(i => i.DiscountCoupons)
+                .HasForeignKey(ci => ci.ProductId);
+
+            builder.Entity<Product>()
+                .HasOne(q => q.ThumbImage)
+                .WithMany(q => q.ProductThumbImages)
+                .HasForeignKey(q => q.ThumbImageId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         private void BuilQuoteImages(ModelBuilder builder)

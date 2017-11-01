@@ -36,6 +36,9 @@
         public OrderStatus Status { get; set; }
 
         public DateTime? DateCompleted { get; set; }
+        
+        public int? DiscountCouponId { get; set; }
+        public virtual DiscountCoupon DiscountCoupon { get; set; }
 
         [InverseProperty("Order")]
         public virtual ICollection<OrderAuditTrail> AuditTrails { get; set; }

@@ -19,8 +19,8 @@
         public string Subtitle { get; set; }
 
         [Required]
-        public int TumbImageId { get; set; }
-        public virtual ImageFile TumbImage { get; set; }
+        public int ThumbImageId { get; set; }
+        public virtual ImageFile ThumbImage { get; set; }
 
         [MaxLength(1000)]
         public string VideoUrl { get; set; }

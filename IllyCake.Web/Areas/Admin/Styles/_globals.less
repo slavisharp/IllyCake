@@ -1,0 +1,38 @@
+﻿@import "_variables.less";
+
+body {
+    background: @colorBackground;
+    font-family: 'Open Sans',sans-serif;
+}
+
+a, button, .btn {
+    cursor: pointer;
+}
+
+.container {
+    background: @colorForContent;
+
+    .inner-content {
+        padding: 15px;
+        background: @colorInnerContent;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.table thead {
+    background: rgba(255,255,255,.5);
+    border: 0 none;
+}
+
+.file-selection-label {
+    border: 2px dashed @colorBackground;
+    display: block;
+    overflow: hidden;
+    padding: .5rem;
+    text-align: center;
+    text-overflow: ellipsis;
+    width: 100%;
+}

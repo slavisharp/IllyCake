@@ -1,3 +1,59 @@
-button:hover {
+body {
+  background: #32464D;
+  font-family: 'Open Sans', sans-serif;
+}
+a,
+button,
+.btn {
   cursor: pointer;
+}
+.container {
+  background: rgba(255, 255, 255, 0.8);
+}
+.container .inner-content {
+  padding: 15px;
+  background: #FFF;
+}
+.hidden {
+  display: none;
+}
+.table thead {
+  background: rgba(255, 255, 255, 0.5);
+  border: 0 none;
+}
+.file-selection-label {
+  border: 2px dashed #32464D;
+  display: block;
+  overflow: hidden;
+  padding: .5rem;
+  text-align: center;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+.container {
+  padding: 15px;
+}
+.navbar-custom {
+  background-color: #7BB3E3;
+  padding: 0;
+}
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+  color: #FFF;
+}
+.navbar-custom .navbar-nav .nav-link {
+  padding-top: 1rem;
+  color: #FFF;
+}
+.navbar-custom .navbar-nav .nav-item.active,
+.navbar-custom .navbar-nav .nav-item:hover {
+  background: #5698CF;
+}
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+  color: #FFF;
+}
+.btn-success {
+  background-color: #5eba67;
+  border-color: #5eba67;
 }

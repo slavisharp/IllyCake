@@ -34,12 +34,19 @@
         [Required]
         public int CategoryId { get; set; }
         public ProductCategory Category { get; set; }
+
+        [Required]
+        public int ThumbImageId { get; set; }
+        public virtual ImageFile ThumbImage { get; set; }
                 
         [InverseProperty("Product")]
         public virtual ICollection<ProductImage> Images { get; set; }
 
         [InverseProperty("Product")]
         public virtual ICollection<OrderItem> OrderItems { get; set; }
+        
+        [InverseProperty("Product")]
+        public ICollection<ProductDiscountCoupon> DiscountCoupons { get; set; }
     }
 
     public enum ProductType

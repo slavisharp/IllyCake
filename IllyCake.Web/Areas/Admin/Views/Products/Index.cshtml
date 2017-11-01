@@ -3,8 +3,12 @@
     ViewBag.Title = "Продукти";
 }
 
-<h2>Продукти</h2>
-
+<header class="list-header">
+    <h2 class="d-inline-block">Продукти</h2>
+    <div class="btn-group pull-right" role="group" aria-label="Actions">
+        <a asp-area="Admin" asp-action="Create" asp-controller="Products" class="btn btn-secondary" title="Нов Продукт"><i class="fa fa-plus" aria-hidden="true"></i></a>
+    </div>
+</header>
 @(Html
     .Grid(Model)
     .Build(columns =>
