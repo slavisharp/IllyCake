@@ -22,16 +22,19 @@
                     var imgSource = data[i].relativePath,
                         id = data[i].id,
                         $imgTag = $('<img class="img-fluid"  src="' + imgSource + '" />'),
-                        $idInput = $('<input type="hidden" name="ThumbImageId"/>');
+                        $idInput = $('<input type="hidden" name="MainImage"/>'),
+                        $imgUrlInput = $('<input type="hidden" name="ImageUrl"/>');
                     if ($this.val()) {
                         var imageName = $this.val().substr($this.val().lastIndexOf('\\') + 1);
                         $this.closest('.file-selection-container').find('.file-selection-label').html(imageName);
                     }
-                    
+
+                    $imgUrlInput.val(data[i].relativePath);
                     $idInput.val(id);
                     $target.html($idInput);
                     $imgTag.hide();
                     $target.append($imgTag);
+                    $target.append($imgUrlInput);
                     $imgTag.fadeIn();
                 }
             })

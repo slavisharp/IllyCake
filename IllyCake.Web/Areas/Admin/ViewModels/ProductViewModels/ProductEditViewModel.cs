@@ -2,16 +2,17 @@
 {
     using IllyCake.Data.Models;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
 
-    public class ProductListViewModel : ProductBaseViewModel
+    public class ProductEditViewModel : ProductBaseViewModel
     {
-        public static Expression<Func<Product, ProductListViewModel>> FromProduct
+        public static Expression<Func<Product, ProductEditViewModel>> FromProduct
         {
             get
             {
-                return x => new ProductListViewModel()
+                return x => new ProductEditViewModel()
                 {
                     Category = x.Category.Name,
                     Created = x.Created,

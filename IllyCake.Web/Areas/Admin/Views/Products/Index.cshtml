@@ -2,20 +2,19 @@
 @{
     ViewBag.Title = "Продукти";
 }
-
 <header class="list-header">
     <h2 class="d-inline-block">Продукти</h2>
     <div class="btn-group pull-right" role="group" aria-label="Actions">
-        <a asp-area="Admin" asp-action="Create" asp-controller="Products" class="btn btn-secondary" title="Нов Продукт"><i class="fa fa-plus" aria-hidden="true"></i></a>
+        <a class="btn btn-secondary" asp-area="Admin" asp-action="Create" asp-controller="Products" title="Нов Продукт"><i class="fa fa-plus" aria-hidden="true"></i></a>
     </div>
 </header>
 @(Html
     .Grid(Model)
     .Build(columns =>
     {
-        columns.Add(model => model.Name).Titled("Име");
+        columns.Add(model => model.Name).Titled("Име").RenderedAs(model => Html.ActionLink(model.Name, "Edit", "Products", new { id = model.Id }));
         columns.Add(model => model.Price).Titled("Цена");
-        columns.Add(model => model.Category).Titled("Категория").Filterable(false);
+        columns.Add(model => model.Category).Titled("Категория");
         columns.Add(model => model.Type).Titled("Тип");
         columns.Add(model => model.Created).Titled("Създаден").Filterable(false); ;
         columns.Add(model => model.Modified).Titled("Модифициран").Filterable(false);
@@ -25,4 +24,5 @@
     .Filterable()
     .Sortable()
     .Pageable(p => { p.RowsPerPage = 20; })
+    .Empty("Няма намерени продукти!")
 )

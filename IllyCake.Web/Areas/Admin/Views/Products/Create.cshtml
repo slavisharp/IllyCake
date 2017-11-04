@@ -12,39 +12,51 @@
         <div class="row">
             <div class="col-12 col-md-6">
                 <div class="form-group row">
-                    <label asp-for="Name" class="col-4 col-form-label"></label>
+                    <label asp-for="Name" class="col-4 col-form-label required"></label>
                     <div class="col-8">
                         <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label asp-for="Price" class="col-4 col-form-label"></label>
+                    <label asp-for="Price" class="col-4 col-form-label required"></label>
                     <div class="col-8">
                         <input asp-for="Price" type="number" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label asp-for="Type" class="col-4 col-form-label"></label>
+                    <label asp-for="Type" class="col-4 col-form-label required"></label>
                     <div class="col-8">
                         <select asp-for="Type" asp-items="Html.GetEnumSelectList<ProductType>()" type="number" class="form-control"></select>
+                        <span asp-validation-for="Type" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label asp-for="CategoryId" class="col-4 col-form-label"></label>
+                    <label asp-for="CategoryId" class="col-4 col-form-label required"></label>
                     <div class="col-8">
                         <select asp-for="CategoryId" asp-items="categories" type="number" class="form-control"></select>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
                     </div>
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group row">
-                    <label for="thumb-image-selection" class="col-4 col-form-label">Главно изображение</label>
+                    <label for="thumb-image-selection" class="col-4 col-form-label required">Главно изображение</label>
                     <div class="col-8 file-selection-container">
                         <input id="thumb-image-selection" data-target="#thumb-image-container" type="file" class="hidden" />
                         <label for="thumb-image-selection" class="file-selection-label">Избери файл</label>
+                        <span asp-validation-for="MainImage" class="text-danger"></span>
                     </div>
                 </div>
-                <div id="thumb-image-container"></div>
+                <div id="thumb-image-container">
+                    @if (Model.ImageUrl != null)
+                    {
+                        <img class="img-fluid" src="@Model.ImageUrl" />
+                        <input type="hidden" name="MainImage"value="@Model.MainImage" />
+                        <input type="hidden" name="ImageUrl" value="@Model.ImageUrl" />
+                    }
+                </div>
             </div>
         </div>
         <div class="text-center">
@@ -52,3 +64,7 @@
         </div>
     </form>
 </section>
+@section scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}

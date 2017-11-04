@@ -1,29 +1,33 @@
 ﻿namespace IllyCake.Web.Areas.Admin.ViewModels.ProductViewModels
 {
+    using IllyCake.Common.Managers;
     using IllyCake.Data.Models;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
-    public class ProductCreateViewModel
+    public class ProductCreateViewModel : ICreatePorductModel
     {
-        [Required]
         [DisplayName("Име")]
+        [Required(ErrorMessage = "Полето е задължително")]
+        [MaxLength(100, ErrorMessage = "Името на продукта не трябва да бъде дълго повече от 100 символа!")]
         public string Name { get; set; }
 
-        [Required]
         [DisplayName("Единична Цена")]
+        [Required(ErrorMessage = "Полето е задължително")]
         public decimal Price { get; set; }
 
-        [Required]
         [DisplayName("Вид Продукт")]
+        [Required(ErrorMessage = "Полето е задължително")]
         public ProductType Type { get; set; }
 
-        [Required]
         [DisplayName("Категория")]
+        [Required(ErrorMessage = "Полето е задължително")]
         public int CategoryId { get; set; }
 
-        [Required]
         [DisplayName("Основно изображение")]
+        [Required(ErrorMessage = "Полето е задължително")]
         public int MainImage { get; set; }
+
+        public string ImageUrl { get; set; }
     }
 }

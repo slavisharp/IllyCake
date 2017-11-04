@@ -14,6 +14,12 @@
         public string Name { get; set; }
 
         [Required]
+        public bool ShowOnHomePage { get; set; }
+
+        [Required]
+        public int Position { get; set; }
+
+        [Required]
         public DateTime Created { get; set; }
 
         public DateTime? Modified { get; set; }

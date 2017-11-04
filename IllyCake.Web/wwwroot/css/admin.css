@@ -38,7 +38,8 @@ button,
   padding: 0;
 }
 .navbar-custom .navbar-brand,
-.navbar-custom .navbar-text {
+.navbar-custom .navbar-text,
+.navbar-custom .navbar-toggler {
   color: #FFF;
 }
 .navbar-custom .navbar-nav .nav-link {
@@ -56,4 +57,39 @@ button,
 .btn-success {
   background-color: #5eba67;
   border-color: #5eba67;
+}
+.btn .fa {
+  color: #FFF;
+}
+.table a {
+  color: #212529;
+}
+.table a:hover {
+  color: #000;
+}
+.row.row-header {
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+.row.row-header .col {
+  padding: .5rem 1rem;
+}
+.row.row-line-item {
+  margin: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+.row.row-line-item .col {
+  padding: .25rem .5rem;
+}
+.read-only-mode .read-only {
+  display: inline-block;
+}
+.read-only-mode .edit-only {
+  display: none;
+}
+.edit-only-mode .read-only {
+  display: none;
+}
+.edit-only-mode .edit-only {
+  display: inline-block;
 }

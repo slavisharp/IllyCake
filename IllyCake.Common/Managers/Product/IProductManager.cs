@@ -9,5 +9,13 @@
         IQueryable<Product> GetAll();
 
         IQueryable<ProductCategory> GetAllProductCategories();
+
+        Task<Product> GetById(int id);
+
+        IQueryable<Product> GetQueryById(int id);
+
+        Task<Product> CreateProduct(ICreatePorductModel input);
+
+        Task<ProductCategory> CreateProductCategory(ICreatePorductCategoryModel input);
     }
 }

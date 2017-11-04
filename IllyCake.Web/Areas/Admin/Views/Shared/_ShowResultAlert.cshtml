@@ -1,0 +1,36 @@
+﻿@model ResultAlertViewModel
+@{ 
+    Layout = null;
+}
+
+@if (Model.Success != null)
+{
+    <div class="alert alert-success" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Успех!</strong> @Model.Success
+    </div>
+}
+
+@if (Model.Error != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Грешка!</strong> @Model.Error
+    </div>
+}
+else if (Model.Errors != null && Model.Errors.Any())
+{
+    foreach (var item in Model.Errors)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Грешка!</strong> @item
+        </div>
+    }
+}

@@ -1,0 +1,70 @@
+﻿@model ICollection<ProductCategoryDetailViewModel>
+@{
+    ViewBag.Title = "Категории";
+    int position = 0;
+}
+<header class="list-header">
+    <h2 class="d-inline-block">Категории</h2>
+    <div class="btn-group pull-right" role="group" aria-label="Actions">
+        <a class="btn btn-secondary" href="#" data-toggle="modal" data-target="#create-category-modal" title="Нова категория"><i class="fa fa-plus" aria-hidden="true"></i></a>
+    </div>
+</header>
+@await Html.PartialAsync("_ShowResultAlert", new ResultAlertViewModel(TempData["success"] as string, TempData["error"] as string, TempData["errors"] as IEnumerable<string>))
+<div class="row row-header category-item">
+    <div class="col col-1 text-center">
+        №
+    </div>
+    <div class="col col-6">
+        Име
+    </div>
+    <div class="col col-2 text-center">
+        Home Page
+    </div>
+    <div class="col col-3">
+        Редактирай
+    </div>
+</div>
+@foreach (var category in Model)
+{
+    position++;
+    <div class="row row-line-item category-item align-items-center read-only-mode">
+        <div class="col col-1 text-center">
+            @if (position > 1)
+            {
+                <a title="Премести нагоре" class="fa fa-arrow-up edit-only edit-move-up"></a>
+            }
+            <span class="position">@category.Position</span>
+            @if (position < Model.Count)
+            {
+                <a title="Премести надолу" class="fa fa-arrow-down edit-only edit-move-down"></a>
+            }
+        </div>
+        <div class="col col-6">
+            <strong class="read-only">@category.Name</strong>
+            <input class="form-control edit-only edit-name"  type="text" value="@category.Name" />
+        </div>
+        <div class="col col-2 text-center">
+            <input class="checkbox read-only" disabled="disabled" type="checkbox" checked="@category.ShowOnHomePage" value="true" />
+            <input class="checkbox edit-only edit-home-page" type="checkbox" checked="@category.ShowOnHomePage" value="true" />
+        </div>
+        <div class="col col-3">
+            <a title="Редактирай" class="btn btn-primary btn-toggle-edit read-only"><i class="fa fa-pencil"></i></a>
+            <a title="Запази" class="btn btn-success btn-save-edit edit-only"><i class="fa fa-floppy-o"></i></a>
+            <a title="Отказ" class="btn btn-warning btn-cancel-edit edit-only"><i class="fa fa-ban"></i></a>
+            <a title="Премахни!" class="btn btn-danger btn-delete edit-only"><i class="fa fa-trash"></i></a>
+        </div>
+    </div>
+}
+<div class="modal fade" tabindex="-1" role="dialog" id="create-category-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Създай категория</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                @await Html.PartialAsync("_CreateProductCategory", new ProductCategoryCreateViewModel())
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

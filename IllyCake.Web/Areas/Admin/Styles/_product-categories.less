@@ -1,0 +1,39 @@
+﻿@import "_variables.less";
+
+.row.row-header{
+    background-color: @colorHeaderRow;
+    margin: 0;
+
+    .col {
+        padding: .5rem 1rem;
+    }
+}
+
+.row.row-line-item{
+    margin: 0;
+    border-bottom: 1px solid @colorHeaderRow;
+
+    .col{
+        padding: .25rem .5rem;
+    }
+}
+
+.read-only-mode {
+    .read-only {
+        display: inline-block;
+    }
+
+    .edit-only{
+        display: none;
+    }
+}
+
+.edit-only-mode {
+    .read-only {
+        display: none;
+    }
+
+    .edit-only {
+        display: inline-block;
+    }
+}

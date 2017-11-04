@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public class ProductsController : AdminController
     {
@@ -32,10 +33,25 @@
         }
 
         [HttpPost]
-        public IActionResult Create(ProductCreateViewModel input)
+        public async Task<IActionResult> Create(ProductCreateViewModel input)
         {
-            ViewBag.Categories = this.manager.GetAllProductCategories().Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() });
-            return View();
+            if (ModelState.IsValid)
+            {
+                var product = await this.manager.CreateProduct(input);
+                return RedirectToAction(nameof(this.Edit), new { id = product.Id });
+            }
+            else
+            {
+                ViewBag.Categories = this.manager.GetAllProductCategories().Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() });
+                return View(input);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var vm = this.manager.GetQueryById(id).Select(ProductEditViewModel.FromProduct).FirstOrDefault();
+            return View(vm);
         }
     }
 }
