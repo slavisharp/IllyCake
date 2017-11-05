@@ -101,6 +101,28 @@ $(function () {
     });
 
     $('.category-item .btn-save-edit').click(function () {
+        var $this = $(this),
+            $row = $this.closest('.category-item'),
+            token = $('input[name="__RequestVerificationToken"]').val(),
+            id = $row.data('id'),
+            name = $row.find('.name').val(),
+            showOnHomePage = $row.find('.home-page').val(),
+            data = {
+                __RequestVerificationToken: token,
+                Id: id,
+                Name: name,
+                ShowOnHomePaeg: showOnHomePage
+            };
 
+        $.ajax({
+            data: data,
+            url: '/Admin/ProductCategories/Edit',
+            traditional: true,
+            method: 'POST'
+        }).done(function () {
+
+        }).fail(function () {
+
+        });
     });
 });
