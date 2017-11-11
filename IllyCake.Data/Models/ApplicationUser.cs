@@ -5,7 +5,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class ApplicationUser : IdentityUser, IDeletableEntity
+    public class ApplicationUser : IdentityUser, IDeletableEntity, IKeyEntity<string>
     {
         [Required]
         public bool IsDeleted { get; set; }

@@ -39,6 +39,11 @@
             return this.DbSet.FindAsync(id);
         }
 
+        //public Task<IQueryable<T>> GetRange(IEnumerable<object> ids)
+        //{
+        //    return this.DbSet.Where(e => ids.Contains(e.Id));
+        //}
+
         public void Add(T entity)
         {
             this.DbSet.Add(entity);

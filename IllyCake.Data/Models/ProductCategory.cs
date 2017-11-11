@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class ProductCategory : DeletableEntity, IAuditInfo
+    public class ProductCategory : DeletableEntity, IAuditInfo, IKeyEntity<int>
     {
         [Key]
         public int Id { get; set; }

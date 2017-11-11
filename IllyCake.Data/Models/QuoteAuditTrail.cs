@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class QuoteAuditTrail : AuditEntity
+    public class QuoteAuditTrail : AuditEntity, IKeyEntity<int>
     {
         [Key]
         public int Id { get; set; }

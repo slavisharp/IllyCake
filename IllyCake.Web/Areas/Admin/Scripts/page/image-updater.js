@@ -22,7 +22,7 @@
                     var imgSource = data[i].relativePath,
                         id = data[i].id,
                         $imgTag = $('<img class="img-fluid"  src="' + imgSource + '" />'),
-                        $idInput = $('<input type="hidden" name="MainImage"/>'),
+                        $idInput = $('<input type="hidden" name="ThumbImageId"/>'),
                         $imgUrlInput = $('<input type="hidden" name="ImageUrl"/>');
                     if ($this.val()) {
                         var imageName = $this.val().substr($this.val().lastIndexOf('\\') + 1);

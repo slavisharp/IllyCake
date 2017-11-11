@@ -2,51 +2,7 @@ $(function () {
     'use strict';
 
     $('.mvc-grid').mvcgrid();
-});
-$(function () {
-    $('#thumb-image-selection').change(function () {
-        var formData = new FormData(),
-            $this = $(this),
-            files = $this.get(0).files,
-            $target = $($this.data('target')),
-            value = $this.val();
-
-        for (var i = 0; i < files.length; i++) {
-            formData.append(files[i].name, files[i]);
-        }
-        
-        $.ajax({
-            data: formData,
-            contentType: false,
-            processData: false,
-            type: 'POST',
-            url: '/Admin/Images/UploadProductImage'
-        })
-            .done(function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    var imgSource = data[i].relativePath,
-                        id = data[i].id,
-                        $imgTag = $('<img class="img-fluid"  src="' + imgSource + '" />'),
-                        $idInput = $('<input type="hidden" name="MainImage"/>'),
-                        $imgUrlInput = $('<input type="hidden" name="ImageUrl"/>');
-                    if ($this.val()) {
-                        var imageName = $this.val().substr($this.val().lastIndexOf('\\') + 1);
-                        $this.closest('.file-selection-container').find('.file-selection-label').html(imageName);
-                    }
-
-                    $imgUrlInput.val(data[i].relativePath);
-                    $idInput.val(id);
-                    $target.html($idInput);
-                    $imgTag.hide();
-                    $target.append($imgTag);
-                    $target.append($imgUrlInput);
-                    $imgTag.fadeIn();
-                }
-            })
-            .fail(function (err) {
-                console.log(err);
-            });
-    });
+    toastr.options.closeButton = true;
 });
 $(function () {
     $.fn.mvcgrid.lang = {
@@ -89,15 +45,56 @@ $(function () {
     };
 });
 $(function () {
+    $('#thumb-image-selection').change(function () {
+        var formData = new FormData(),
+            $this = $(this),
+            files = $this.get(0).files,
+            $target = $($this.data('target')),
+            value = $this.val();
+
+        for (var i = 0; i < files.length; i++) {
+            formData.append(files[i].name, files[i]);
+        }
+        
+        $.ajax({
+            data: formData,
+            contentType: false,
+            processData: false,
+            type: 'POST',
+            url: '/Admin/Images/UploadProductImage'
+        })
+            .done(function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var imgSource = data[i].relativePath,
+                        id = data[i].id,
+                        $imgTag = $('<img class="img-fluid"  src="' + imgSource + '" />'),
+                        $idInput = $('<input type="hidden" name="ThumbImageId"/>'),
+                        $imgUrlInput = $('<input type="hidden" name="ImageUrl"/>');
+                    if ($this.val()) {
+                        var imageName = $this.val().substr($this.val().lastIndexOf('\\') + 1);
+                        $this.closest('.file-selection-container').find('.file-selection-label').html(imageName);
+                    }
+
+                    $imgUrlInput.val(data[i].relativePath);
+                    $idInput.val(id);
+                    $target.html($idInput);
+                    $imgTag.hide();
+                    $target.append($imgTag);
+                    $target.append($imgUrlInput);
+                    $imgTag.fadeIn();
+                }
+            })
+            .fail(function (err) {
+                console.log(err);
+            });
+    });
+});
+$(function () {
     $('.btn-toggle-edit,.btn-cancel-edit').click(function () {
         var $this = $(this),
             $row = $this.closest('.row-line-item');
 
-        if ($row.hasClass('edit-only-mode')) {
-            $row.removeClass('edit-only-mode').addClass('read-only-mode');
-        } else {
-            $row.removeClass('read-only-mode').addClass('edit-only-mode');
-        }
+        toggleEditMode($row);
     });
 
     $('.category-item .btn-save-edit').click(function () {
@@ -105,13 +102,13 @@ $(function () {
             $row = $this.closest('.category-item'),
             token = $('input[name="__RequestVerificationToken"]').val(),
             id = $row.data('id'),
-            name = $row.find('.name').val(),
-            showOnHomePage = $row.find('.home-page').val(),
+            name = $row.find('.edit-name').val(),
+            showOnHomePage = $row.find('.edit-home-page').is(':checked'),
             data = {
                 __RequestVerificationToken: token,
                 Id: id,
                 Name: name,
-                ShowOnHomePaeg: showOnHomePage
+                ShowOnHomePage: showOnHomePage
             };
 
         $.ajax({
@@ -119,10 +116,61 @@ $(function () {
             url: '/Admin/ProductCategories/Edit',
             traditional: true,
             method: 'POST'
-        }).done(function () {
-
-        }).fail(function () {
-
+        })
+            .done(function (data) {
+                toastr.success(data.success);
+                toggleEditMode($row);
+            }).fail(function (response) {
+                toastr.error(response.status, response.responseText);
+                toggleEditMode($row);
         });
     });
+
+    $('.sortable-categories').sortable({
+        containerSelector: 'div.sortable,ol,ul',
+        itemSelector: 'div.row, li',
+        pullPlaceholder: false,
+        handle: 'i.fa-arrows',
+        onDrop: function ($item, container, _super, event) {
+            _super($item, container, _super, event);
+            var positionDelta = $item.data('index') - $item.data('old-index'),
+                id = $item.data('id');
+
+            $('.category-item').each(function (index, element) {
+                $(element).find('.position').text(index);
+            });
+            updatePosition(id, positionDelta);
+        }
+    });
+
+    function updatePosition(id, positionDelta) {
+        var token = $('input[name="__RequestVerificationToken"]').val(),
+            data = {
+                categoryId: id,
+                positionDelta: positionDelta,
+                __RequestVerificationToken: token
+            };
+        $.ajax({
+            data: data,
+            url: '/Admin/ProductCategories/ChangePosition',
+            traditional: true,
+            method: 'POST'
+        })
+            .done(function (data) {
+                
+            }).fail(function (response) {
+                toastr.error(response.status, response.responseText + "! Презареди страницата!");
+            });
+    }
+
+    function toggleEditMode($row) {
+        if ($row.hasClass('edit-only-mode')) {
+            $row.removeClass('edit-only-mode').addClass('read-only-mode');
+        } else {
+            $row.removeClass('read-only-mode').addClass('edit-only-mode');
+        }
+    }
+});
+$(function () {
+
 });

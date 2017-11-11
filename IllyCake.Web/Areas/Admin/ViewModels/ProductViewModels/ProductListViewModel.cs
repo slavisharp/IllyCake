@@ -13,7 +13,7 @@
             {
                 return x => new ProductListViewModel()
                 {
-                    Category = x.Category.Name,
+                    CategoryName = x.Category.Name,
                     Created = x.Created,
                     Modified = x.Modified,
                     Id = x.Id,

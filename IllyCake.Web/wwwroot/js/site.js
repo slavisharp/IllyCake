@@ -3,6 +3,11 @@ $(function () {
     
 });
 $(function () {
+    var Cart = function () {
+
+    };
+});
+$(function () {
     $('.image-updater').change(function () {
         var formData = new FormData(),
             $this = $(this),

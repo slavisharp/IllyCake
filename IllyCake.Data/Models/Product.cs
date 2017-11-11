@@ -6,7 +6,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class Product : DeletableEntity, IAuditInfo
+    public class Product : DeletableEntity, IAuditInfo, IKeyEntity<int>
     {
         [Key]
         public int Id { get; set; }
@@ -19,6 +19,12 @@
         public decimal Price { get; set; }
 
         public string Description { get; set; }
+
+        [MaxLength(160)]
+        public string MetaDescription { get; set; }
+
+        [MaxLength(200)]
+        public string MetaKeyWords { get; set; }
 
         [Required]
         public ProductType Type { get; set; }

@@ -14,7 +14,7 @@
     {
         columns.Add(model => model.Name).Titled("Име").RenderedAs(model => Html.ActionLink(model.Name, "Edit", "Products", new { id = model.Id }));
         columns.Add(model => model.Price).Titled("Цена");
-        columns.Add(model => model.Category).Titled("Категория");
+        columns.Add(model => model.CategoryName).Titled("Категория");
         columns.Add(model => model.Type).Titled("Тип");
         columns.Add(model => model.Created).Titled("Създаден").Filterable(false); ;
         columns.Add(model => model.Modified).Titled("Модифициран").Filterable(false);

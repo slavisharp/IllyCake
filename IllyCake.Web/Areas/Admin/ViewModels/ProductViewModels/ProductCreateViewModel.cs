@@ -26,7 +26,7 @@
 
         [DisplayName("Основно изображение")]
         [Required(ErrorMessage = "Полето е задължително")]
-        public int MainImage { get; set; }
+        public int ThumbImageId { get; set; }
 
         public string ImageUrl { get; set; }
     }

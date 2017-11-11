@@ -4,7 +4,7 @@
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
-    public class BlogPostState
+    public class BlogPostState : IKeyEntity<int>
     {
         [Key]
         public int Id { get; set; }

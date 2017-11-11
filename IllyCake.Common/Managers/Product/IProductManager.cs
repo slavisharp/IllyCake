@@ -17,5 +17,11 @@
         Task<Product> CreateProduct(ICreatePorductModel input);
 
         Task<ProductCategory> CreateProductCategory(ICreatePorductCategoryModel input);
+
+        Task<ProductCategory> MoveProductCategory(int categoryId, int positionDelta);
+
+        Task<ProductCategory> EditProductCategory(IEditPorductCategoryModel input);
+
+        Task<Product> EditProduct(IEditPorductModel input);
     }
 }

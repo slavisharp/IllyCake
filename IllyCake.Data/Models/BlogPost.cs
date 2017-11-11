@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class BlogPost : DeletableEntity, IAuditInfo
+    public class BlogPost : DeletableEntity, IAuditInfo, IKeyEntity<string>
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -26,9 +26,9 @@
         public string VideoUrl { get; set; }
 
         [Required]
-        [MaxLength(500)]
+        [MaxLength(1000)]
         public string ShortDescription { get; set; }
-                
+        
         public bool ShowOnHomePage { get; set; }
 
         [Required]
@@ -45,7 +45,7 @@
 
         public int ViewCount { get; set; }
 
-        [MaxLength(150)]
+        [MaxLength(160)]
         public string MetaDescription { get; set; }
 
         [MaxLength(200)]

@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class Paragraph
+    public class Paragraph : IKeyEntity<int>
     {
         [Key]
         public int Id { get; set; }

@@ -12,6 +12,6 @@
         
         int CategoryId { get; set; }
         
-        int MainImage { get; set; }
+        int ThumbImageId { get; set; }
     }
 }

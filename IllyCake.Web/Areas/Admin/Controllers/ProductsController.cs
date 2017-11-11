@@ -6,6 +6,7 @@
     using IllyCake.Web.Areas.Admin.ViewModels.ProductViewModels;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -42,7 +43,7 @@
             }
             else
             {
-                ViewBag.Categories = this.manager.GetAllProductCategories().Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() });
+                SetProductCategoriesList();
                 return View(input);
             }
         }
@@ -51,7 +52,37 @@
         public IActionResult Edit(int id)
         {
             var vm = this.manager.GetQueryById(id).Select(ProductEditViewModel.FromProduct).FirstOrDefault();
+            SetProductCategoriesList();
             return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ProductEditViewModel input)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var entity = await this.manager.EditProduct(input);
+                    TempData["success"] = "Информацията за продукта е обновена.";
+                    return RedirectToAction("Edit", new { id = input.Id });
+                }
+                catch (Exception ex)
+                {
+                    TempData["error"] = ex.Message; 
+                    return RedirectToAction("Edit", new { id = input.Id });
+                }
+            }
+            else
+            {
+                SetProductCategoriesList();
+                return View(input);
+            }
+        }
+
+        private void SetProductCategoriesList()
+        {
+            ViewBag.Categories = this.manager.GetAllProductCategories().Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() });
         }
     }
 }

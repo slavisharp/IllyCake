@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class HomePage : IAuditInfo
+    public class HomePage : IAuditInfo, IKeyEntity<int>
     {
         [Key]
         public int Id { get; set; }

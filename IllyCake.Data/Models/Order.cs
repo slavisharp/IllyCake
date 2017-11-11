@@ -6,7 +6,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class Order : DeletableEntity, IAuditInfo
+    public class Order : DeletableEntity, IAuditInfo, IKeyEntity<string>
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

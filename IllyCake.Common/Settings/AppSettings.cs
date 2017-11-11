@@ -29,4 +29,9 @@
 
         public string QuoteImagesFileRelativePath { get; set; }
     }
+
+    public static class StaticStringValues
+    {
+        public const string REQUIRED_FIELD = "Полето е задължително";
+    }
 }

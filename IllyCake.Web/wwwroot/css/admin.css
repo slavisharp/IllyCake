@@ -21,6 +21,12 @@ button,
   background: rgba(255, 255, 255, 0.5);
   border: 0 none;
 }
+.table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+.table tbody tr td {
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+}
 .file-selection-label {
   border: 2px dashed #32464D;
   display: block;
@@ -66,6 +72,23 @@ button,
 }
 .table a:hover {
   color: #000;
+}
+body.dragging,
+body.dragging * {
+  cursor: move !important;
+}
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+ol.example li.placeholder {
+  position: relative;
+  /** More li styles **/
+}
+ol.example li.placeholder:before {
+  position: absolute;
+  /** Define arrowhead **/
 }
 .row.row-header {
   background-color: rgba(255, 255, 255, 0.5);

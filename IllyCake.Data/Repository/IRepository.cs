@@ -1,5 +1,6 @@
 ﻿namespace IllyCake.Data.Repository
 {
+    using IllyCake.Data.Models;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -12,7 +13,7 @@
         T GetById(object id);
 
         Task<T> GetByIdAsync(object id);
-
+        
         void Add(T entity);
 
         Task AddAsync(T entity);

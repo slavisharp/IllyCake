@@ -46,14 +46,14 @@
                     <div class="col-8 file-selection-container">
                         <input id="thumb-image-selection" data-target="#thumb-image-container" type="file" class="hidden" />
                         <label for="thumb-image-selection" class="file-selection-label">Избери файл</label>
-                        <span asp-validation-for="MainImage" class="text-danger"></span>
+                        <span asp-validation-for="ThumbImageId" class="text-danger"></span>
                     </div>
                 </div>
                 <div id="thumb-image-container">
                     @if (Model.ImageUrl != null)
                     {
                         <img class="img-fluid" src="@Model.ImageUrl" />
-                        <input type="hidden" name="MainImage"value="@Model.MainImage" />
+                        <input type="hidden" name="ThumbImageId" value="@Model.ThumbImageId" />
                         <input type="hidden" name="ImageUrl" value="@Model.ImageUrl" />
                     }
                 </div>

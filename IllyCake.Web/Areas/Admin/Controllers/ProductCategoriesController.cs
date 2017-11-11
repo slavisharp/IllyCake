@@ -1,10 +1,14 @@
 ﻿namespace IllyCake.Web.Areas.Admin.Controllers
 {
+    using IllyCake.Common.Exeptions;
     using IllyCake.Common.Managers;
     using IllyCake.Common.Settings;
     using IllyCake.Web.Areas.Admin.ViewModels.ProductCategoryViewModels;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
+    using System;
     using System.Linq;
+    using System.Net;
     using System.Threading.Tasks;
 
     public class ProductCategoriesController : AdminController
@@ -34,7 +38,7 @@
             }
             else
             {
-                var errors = ModelState.Values.SelectMany(v => v.Errors.Select(e => e.ErrorMessage)).ToList();
+                var errors = ModelState.GetErrorsList();
                 TempData["errors"] = errors;
             }
 
@@ -43,18 +47,46 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(ProductCategoryCreateViewModel input)
+        public async Task<IActionResult> Edit(ProductCategoryEditViewModel input)
         {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.GetErrorsList();
+                return StatusCode((int)HttpStatusCode.BadRequest, new { error = "Невалидни данни!", errorList = errors });
+            }
 
-            return RedirectToAction(nameof(this.Index));
+            try
+            {
+                var entity = await this.manager.EditProductCategory(input);
+                return Json(new { success ="Промените са запазени!", entity = entity });
+            }
+            catch (EntityNotFoundException ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ChangePosition(int positionDelta, int categoryId)
+        public async Task<IActionResult> ChangePosition(int categoryId, int positionDelta)
         {
-
-            return RedirectToAction(nameof(this.Index));
+            try
+            {
+                var entity = await this.manager.MoveProductCategory(categoryId, positionDelta);
+                return Json(new { success = "Промените са запазени!", entity = entity });
+            }
+            catch (EntityNotFoundException ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+            }
         }
     }
 }
