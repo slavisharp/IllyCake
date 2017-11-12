@@ -52,7 +52,7 @@
         public virtual ICollection<OrderItem> OrderItems { get; set; }
         
         [InverseProperty("Product")]
-        public ICollection<ProductDiscountCoupon> DiscountCoupons { get; set; }
+        public virtual ICollection<ProductDiscountCoupon> DiscountCoupons { get; set; }
     }
 
     public enum ProductType

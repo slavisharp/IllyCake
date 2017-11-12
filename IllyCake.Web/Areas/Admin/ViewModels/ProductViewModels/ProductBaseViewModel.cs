@@ -13,7 +13,7 @@
 
         [Required(ErrorMessage = StaticStringValues.REQUIRED_FIELD)]
         [MinLength(2, ErrorMessage = "Името трябва да е дълго поне 2 символа!")]
-        [MaxLength(100, ErrorMessage = "")]
+        [MaxLength(100, ErrorMessage = "Името не трябва да е по-дълго от 100 символа!")]
         [DisplayName("Име на продукта")]
         public string Name { get; set; }
 

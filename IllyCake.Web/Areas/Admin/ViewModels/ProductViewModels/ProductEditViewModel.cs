@@ -5,6 +5,7 @@
     using IllyCake.Data.Models;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Linq.Expressions;
@@ -23,13 +24,16 @@
 
         public IEnumerable<ImageViewModel> GalleryImages { get; set; }
 
+        [DisplayName("Oписание")]
         [Required(ErrorMessage = StaticStringValues.REQUIRED_FIELD)]
         public string Descripton { get; set; }
 
-        [MaxLength(160)]
+        [DisplayName("Мета описание")]
+        [MaxLength(160, ErrorMessage = "Полето не трябва да е по-дълго от 160 символа")]
         public string MetaDescripton { get; set; }
 
-        [MaxLength(200)]
+        [DisplayName("Мета ключови думи")]
+        [MaxLength(200, ErrorMessage = "Полето не трябва да е по-дълго от 200 символа")]
         public string MetaKeyWords { get; set; }
 
         public static Expression<Func<Product, ProductEditViewModel>> FromProduct
@@ -53,7 +57,7 @@
                     OrderedCount = x.OrderItems.Where(i => i.OrderId != null).Sum(i => i.Quantity),
                     ThumbImage = new ImageViewModel() { Id = x.ThumbImageId, Name = x.ThumbImage.Name, Path = x.ThumbImage.Path },
                     ThumbImageId = x.ThumbImageId,
-                    GalleryImages = x.Images.AsQueryable().Select(i => i.Image).Select(ImageViewModel.FromImage),
+                    GalleryImages = x.Images.Select(i => new ImageViewModel() { Name = i.Image.Name, Path = i.Image.Path, Id = i.ImageId }),
                     GalleryImagesIds = x.Images.Select(i => i.ImageId).ToList()
                 };
             }

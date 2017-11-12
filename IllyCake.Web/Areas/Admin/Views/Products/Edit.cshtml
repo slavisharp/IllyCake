@@ -6,7 +6,7 @@
 
 <section>
     <header>
-        <h2>Edit @Model.Name</h2>
+        <h2>Редактирай "@Model.Name"</h2>
     </header>
     <div class="inner-content">
         <form class="inner-content" method="post" asp-area="Admin" asp-controller="Products" asp-action="Create" asp-antiforgery="true">
@@ -39,6 +39,42 @@
                             <select asp-for="CategoryId" asp-items="categories" type="number" class="form-control"></select>
                             <span asp-validation-for="CategoryId" class="text-danger"></span>
                         </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="ShowOnHomePage" class="col-4 col-form-label required"></label>
+                        <div class="col-8">
+                            <input asp-for="ShowOnHomePage" type="checkbox" class="form-control" />
+                            <span asp-validation-for="ShowOnHomePage" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="MetaDescripton" class="col-4 col-form-label required"></label>
+                        <div class="col-8">
+                            <textarea asp-for="MetaDescripton" class="form-control"></textarea>
+                            <span asp-validation-for="MetaDescripton" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="MetaKeyWords" class="col-4 col-form-label required"></label>
+                        <div class="col-8">
+                            <textarea  asp-for="MetaKeyWords" class="form-control"></textarea>
+                            <span asp-validation-for="MetaKeyWords" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <strong>Главно изображение</strong>
+                        <span asp-validation-for="ThumbImageId" class="text-danger"></span>
+                        <label for="thumb-image-upload">
+                            <div class="image-preview" id="thumb-image-preview">
+                                <img class="img-fluid" src="@Model.ThumbImage.Path" alt="@Model.ThumbImage.Name" />
+                                <input type="hidden" asp-for="ThumbImageId" />
+                                <input type="hidden" asp-for="ThumbImage.Path" />
+                                <input type="hidden" asp-for="ThumbImage.Name" />
+                            </div>
+                            <input type="file" class="d-none" id="thumb-image-upload" data-target="#thumb-image-preview" />
+                        </label>
                     </div>
                 </div>
             </div>
