@@ -88,6 +88,9 @@
                 product.ThumbImageId = input.ThumbImageId;
             }
 
+            product.Images = product.Images ?? new HashSet<ProductImage>();
+            input.GalleryImagesIds = input.GalleryImagesIds ?? new List<int>();
+
             IList<int> imageIds = product.Images.Select(i => i.ImageId).ToList();
             var deletedImages = imageIds.Except(input.GalleryImagesIds).ToList();
             if (deletedImages.Any() || imageIds.Count < input.GalleryImagesIds.Count)
@@ -105,7 +108,7 @@
                 }
             }
 
-            product.Description = input.Descripton;
+            product.Description = input.Description;
             product.MetaDescription = input.MetaDescripton;
             product.MetaKeyWords = input.MetaKeyWords;
             product.Name = input.Name;

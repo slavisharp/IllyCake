@@ -45,51 +45,6 @@ $(function () {
     };
 });
 $(function () {
-    $('#thumb-image-selection').change(function () {
-        var formData = new FormData(),
-            $this = $(this),
-            files = $this.get(0).files,
-            $target = $($this.data('target')),
-            value = $this.val();
-
-        for (var i = 0; i < files.length; i++) {
-            formData.append(files[i].name, files[i]);
-        }
-        
-        $.ajax({
-            data: formData,
-            contentType: false,
-            processData: false,
-            type: 'POST',
-            url: '/Admin/Images/UploadProductImage'
-        })
-            .done(function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    var imgSource = data[i].relativePath,
-                        id = data[i].id,
-                        $imgTag = $('<img class="img-fluid"  src="' + imgSource + '" />'),
-                        $idInput = $('<input type="hidden" name="ThumbImageId"/>'),
-                        $imgUrlInput = $('<input type="hidden" name="ImageUrl"/>');
-                    if ($this.val()) {
-                        var imageName = $this.val().substr($this.val().lastIndexOf('\\') + 1);
-                        $this.closest('.file-selection-container').find('.file-selection-label').html(imageName);
-                    }
-
-                    $imgUrlInput.val(data[i].relativePath);
-                    $idInput.val(id);
-                    $target.html($idInput);
-                    $imgTag.hide();
-                    $target.append($imgTag);
-                    $target.append($imgUrlInput);
-                    $imgTag.fadeIn();
-                }
-            })
-            .fail(function (err) {
-                console.log(err);
-            });
-    });
-});
-$(function () {
     $('.btn-toggle-edit,.btn-cancel-edit').click(function () {
         var $this = $(this),
             $row = $this.closest('.row-line-item');
@@ -172,5 +127,91 @@ $(function () {
     }
 });
 $(function () {
+    $('#thumb-image-selection').change(function () {
+        var formData = new FormData(),
+            $this = $(this),
+            files = $this.get(0).files,
+            $target = $($this.data('target')),
+            value = $this.val();
 
+        for (var i = 0; i < files.length; i++) {
+            formData.append(files[i].name, files[i]);
+        }
+        
+        $.ajax({
+            data: formData,
+            contentType: false,
+            processData: false,
+            type: 'POST',
+            url: '/Admin/Images/UploadProductImage'
+        })
+            .done(function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var imgSource = data[i].relativePath,
+                        id = data[i].id,
+                        $imgTag = $('<img class="img-fluid"  src="' + imgSource + '" />'),
+                        $idInput = $('<input type="hidden" name="ThumbImageId"/>'),
+                        $imgUrlInput = $('<input type="hidden" name="ImageUrl"/>');
+                    if ($this.val()) {
+                        var imageName = $this.val().substr($this.val().lastIndexOf('\\') + 1);
+                        $this.closest('.file-selection-container').find('.file-selection-label').html(imageName);
+                    }
+
+                    $imgUrlInput.val(data[i].relativePath);
+                    $idInput.val(id);
+                    $target.html($idInput);
+                    $imgTag.hide();
+                    $target.append($imgTag);
+                    $target.append($imgUrlInput);
+                    $imgTag.fadeIn();
+                }
+            })
+            .fail(function (err) {
+                console.log(err);
+            });
+    });
+});
+$(function () {
+    CKEDITOR.replace('Description');
+
+    $('#thumb-image-upload').change(function () {
+        var formData = new FormData(),
+            $this = $(this),
+            files = $this.get(0).files,
+            value = $this.val();
+
+        for (var i = 0; i < files.length; i++) {
+            formData.append(files[i].name, files[i]);
+        }
+
+        $.ajax({
+            data: formData,
+            contentType: false,
+            processData: false,
+            type: 'POST',
+            url: '/Admin/Images/UploadProductImage'
+        })
+            .done(function (data) {
+                var $imagePreviewContainer = $('#thumb-image-preview');
+                for (var i = 0; i < data.length; i++) {
+                    $imagePreviewContainer.fadeOut();
+                    var imgSource = data[i].relativePath,
+                        id = data[i].id,
+                        name = data[i].name,
+                        $imgTag = $imagePreviewContainer.find('.thumb-image'),
+                        $idInput = $imagePreviewContainer.find('#ThumbImageId'),
+                        $imgUrlInput = $imagePreviewContainer.find('#ThumbImage_Path'),
+                        $imgNameInput = $imagePreviewContainer.find('#ThumbImage_Name');
+
+                    $imgUrlInput.val(data[i].relativePath);
+                    $idInput.val(id);
+                    $imgNameInput.val(name);
+                    $imgTag.attr('src', imgSource).attr('alt', name);
+                    $imagePreviewContainer.fadeIn();
+                }
+            })
+            .fail(function (err) {
+                toastr.error(err.status, err.responseText);
+            });
+    });
 });

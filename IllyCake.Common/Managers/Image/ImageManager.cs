@@ -21,6 +21,12 @@
             this.repository = repo;
         }
         
+        public async Task<ImageFile> AddArticleImageAsync(string fileName, string contentType, long length, byte[] imageBytes)
+        {
+            return await AddImageSync(
+                this.settings.URLS.BlogImagesRelativePath, this.settings.URLS.BlogImagesFileRelativePath, fileName, contentType, length, imageBytes);
+        }
+
         public async Task<ImageFile> AddProductImageAsync(string fileName, string contentType, long length, byte[] imageBytes)
         {
             return await AddImageSync(

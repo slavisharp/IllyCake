@@ -7,5 +7,6 @@
     {
         Task<ImageFile> AddQuoteImageAsync(string fileName, string contentType, long length, byte[] imageBytes);
         Task<ImageFile> AddProductImageAsync(string fileName, string contentType, long length, byte[] imageBytes);
+        Task<ImageFile> AddArticleImageAsync(string fileName, string contentType, long length, byte[] imageBytes);
     }
 }

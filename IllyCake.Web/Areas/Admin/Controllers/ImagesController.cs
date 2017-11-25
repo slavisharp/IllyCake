@@ -3,6 +3,7 @@
     using IllyCake.Common.Managers;
     using IllyCake.Common.Settings;
     using IllyCake.Web.ViewModels;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
     using System.IO;
@@ -40,6 +41,25 @@
             }
 
             return Json(imagesResult);
+        }
+
+        [HttpPost]
+        [Route("/uploader/upload.php")]
+        public async Task<IActionResult> UploadArticleImage(IFormFile upload)
+        {
+            if (upload == null)
+            {
+                return BadRequest("Няма избран файл!");
+            }
+
+            byte[] imageBytes = null;
+            using (BinaryReader reader = new BinaryReader(upload.OpenReadStream()))
+            {
+                imageBytes = reader.ReadBytes((int)upload.Length);
+            }
+
+            var imageResult = await this.imageManager.AddArticleImageAsync(upload.FileName, upload.ContentType, upload.Length, imageBytes);
+            return Json(new { id = imageResult.Id, fileName = imageResult.Name, url = imageResult.Path, uploaded = 1 });
         }
     }
 }

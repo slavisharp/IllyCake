@@ -23,11 +23,12 @@
         public IList<int> GalleryImagesIds { get; set; }
 
         public IEnumerable<ImageViewModel> GalleryImages { get; set; }
-
+        
         [DisplayName("Oписание")]
         [Required(ErrorMessage = StaticStringValues.REQUIRED_FIELD)]
-        public string Descripton { get; set; }
+        public string Description { get; set; }
 
+        [Required(ErrorMessage = StaticStringValues.REQUIRED_FIELD)]
         [DisplayName("Мета описание")]
         [MaxLength(160, ErrorMessage = "Полето не трябва да е по-дълго от 160 символа")]
         public string MetaDescripton { get; set; }
@@ -51,7 +52,7 @@
                     Price = x.Price,
                     ShowOnHomePage = x.ShowOnHomePage,
                     Type = x.Type,
-                    Descripton = x.Description,
+                    Description = x.Description,
                     MetaDescripton = x.MetaDescription,
                     MetaKeyWords = x.MetaKeyWords,
                     OrderedCount = x.OrderItems.Where(i => i.OrderId != null).Sum(i => i.Quantity),

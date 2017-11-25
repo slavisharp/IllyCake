@@ -1,6 +1,15 @@
 ﻿namespace IllyCake.Common.Managers
 {
-    public class OrderManager : IOrderManger
+    using IllyCake.Data.Models;
+    using IllyCake.Data.Repository;
+
+    public class OrderManager : IOrderManager
     {
+        private IRepository<Order> repository;
+
+        public OrderManager(IRepository<Order> repo)
+        {
+            this.repository = repo;
+        }
     }
 }

@@ -8,7 +8,7 @@
         
         IList<int> GalleryImagesIds { get; set; }
                 
-        string Descripton { get; set; }
+        string Description { get; set; }
         
         string MetaDescripton { get; set; }
         

@@ -64,12 +64,12 @@
                 try
                 {
                     var entity = await this.manager.EditProduct(input);
-                    TempData["success"] = "Информацията за продукта е обновена.";
+                    base.SetActionSuccessMessageInTempData("Информацията за продукта е обновена.");
                     return RedirectToAction("Edit", new { id = input.Id });
                 }
                 catch (Exception ex)
                 {
-                    TempData["error"] = ex.Message; 
+                    TempData["error"] = ex.Message;
                     return RedirectToAction("Edit", new { id = input.Id });
                 }
             }

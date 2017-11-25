@@ -4,14 +4,15 @@
     var categories = ViewBag.Categories as IEnumerable<SelectListItem>;
 }
 
-<section>
+<section class="product-edit">
     <header>
         <h2>Редактирай "@Model.Name"</h2>
     </header>
+    @await Html.PartialAsync("_ShowResultAlert", new ResultAlertViewModel(TempData["success"] as string, TempData["error"] as string, TempData["errors"] as IEnumerable<string>))
     <div class="inner-content">
-        <form class="inner-content" method="post" asp-area="Admin" asp-controller="Products" asp-action="Create" asp-antiforgery="true">
+        <form class="inner-content" method="post" asp-area="Admin" asp-controller="Products" asp-action="Edit" asp-antiforgery="true">
             <div class="row">
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-7">
                     <div class="form-group row">
                         <label asp-for="Name" class="col-4 col-form-label required"></label>
                         <div class="col-8">
@@ -62,21 +63,42 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        <strong>Главно изображение</strong>
+                <div class="col-12 col-md-5">
+                    <div class="form-group thumb-image-edit">
+                        <div>
+                            <strong>Главно изображение</strong>
+                        </div>
                         <span asp-validation-for="ThumbImageId" class="text-danger"></span>
                         <label for="thumb-image-upload">
                             <div class="image-preview" id="thumb-image-preview">
-                                <img class="img-fluid" src="@Model.ThumbImage.Path" alt="@Model.ThumbImage.Name" />
+                                <img class="thumb-image" src="@Model.ThumbImage.Path" alt="@Model.ThumbImage.Name" />
                                 <input type="hidden" asp-for="ThumbImageId" />
                                 <input type="hidden" asp-for="ThumbImage.Path" />
                                 <input type="hidden" asp-for="ThumbImage.Name" />
+                                <div class="thumb-image-text">
+                                    <span>Натисни за качване на нова снимка</span>
+                                </div>
                             </div>
-                            <input type="file" class="d-none" id="thumb-image-upload" data-target="#thumb-image-preview" />
+                            <input type="file" class="form-control d-none" id="thumb-image-upload" data-target="#thumb-image-preview" />
                         </label>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <label asp-for="Description"></label>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <div>
+                        <textarea class="form-control" asp-for="Description"></textarea>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+
+                </div>
+            </div>
+            <hr />
+            <div class="text-center">
+                <input type="submit" class="btn btn-success" value="Запази промените" />
             </div>
         </form>
     </div>
