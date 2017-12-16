@@ -12,13 +12,13 @@
     {
         private IRepository<Product> repository;
         private IRepository<ProductCategory> categoryRepository;
-        private IRepository<ImageFile> imageRepository;
+        private IRepository<ProductVersion> productVersionRepository;
 
-        public ProductManager(IRepository<Product> repo, IRepository<ProductCategory> categoryRepo, IRepository<ImageFile> imageRepo)
+        public ProductManager(IRepository<Product> repo, IRepository<ProductCategory> categoryRepo, IRepository<ProductVersion> productVersionRepo)
         {
             this.repository = repo;
             this.categoryRepository = categoryRepo;
-            this.imageRepository = imageRepo;
+            this.productVersionRepository = productVersionRepo;
         }
 
         public async Task<Product> GetById(int id)
@@ -76,38 +76,7 @@
 
                 product.CategoryId = input.CategoryId;
             }
-
-            if (product.ThumbImageId != input.ThumbImageId)
-            {
-                var image = await this.imageRepository.GetByIdAsync(input.ThumbImageId);
-                if (image == null)
-                {
-                    throw new EntityNotFoundException("Главното изображение не е намерено!");
-                }
-
-                product.ThumbImageId = input.ThumbImageId;
-            }
-
-            product.Images = product.Images ?? new HashSet<ProductImage>();
-            input.GalleryImagesIds = input.GalleryImagesIds ?? new List<int>();
-
-            IList<int> imageIds = product.Images.Select(i => i.ImageId).ToList();
-            var deletedImages = imageIds.Except(input.GalleryImagesIds).ToList();
-            if (deletedImages.Any() || imageIds.Count < input.GalleryImagesIds.Count)
-            {
-                var newImages = input.GalleryImagesIds.Except(imageIds);
-                for (int i = 0; i < deletedImages.Count; i++)
-                {
-                    var imageToRemove = product.Images.Where(e => e.ImageId == deletedImages[i]).FirstOrDefault();
-                    product.Images.Remove(imageToRemove);
-                }
-
-                foreach (var newImageId in newImages)
-                {
-                    product.Images.Add(new ProductImage() { ProductId = product.Id, ImageId = newImageId });
-                }
-            }
-
+           
             product.Description = input.Description;
             product.MetaDescription = input.MetaDescripton;
             product.MetaKeyWords = input.MetaKeyWords;
@@ -117,6 +86,56 @@
             product.Type = input.Type;
             await this.repository.SaveAsync();
             return product;
+        }
+
+        public async Task<ProductVersion> CreateProductVersion(ICreateProductVersionModel input)
+        {
+            var product = await this.GetById(input.ProductId);
+            if (product == null)
+            {
+                throw new EntityNotFoundException("Продукта не е намерен!");
+            }
+
+            var productVersionEntity = new ProductVersion()
+            {
+                Name = input.Name,
+                ProductId = product.Id,
+                Price = input.Price
+            };
+
+            this.productVersionRepository.Add(productVersionEntity);
+            await this.productVersionRepository.SaveAsync();
+            return productVersionEntity;
+        }
+        
+        public async Task<ProductVersion> UpdateProductVersion(IUpdateProductVersionModel input)
+        {
+            var productVersionEntity = await this.productVersionRepository.GetByIdAsync(input.Id);
+            if (productVersionEntity == null)
+            {
+                throw new EntityNotFoundException("Продукта не е намерен!");
+            }
+
+            productVersionEntity.Name = input.Name;
+            productVersionEntity.Price = input.Price;
+
+            await this.productVersionRepository.SaveAsync();
+            return productVersionEntity;
+        }
+
+        public async Task<ProductVersion> DeleteProductVersion(int id)
+        {
+            var productVersionEntity = await this.productVersionRepository.GetByIdAsync(id);
+            if (productVersionEntity == null)
+            {
+                throw new EntityNotFoundException("Продукта не е намерен!");
+            }
+
+            productVersionEntity.IsDeleted = true;
+            productVersionEntity.DeletedOn = DateTime.Now;
+
+            await this.productVersionRepository.SaveAsync();
+            return productVersionEntity;
         }
 
         public async Task<ProductCategory> CreateProductCategory(ICreatePorductCategoryModel input)

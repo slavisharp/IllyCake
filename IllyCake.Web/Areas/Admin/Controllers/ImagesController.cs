@@ -2,6 +2,8 @@
 {
     using IllyCake.Common.Managers;
     using IllyCake.Common.Settings;
+    using IllyCake.Data.Models;
+    using IllyCake.Data.Repository;
     using IllyCake.Web.ViewModels;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -19,7 +21,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> UploadProductImage()
+        public async Task<IActionResult> UploadProductMainImage(int? productId = null)
         {
             var images = this.Request.Form.Files;
             if (images == null || images.Count == 0)
@@ -36,8 +38,33 @@
                     imageBytes = reader.ReadBytes((int)image.Length);
                 }
 
-                var imageResult = await this.imageManager.AddProductImageAsync(image.FileName, image.ContentType, image.Length, imageBytes);
-                imagesResult.Add(new ImageFileViewModel() { Id = imageResult.Id, Name = imageResult.Name, RelativePath = imageResult.Path });
+                var imageEntity = await this.imageManager.AddProductMainImageAsync(image.FileName, image.ContentType, image.Length, imageBytes, productId);
+                imagesResult.Add(new ImageFileViewModel() { Id = imageEntity.Id, Name = imageEntity.Name, RelativePath = imageEntity.Path });
+            }
+
+            return Json(imagesResult);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadProductGaleryImages(int? productId = null)
+        {
+            var images = this.Request.Form.Files;
+            if (images == null || images.Count == 0)
+            {
+                return BadRequest("Няма избрани файлове!");
+            }
+
+            byte[] imageBytes = null;
+            IList<ImageFileViewModel> imagesResult = new List<ImageFileViewModel>(images.Count);
+            foreach (var image in images)
+            {
+                using (BinaryReader reader = new BinaryReader(image.OpenReadStream()))
+                {
+                    imageBytes = reader.ReadBytes((int)image.Length);
+                }
+
+                var imageEntity = await this.imageManager.AddProductGalleryImageAsync(image.FileName, image.ContentType, image.Length, imageBytes, productId);
+                imagesResult.Add(new ImageFileViewModel() { Id = imageEntity.Id, Name = imageEntity.Name, RelativePath = imageEntity.Path });
             }
 
             return Json(imagesResult);

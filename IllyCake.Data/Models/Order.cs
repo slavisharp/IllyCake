@@ -13,10 +13,16 @@
         public string Id { get; set; }
 
         [Required]
+        [MinLength(6)]
+        [MaxLength(7)]
+        public string Number { get; set; }
+
+        [Required]
         public DateTime Created { get; set; }
 
         public DateTime? Modified { get; set; }
 
+        [MaxLength(2000)]
         public string PrivateNotes { get; set; }
 
         [Required]
@@ -40,8 +46,14 @@
         public int? DiscountCouponId { get; set; }
         public virtual DiscountCoupon DiscountCoupon { get; set; }
 
+        public int AddressId { get; set; }
+        public virtual Address Address { get; set; }
+
         [InverseProperty("Order")]
         public virtual ICollection<OrderAuditTrail> AuditTrails { get; set; }
+
+        [InverseProperty("Order")]
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 
     public enum OrderStatus

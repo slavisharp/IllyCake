@@ -16,6 +16,10 @@
 
         }
 
+        public DbSet<Address> Addresses { get; set; }
+
+        public DbSet<ApplicationUserAddress> ApplicationUserAddresses { get; set; }
+
         public DbSet<BlogPost> BlogPosts { get; set; }
 
         public DbSet<BlogPostState> BlogPostStates { get; set; }
@@ -37,6 +41,8 @@
         public DbSet<Paragraph> Paragraphs { get; set; }
 
         public DbSet<Product> Products { get; set; }
+
+        public DbSet<ProductVersion> ProductVersions { get; set; }
 
         public DbSet<ProductCategory> ProductCategories { get; set; }
 
@@ -121,6 +127,17 @@
         {
             builder.Entity<ApplicationUser>()
                 .HasIndex(u => u.IsDeleted);
+
+            builder.Entity<ApplicationUserAddress>()
+                .HasKey(ci => new { ci.ApplicationUserId, ci.AddressId });
+            builder.Entity<ApplicationUserAddress>()
+                .HasOne(ci => ci.Address)
+                .WithMany(i => i.Users)
+                .HasForeignKey(ci => ci.AddressId);
+            builder.Entity<ApplicationUserAddress>()
+                .HasOne(ci => ci.ApplicationUser)
+                .WithMany(i => i.Addresses)
+                .HasForeignKey(ci => ci.ApplicationUserId);
         }
 
         private static void BuildProduct(ModelBuilder builder)

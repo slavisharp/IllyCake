@@ -35,7 +35,7 @@
         public DateTime? Modified { get; set; }
 
         [Required(ErrorMessage = StaticStringValues.REQUIRED_FIELD)]
-        [DisplayName("Покажи на началния екран")]
+        [DisplayName("На начален екран")]
         public bool ShowOnHomePage { get; set; }
 
         [DisplayName("Брой на поръчки")]

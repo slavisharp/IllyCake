@@ -10,14 +10,20 @@
         [Required]
         public string Text { get; set; }
 
+        [MaxLength(100)]
+        public string CssClassList { get; set; }
+
         public int? ImageId { get; set; }
         public virtual ImageFile Image { get; set; }
         
         [MaxLength(1000)]
-        public string VideoUrl { get; set; }
+        public string EmbedVideoHtml { get; set; }
 
         [Required]
         public ParagraphType Type { get; set; }
+
+        [Required]
+        public SpecialContentPosition SpecialContentPosition { get; set; }
 
         [Required]
         public int Position { get; set; }
@@ -29,8 +35,15 @@
 
     public enum ParagraphType
     {
-        Default = 1,
+        TextOnly = 1,
         WithImage = 2,
         WithVideo = 3
+    }
+
+    public enum SpecialContentPosition
+    {
+        Left = 1,
+        Right = 2,
+        Center = 3
     }
 }

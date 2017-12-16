@@ -53,6 +53,9 @@
         
         [InverseProperty("Product")]
         public virtual ICollection<ProductDiscountCoupon> DiscountCoupons { get; set; }
+
+        [InverseProperty("Product")]
+        public virtual ICollection<ProductVersion> ProductVersions { get; set; }
     }
 
     public enum ProductType

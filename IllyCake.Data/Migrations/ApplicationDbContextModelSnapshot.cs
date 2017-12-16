@@ -21,6 +21,60 @@ namespace IllyCake.Web.Data.Migrations
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("IllyCake.Data.Models.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("ContactName")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("LastUsedInOrder");
+
+                    b.Property<string>("Line1")
+                        .IsRequired()
+                        .HasMaxLength(500);
+
+                    b.Property<string>("Line2")
+                        .HasMaxLength(500);
+
+                    b.Property<DateTime?>("Modified");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Phonenumber")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasMaxLength(10);
+
+                    b.Property<string>("Region")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Addresses");
+                });
+
             modelBuilder.Entity("IllyCake.Data.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -38,7 +92,11 @@ namespace IllyCake.Web.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<string>("FirstName");
+
                     b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -76,6 +134,19 @@ namespace IllyCake.Web.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("IllyCake.Data.Models.ApplicationUserAddress", b =>
+                {
+                    b.Property<string>("ApplicationUserId");
+
+                    b.Property<int>("AddressId");
+
+                    b.HasKey("ApplicationUserId", "AddressId");
+
+                    b.HasIndex("AddressId");
+
+                    b.ToTable("ApplicationUserAddresses");
                 });
 
             modelBuilder.Entity("IllyCake.Data.Models.BlogPost", b =>
@@ -229,6 +300,8 @@ namespace IllyCake.Web.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("AddressId");
+
                     b.Property<DateTime>("Created");
 
                     b.Property<DateTime?>("DateCompleted");
@@ -241,7 +314,12 @@ namespace IllyCake.Web.Data.Migrations
 
                     b.Property<DateTime?>("Modified");
 
-                    b.Property<string>("PrivateNotes");
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasMaxLength(7);
+
+                    b.Property<string>("PrivateNotes")
+                        .HasMaxLength(2000);
 
                     b.Property<decimal>("ShippingPrice");
 
@@ -255,6 +333,8 @@ namespace IllyCake.Web.Data.Migrations
                         .IsRequired();
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("DiscountCouponId");
 
@@ -297,6 +377,8 @@ namespace IllyCake.Web.Data.Migrations
 
                     b.Property<DateTime>("Created");
 
+                    b.Property<decimal>("DiscountAmmunt");
+
                     b.Property<decimal>("FinalPrice");
 
                     b.Property<DateTime?>("Modified");
@@ -315,6 +397,8 @@ namespace IllyCake.Web.Data.Migrations
                     b.Property<int>("Quantity");
 
                     b.Property<int?>("ShoppingCartId");
+
+                    b.Property<decimal>("Subtotal");
 
                     b.HasKey("Id");
 
@@ -335,17 +419,22 @@ namespace IllyCake.Web.Data.Migrations
                     b.Property<string>("BlogPostId")
                         .IsRequired();
 
+                    b.Property<string>("CssClassList")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("EmbedVideoHtml")
+                        .HasMaxLength(1000);
+
                     b.Property<int?>("ImageId");
 
                     b.Property<int>("Position");
+
+                    b.Property<int>("SpecialContentPosition");
 
                     b.Property<string>("Text")
                         .IsRequired();
 
                     b.Property<int>("Type");
-
-                    b.Property<string>("VideoUrl")
-                        .HasMaxLength(1000);
 
                     b.HasKey("Id");
 
@@ -450,6 +539,34 @@ namespace IllyCake.Web.Data.Migrations
                     b.HasIndex("ImageId");
 
                     b.ToTable("ProductImages");
+                });
+
+            modelBuilder.Entity("IllyCake.Data.Models.ProductVersion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("Modified");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<int>("ProductId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductVersions");
                 });
 
             modelBuilder.Entity("IllyCake.Data.Models.Quote", b =>
@@ -686,6 +803,19 @@ namespace IllyCake.Web.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("IllyCake.Data.Models.ApplicationUserAddress", b =>
+                {
+                    b.HasOne("IllyCake.Data.Models.Address", "Address")
+                        .WithMany("Users")
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("IllyCake.Data.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Addresses")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("IllyCake.Data.Models.BlogPost", b =>
                 {
                     b.HasOne("IllyCake.Data.Models.ImageFile", "ThumbImage")
@@ -716,6 +846,11 @@ namespace IllyCake.Web.Data.Migrations
 
             modelBuilder.Entity("IllyCake.Data.Models.Order", b =>
                 {
+                    b.HasOne("IllyCake.Data.Models.Address", "Address")
+                        .WithMany("Orders")
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("IllyCake.Data.Models.DiscountCoupon", "DiscountCoupon")
                         .WithMany("Orders")
                         .HasForeignKey("DiscountCouponId");
@@ -742,7 +877,7 @@ namespace IllyCake.Web.Data.Migrations
             modelBuilder.Entity("IllyCake.Data.Models.OrderItem", b =>
                 {
                     b.HasOne("IllyCake.Data.Models.Order", "Order")
-                        .WithMany()
+                        .WithMany("OrderItems")
                         .HasForeignKey("OrderId1");
 
                     b.HasOne("IllyCake.Data.Models.Product", "Product")
@@ -802,6 +937,14 @@ namespace IllyCake.Web.Data.Migrations
 
                     b.HasOne("IllyCake.Data.Models.Product", "Product")
                         .WithMany("Images")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("IllyCake.Data.Models.ProductVersion", b =>
+                {
+                    b.HasOne("IllyCake.Data.Models.Product", "Product")
+                        .WithMany("ProductVersions")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

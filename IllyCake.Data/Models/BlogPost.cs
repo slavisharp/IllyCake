@@ -11,7 +11,7 @@
         public string Id { get; set; }
 
         [Required]
-        [MinLength(5), MaxLength(100)]
+        [MinLength(3), MaxLength(100)]
         public string Title { get; set; }
 
         [Required]
@@ -28,7 +28,8 @@
         [Required]
         [MaxLength(1000)]
         public string ShortDescription { get; set; }
-        
+
+        [Required]
         public bool ShowOnHomePage { get; set; }
 
         [Required]

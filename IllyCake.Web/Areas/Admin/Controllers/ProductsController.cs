@@ -5,6 +5,7 @@
     using IllyCake.Data.Models;
     using IllyCake.Web.Areas.Admin.ViewModels.ProductViewModels;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using System;
     using System.Linq;
@@ -22,7 +23,7 @@
         [HttpGet]
         public IActionResult Index()
         {
-            var vm = this.manager.GetAll().Select(ProductListViewModel.FromProduct);
+            var vm = this.manager.GetAll().Select(ProductListViewModel.ExpressionFromProduct);
             return View(vm);
         }
 
@@ -51,13 +52,13 @@
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var vm = this.manager.GetQueryById(id).Select(ProductEditViewModel.FromProduct).FirstOrDefault();
+            var vm = this.manager.GetQueryById(id).Select(ProductDetailsViewModel.ExpressionFromProduct).FirstOrDefault();
             SetProductCategoriesList();
             return View(vm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(ProductEditViewModel input)
+        public async Task<IActionResult> Edit(ProductDetailsViewModel input)
         {
             if (ModelState.IsValid)
             {
@@ -77,6 +78,65 @@
             {
                 SetProductCategoriesList();
                 return View(input);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddProductVersion(ProductVersionViewModel input)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var entity = await this.manager.CreateProductVersion(input);
+                    return Json(entity);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState.GetErrorsList());
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateProductVersion(ProductVersionViewModel input)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var entity = await this.manager.CreateProductVersion(input);
+                    return Json(entity);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState.GetErrorsList());
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteProductVersion(int id)
+        {
+            try
+            {
+                var entity = await this.manager.DeleteProductVersion(id);
+                return Json(entity);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
 

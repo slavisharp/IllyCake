@@ -175,21 +175,23 @@ $(function () {
     CKEDITOR.replace('Description');
 
     $('#thumb-image-upload').change(function () {
-        var formData = new FormData(),
-            $this = $(this),
+        var $this = $(this),
             files = $this.get(0).files,
-            value = $this.val();
+            url = '/Admin/Images/UploadProductMainImage',
+            productId = $('#Id').val(),
+            formData = new FormData();
 
         for (var i = 0; i < files.length; i++) {
             formData.append(files[i].name, files[i]);
         }
 
+        formData.append('productId', productId);
         $.ajax({
             data: formData,
             contentType: false,
             processData: false,
             type: 'POST',
-            url: '/Admin/Images/UploadProductImage'
+            url: url
         })
             .done(function (data) {
                 var $imagePreviewContainer = $('#thumb-image-preview');
@@ -199,7 +201,7 @@ $(function () {
                         id = data[i].id,
                         name = data[i].name,
                         $imgTag = $imagePreviewContainer.find('.thumb-image'),
-                        $idInput = $imagePreviewContainer.find('#ThumbImageId'),
+                        $idInput = $imagePreviewContainer.find('#ThumbImage_Id'),
                         $imgUrlInput = $imagePreviewContainer.find('#ThumbImage_Path'),
                         $imgNameInput = $imagePreviewContainer.find('#ThumbImage_Name');
 
@@ -213,5 +215,36 @@ $(function () {
             .fail(function (err) {
                 toastr.error(err.status, err.responseText);
             });
+    });
+
+    $('#galery-image-upload').change(function () {
+        var $this = $(this),
+            url = '/Admin/Images/UploadProductMainImage',
+            files = $this.get(0).files,
+            productId = $('#Id').val(),
+            formData = new FormData();
+
+        formData.append('productId', productId);
+        $.ajax({
+            data: formData,
+            contentType: false,
+            processData: false,
+            type: 'POST',
+            url: url
+        })
+            .done(function (data) {
+                console.log(data);
+            })
+            .fail(function (err) {
+                toastr.error(err.status, err.responseText);
+            });
+    });
+
+    $('.create-product-version-toggle').click(function (e) {
+        e.preventDefault();
+
+        //string Name { get; set; }
+        //decimal Price { get; set; }
+        //int ProductId { get; set; }
     });
 });

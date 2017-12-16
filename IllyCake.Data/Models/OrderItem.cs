@@ -28,6 +28,12 @@
         public int Quantity { get; set; }
 
         [Required]
+        public decimal Subtotal { get; set; }
+
+        [Required]
+        public decimal DiscountAmmunt { get; set; }
+
+        [Required]
         public decimal FinalPrice { get; set; }
 
         [Required]

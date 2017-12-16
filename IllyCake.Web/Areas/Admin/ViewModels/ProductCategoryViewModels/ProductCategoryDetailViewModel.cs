@@ -14,7 +14,7 @@
 
         public int Position { get; set; }
 
-        public static Expression<Func<ProductCategory, ProductCategoryDetailViewModel>> FromProductCategory
+        public static Expression<Func<ProductCategory, ProductCategoryDetailViewModel>> ExpressionFromProductCategory
         {
             get
             {

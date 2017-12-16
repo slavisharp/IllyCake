@@ -23,7 +23,7 @@
         [HttpGet]
         public IActionResult Index()
         {
-            var vm = this.manager.GetAllProductCategories().Select(ProductCategoryDetailViewModel.FromProductCategory).ToList();
+            var vm = this.manager.GetAllProductCategories().Select(ProductCategoryDetailViewModel.ExpressionFromProductCategory).ToList();
             return View(vm);
         }
 

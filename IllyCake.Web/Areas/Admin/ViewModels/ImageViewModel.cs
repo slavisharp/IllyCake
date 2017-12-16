@@ -15,7 +15,7 @@
         public string Path { get; set; }
         
 
-        public static Expression<Func<ImageFile, ImageViewModel>> FromImage
+        public static Expression<Func<ImageFile, ImageViewModel>> ExpressionFromImage
         {
             get
             {
@@ -24,6 +24,19 @@
                     Id = x.Id,
                     Name = x.Name,
                     Path = x.Path
+                };
+            }
+        }
+
+        public static Func<ProductImage, ImageViewModel> FuncFromProductImage
+        {
+            get
+            {
+                return x => new ImageViewModel()
+                {
+                    Id = x.ImageId,
+                    Name = x.Image.Name,
+                    Path = x.Image.Path
                 };
             }
         }

@@ -7,7 +7,7 @@
 
     public class ProductListViewModel : ProductBaseViewModel
     {
-        public static Expression<Func<Product, ProductListViewModel>> FromProduct
+        public static Expression<Func<Product, ProductListViewModel>> ExpressionFromProduct
         {
             get
             {

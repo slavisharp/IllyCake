@@ -10,19 +10,18 @@
     using System.Linq;
     using System.Linq.Expressions;
 
-    public class ProductEditViewModel : ProductBaseViewModel, IEditPorductModel
+    public class ProductDetailsViewModel : ProductBaseViewModel, IEditPorductModel
     {
         [Required(ErrorMessage = StaticStringValues.REQUIRED_FIELD)]
         public int CategoryId { get; set; }
-
-        [Required(ErrorMessage = StaticStringValues.REQUIRED_FIELD)]
+        
         public int ThumbImageId { get; set; }
 
         public ImageViewModel ThumbImage { get; set; }
-
-        public IList<int> GalleryImagesIds { get; set; }
-
+        
         public IEnumerable<ImageViewModel> GalleryImages { get; set; }
+
+        public IEnumerable<ProductVersionViewModel> ProductVersions { get; set; }
         
         [DisplayName("Oписание")]
         [Required(ErrorMessage = StaticStringValues.REQUIRED_FIELD)]
@@ -37,11 +36,11 @@
         [MaxLength(200, ErrorMessage = "Полето не трябва да е по-дълго от 200 символа")]
         public string MetaKeyWords { get; set; }
 
-        public static Expression<Func<Product, ProductEditViewModel>> FromProduct
+        public static Expression<Func<Product, ProductDetailsViewModel>> ExpressionFromProduct
         {
             get
             {
-                return x => new ProductEditViewModel()
+                return x => new ProductDetailsViewModel()
                 {
                     CategoryName = x.Category.Name,
                     CategoryId = x.CategoryId,
@@ -57,9 +56,18 @@
                     MetaKeyWords = x.MetaKeyWords,
                     OrderedCount = x.OrderItems.Where(i => i.OrderId != null).Sum(i => i.Quantity),
                     ThumbImage = new ImageViewModel() { Id = x.ThumbImageId, Name = x.ThumbImage.Name, Path = x.ThumbImage.Path },
-                    ThumbImageId = x.ThumbImageId,
-                    GalleryImages = x.Images.Select(i => new ImageViewModel() { Name = i.Image.Name, Path = i.Image.Path, Id = i.ImageId }),
-                    GalleryImagesIds = x.Images.Select(i => i.ImageId).ToList()
+                    GalleryImages = x.Images.Select(i => new ImageViewModel()
+                    {
+                        Id = i.ImageId,
+                        Name = i.Image.Name,
+                        Path = i.Image.Path
+                    }), //.Select(ImageViewModel.FuncFromProductImage),
+                    ProductVersions = x.ProductVersions.Where(pv => !pv.IsDeleted).Select(pv => new ProductVersionViewModel()
+                    {
+                        Id = pv.Id,
+                        Name = pv.Name,
+                        Price = pv.Price
+                    }), //.Select(ProductVersionViewModel.FuncFromProductVersion),
                 };
             }
         }
