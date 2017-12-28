@@ -47,9 +47,9 @@ project.lock.json
 project.fragment.lock.json
 artifacts/
 **/Properties/launchSettings.json
-wwwroot/images/blog/
-wwwroot/images/product/
-wwwroot/images/quote/
+IllyCake.Web/wwwroot/images/blog/
+IllyCake.Web/wwwroot/images/product/
+IllyCake.Web/wwwroot/images/quote/
 
 *_i.c
 *_p.c
