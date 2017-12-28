@@ -40,6 +40,18 @@ button,
 .required:after {
   content: '*';
 }
+.border-right {
+  border-right: 1px solid;
+}
+.border-gray {
+  border-color: #EBEDED;
+}
+/* =============================================================================
+   Screen size variables
+   ========================================================================== */
+/* =============================================================================
+   Media queries for different screen sizes
+   ========================================================================== */
 .container {
   padding: 15px;
 }
@@ -71,6 +83,12 @@ button,
 .btn .fa {
   color: #FFF;
 }
+.btn.btn-xs {
+  padding: .125rem .4rem;
+  font-size: .875rem;
+  line-height: 1.5;
+  border-radius: 0;
+}
 .table a {
   color: #212529;
 }
@@ -84,6 +102,10 @@ button,
 }
 .toggle-on {
   border: 1px solid #ddd;
+}
+.carousel .carousel-control-next,
+.carousel .carousel-control-prev {
+  top: 30px;
 }
 body.dragging,
 body.dragging * {
@@ -102,8 +124,30 @@ ol.example li.placeholder:before {
   position: absolute;
   /** Define arrowhead **/
 }
+.editable-row .edit-mode-input {
+  padding: 5px 5px 2px 5px;
+  background-color: white;
+  border-radius: 0;
+  border-color: #EBEDED;
+}
+.editable-row .edit-mode-input:disabled {
+  border-color: white;
+  background-color: transparent;
+}
+.editable-row.edit-mode .read-mode-only {
+  display: none;
+}
+.editable-row.edit-mode .edit-mode-only {
+  display: inline-block;
+}
+.editable-row.read-mode .read-mode-only {
+  display: inline-block;
+}
+.editable-row.read-mode .edit-mode-only {
+  display: none;
+}
 .row.row-header {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: #EBEDED;
   margin: 0;
 }
 .row.row-header .col {
@@ -111,28 +155,20 @@ ol.example li.placeholder:before {
 }
 .row.row-line-item {
   margin: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid #EBEDED;
 }
 .row.row-line-item .col {
   padding: .25rem .5rem;
 }
-.read-only-mode .read-only {
-  display: inline-block;
-}
-.read-only-mode .edit-only {
-  display: none;
-}
-.edit-only-mode .read-only {
-  display: none;
-}
-.edit-only-mode .edit-only {
-  display: inline-block;
+.row.row-line-item.category-item .edit-mode-input {
+  border-color: #D6DADB;
 }
 .product-edit .thumb-image-edit {
   text-align: center;
 }
 .product-edit .thumb-image-edit .image-preview {
   position: relative;
+  padding-bottom: 50px;
 }
 .product-edit .thumb-image-edit .image-preview img {
   max-width: 100%;
@@ -142,7 +178,7 @@ ol.example li.placeholder:before {
 .product-edit .thumb-image-edit .image-preview .thumb-image-text {
   display: none;
   position: absolute;
-  bottom: -2em;
+  bottom: 0;
   left: 0;
   text-align: center;
   width: 100%;
@@ -156,4 +192,9 @@ ol.example li.placeholder:before {
 }
 .product-edit .thumb-image-edit .image-preview:hover .thumb-image-text {
   display: block;
+}
+.product-edit .carousel .carousel-item .delete-gallery-image-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
 }

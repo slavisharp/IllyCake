@@ -1,5 +1,6 @@
 ﻿namespace IllyCake.Web.Areas.Admin.Controllers
 {
+    using IllyCake.Common.Exeptions;
     using IllyCake.Common.Managers;
     using IllyCake.Common.Settings;
     using IllyCake.Data.Models;
@@ -7,6 +8,7 @@
     using IllyCake.Web.ViewModels;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Threading.Tasks;
@@ -68,6 +70,25 @@
             }
 
             return Json(imagesResult);
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteProductImage(int productId, int imageId)
+        {
+            try
+            {
+                var image = await this.imageManager.DeleteProductImageAsync(productId, imageId);
+                return Json(new { success = "Снимката е изтрита!" });
+            }
+            catch (EntityNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]

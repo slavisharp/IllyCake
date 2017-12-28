@@ -1,11 +1,13 @@
 ﻿namespace IllyCake.Common.Managers
 {
+    using IllyCake.Common.Exeptions;
     using IllyCake.Common.Settings;
     using IllyCake.Data.Models;
     using IllyCake.Data.Repository;
     using Microsoft.AspNetCore.Hosting;
     using System;
     using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
 
     public class ImageManager : IImageManager
@@ -117,6 +119,19 @@
             {
                 await fs.WriteAsync(byteArray, 0, byteArray.Length);
             }
+        }
+
+        public async Task<ProductImage> DeleteProductImageAsync(int productId, int imageId)
+        {
+            var productImage = this.productImageRepository.All().Where(i => i.ImageId == imageId && i.ProductId == productId).FirstOrDefault();
+            if (productImage == null)
+            {
+                throw new EntityNotFoundException("Снимката не е намерена!");
+            }
+
+            this.productImageRepository.Delete(productImage);
+            await this.productImageRepository.SaveAsync();
+            return productImage;
         }
     }
 }

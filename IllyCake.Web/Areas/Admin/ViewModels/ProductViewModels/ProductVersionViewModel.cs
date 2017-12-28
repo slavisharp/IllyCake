@@ -18,8 +18,7 @@
         [Required]
         [DisplayName("Цена")]
         public decimal Price { get; set; }
-
-        [Required]
+        
         public int ProductId { get; set; }
 
         public static Expression<Func<ProductVersion, ProductVersionViewModel>> ExpressionFromProductVersion

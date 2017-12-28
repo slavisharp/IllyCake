@@ -12,7 +12,7 @@
     .Grid(Model)
     .Build(columns =>
     {
-        columns.Add(model => model.Name).Titled("Име").RenderedAs(model => Html.ActionLink(model.Name, "Edit", "Products", new { id = model.Id }));
+        columns.Add(model => model.Name).Titled("Име").InitialSort(GridSortOrder.Asc).RenderedAs(model => Html.ActionLink(model.Name, "Edit", "Products", new { id = model.Id }));
         columns.Add(model => model.Price).Titled("Цена");
         columns.Add(model => model.CategoryName).Titled("Категория");
         columns.Add(model => model.Type).Titled("Тип");
@@ -23,6 +23,6 @@
     })
     .Filterable()
     .Sortable()
-    .Pageable(p => { p.RowsPerPage = 20; })
+    .Pageable(p => { p.RowsPerPage = 25; })
     .Empty("Няма намерени продукти!")
 )

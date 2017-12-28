@@ -9,31 +9,15 @@
     }
 }
 
-.row.row-line-item{
+.row.row-line-item {
     margin: 0;
     border-bottom: 1px solid @colorHeaderRow;
 
-    .col{
+    .col {
         padding: .25rem .5rem;
     }
-}
 
-.read-only-mode {
-    .read-only {
-        display: inline-block;
-    }
-
-    .edit-only{
-        display: none;
-    }
-}
-
-.edit-only-mode {
-    .read-only {
-        display: none;
-    }
-
-    .edit-only {
-        display: inline-block;
+    &.category-item .edit-mode-input {
+        border-color: @colorForContent;
     }
 }

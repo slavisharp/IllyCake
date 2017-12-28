@@ -1,0 +1,36 @@
+﻿@import "_variables.less";
+@import "mixins/mixins.less";
+
+.editable-row {
+    .edit-mode-input {
+        padding: 5px 5px 2px 5px;
+        background-color: white;
+        border-radius: 0;
+        border-color: @colorHeaderRow;
+
+        &:disabled {
+            border-color: white;
+            background-color: transparent;
+        }
+    }
+
+    &.edit-mode {
+        .read-mode-only {
+            display: none;
+        }
+
+        .edit-mode-only {
+            display: inline-block;
+        }
+    }
+
+    &.read-mode {
+        .read-mode-only {
+            display: inline-block;
+        }
+
+        .edit-mode-only {
+            display: none;
+        }
+    }
+}

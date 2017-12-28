@@ -50,10 +50,11 @@
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int id, string tab = "tab-1")
         {
             var vm = this.manager.GetQueryById(id).Select(ProductDetailsViewModel.ExpressionFromProduct).FirstOrDefault();
             SetProductCategoriesList();
+            ViewBag.ActiveTab = "tab-1";
             return View(vm);
         }
 
@@ -90,16 +91,19 @@
                 try
                 {
                     var entity = await this.manager.CreateProductVersion(input);
-                    return Json(entity);
+                    TempData["success"] = "Версията е добавена";
+                    return RedirectToAction("Edit", new { id = input.ProductId });
                 }
                 catch (Exception ex)
                 {
-                    return BadRequest(ex.Message);
+                    TempData["error"] = ex.Message;
+                    return RedirectToAction("Edit", new { id = input.ProductId });
                 }
             }
             else
             {
-                return BadRequest(ModelState.GetErrorsList());
+                TempData["error"] = ModelState.GetErrorsList();
+                return RedirectToAction("Edit", new { id = input.ProductId });
             }
         }
 
@@ -111,8 +115,8 @@
             {
                 try
                 {
-                    var entity = await this.manager.CreateProductVersion(input);
-                    return Json(entity);
+                    var entity = await this.manager.UpdateProductVersion(input);
+                    return Json(new { success = $"Промените във версия '{entity.Name}' са запазени!" });
                 }
                 catch (Exception ex)
                 {
@@ -132,7 +136,7 @@
             try
             {
                 var entity = await this.manager.DeleteProductVersion(id);
-                return Json(entity);
+                return Json(new { success = $"Версия '{entity.Name}' е изтрита!" });
             }
             catch (Exception ex)
             {

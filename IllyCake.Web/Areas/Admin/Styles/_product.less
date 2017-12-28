@@ -6,6 +6,7 @@
 
         .image-preview {
             position: relative;
+            padding-bottom: 50px;
 
             img {
                 max-width: 100%;
@@ -16,7 +17,7 @@
             .thumb-image-text {
                 display: none;
                 position: absolute;
-                bottom: -2em;
+                bottom: 0;
                 left: 0;
                 text-align: center;
                 width: 100%;
@@ -33,6 +34,16 @@
                 .thumb-image-text {
                     display: block;
                 }
+            }
+        }
+    }
+
+    .carousel {
+        .carousel-item {
+            .delete-gallery-image-btn {
+                position: absolute;
+                top: 0;
+                right: 0;
             }
         }
     }
