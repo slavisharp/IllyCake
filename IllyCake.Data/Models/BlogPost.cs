@@ -1,6 +1,7 @@
 ﻿namespace IllyCake.Data.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,15 +16,18 @@
         public string Title { get; set; }
 
         [Required]
-        [MaxLength(150)]
-        public string Subtitle { get; set; }
+        [MinLength(3), MaxLength(100)]
+        public string Alias { get; set; }
 
         [Required]
-        public int ThumbImageId { get; set; }
+        [MaxLength(150)]
+        public string Subtitle { get; set; }
+        
+        public int? ThumbImageId { get; set; }
         public virtual ImageFile ThumbImage { get; set; }
 
         [MaxLength(1000)]
-        public string VideoUrl { get; set; }
+        public string EmbedetVideo { get; set; }
 
         [Required]
         [MaxLength(1000)]
@@ -51,5 +55,7 @@
 
         [MaxLength(200)]
         public string MetaKeyWords { get; set; }
+        
+        public virtual ICollection<BlogPostState> BlogPostStates { get; set; }
     }
 }

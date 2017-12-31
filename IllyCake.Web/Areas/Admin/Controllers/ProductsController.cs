@@ -4,6 +4,7 @@
     using IllyCake.Common.Settings;
     using IllyCake.Data.Models;
     using IllyCake.Web.Areas.Admin.ViewModels.ProductViewModels;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
     using Microsoft.AspNetCore.Mvc.Rendering;
@@ -15,7 +16,7 @@
     {
         private IProductManager manager;
 
-        public ProductsController(AppSettings appSettings, IProductManager manager) : base(appSettings)
+        public ProductsController(AppSettings appSettings, IProductManager manager, UserManager<ApplicationUser> userManager) : base(appSettings, userManager)
         {
             this.manager = manager;
         }

@@ -2,11 +2,13 @@
 {
     using IllyCake.Common.Managers;
     using IllyCake.Common.Settings;
+    using IllyCake.Data.Models;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     public class OrdersController : AdminController
     {
-        public OrdersController(AppSettings appSettings, IOrderManager manager) : base(appSettings)
+        public OrdersController(AppSettings appSettings, IOrderManager manager, UserManager<ApplicationUser> userManager) : base(appSettings, userManager)
         {
         }
         

@@ -2,8 +2,10 @@
 {
     using IllyCake.Common.Settings;
     using IllyCake.Data;
+    using IllyCake.Data.Models;
     using IllyCake.Web.Controllers;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     [Area("Admin")]
@@ -14,7 +16,7 @@
         private const string ERROR_TEMP_DATA_KEY = "error";
         private const string ERRORS_TEMP_DATA_KEY = "errors";
 
-        public AdminController(AppSettings appSettings) : base(appSettings)
+        public AdminController(AppSettings appSettings, UserManager<ApplicationUser> userManager) : base(appSettings, userManager)
         {
 
         }

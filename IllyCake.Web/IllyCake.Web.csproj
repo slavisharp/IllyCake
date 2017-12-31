@@ -29,7 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\ViewModels\BlogViewModels\" />
     <Folder Include="Areas\Admin\ViewModels\HomeViewModels\" />
     <Folder Include="Areas\Admin\ViewModels\QuoteViewModels\" />
     <Folder Include="ViewModels\HomePageViewModels\" />

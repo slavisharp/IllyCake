@@ -66,6 +66,9 @@
             // Product
             BuildProduct(builder);
 
+            // BLOG POST
+            BuildBlogPost(builder);
+
             // Quote Images
             BuilQuoteImages(builder);
 
@@ -140,6 +143,13 @@
                 .HasForeignKey(ci => ci.ApplicationUserId);
         }
 
+        private static void BuildBlogPost(ModelBuilder builder)
+        {
+            builder.Entity<BlogPost>()
+                .HasIndex(p => p.Alias)
+                .IsUnique(true);
+        }
+        
         private static void BuildProduct(ModelBuilder builder)
         {
             builder.Entity<ProductImage>()
@@ -169,6 +179,13 @@
                 .WithMany(q => q.ProductThumbImages)
                 .HasForeignKey(q => q.ThumbImageId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Product>()
+                .HasIndex(p => p.Alias)
+                .IsUnique(true);
+
+            builder.Entity<Product>()
+                .HasIndex(p => p.SKUCode);
         }
 
         private void BuilQuoteImages(ModelBuilder builder)

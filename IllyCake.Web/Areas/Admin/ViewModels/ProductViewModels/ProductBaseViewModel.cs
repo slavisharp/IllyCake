@@ -18,6 +18,12 @@
         public string Name { get; set; }
 
         [Required(ErrorMessage = StaticStringValues.REQUIRED_FIELD)]
+        [MinLength(2, ErrorMessage = "Кода трябва да е дълъг поне 2 символа!")]
+        [MaxLength(10, ErrorMessage = "Кода не трябва да е по-дълъг от 10 символа!")]
+        [DisplayName("Каталожен №")]
+        public string SKUCode { get; set; }
+
+        [Required(ErrorMessage = StaticStringValues.REQUIRED_FIELD)]
         [DisplayName("Цена")]
         [Range(0, Double.PositiveInfinity)]
         public decimal Price { get; set; }

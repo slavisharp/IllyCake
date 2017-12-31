@@ -2,14 +2,16 @@
 {
     using IllyCake.Common.Managers;
     using IllyCake.Common.Settings;
+    using IllyCake.Data.Models;
     using IllyCake.Web.ViewModels.QuoteViewModels;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     public class QuoteController : BaseController
     {
         private IQuoteManager quoteManager;
 
-        public QuoteController(AppSettings appSettings, IQuoteManager quoteManager) : base(appSettings)
+        public QuoteController(AppSettings appSettings, IQuoteManager quoteManager, UserManager<ApplicationUser> userManager) : base(appSettings, userManager)
         {
             this.quoteManager = quoteManager;
         }

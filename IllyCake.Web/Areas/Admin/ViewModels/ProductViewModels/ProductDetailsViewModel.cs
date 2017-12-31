@@ -54,6 +54,7 @@
                     Description = x.Description,
                     MetaDescripton = x.MetaDescription,
                     MetaKeyWords = x.MetaKeyWords,
+                    SKUCode = x.SKUCode,
                     OrderedCount = x.OrderItems.Where(i => i.OrderId != null).Sum(i => i.Quantity),
                     ThumbImage = new ImageViewModel() { Id = x.ThumbImageId, Name = x.ThumbImage.Name, Path = x.ThumbImage.Path },
                     GalleryImages = x.Images.Select(i => new ImageViewModel()

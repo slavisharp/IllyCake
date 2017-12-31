@@ -1,7 +1,25 @@
-﻿
+﻿@model IEnumerable<BlogPostListViewModel>
 @{
-    ViewData["Title"] = "Blog posts";
+    ViewBag.Title = "Блог";
 }
-
-<h2>Blog posts</h2>
-
+<header class="list-header">
+    <h2 class="d-inline-block">Блог публикации</h2>
+    <div class="btn-group pull-right" role="group" aria-label="Actions">
+        <a class="btn btn-secondary" asp-area="Admin" asp-action="Create" asp-controller="BlogPosts" title="Нова публикация"><i class="fa fa-plus" aria-hidden="true"></i></a>
+    </div>
+</header>
+@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.Title).Titled("Заглавие").InitialSort(GridSortOrder.Asc).RenderedAs(model => Html.ActionLink(model.Title, "Edit", "BlogPosts", new { id = model.Id }));
+        columns.Add(model => model.LastState).Titled("Статус").Filterable(true);
+        columns.Add(model => model.CreatorName).Titled("Създател").Filterable(true);
+        columns.Add(model => model.Created).Titled("Създаден").Filterable(true);
+        columns.Add(model => model.Modified).Titled("Модифициран").Filterable(true);
+    })
+    .Filterable()
+    .Sortable()
+    .Pageable(p => { p.RowsPerPage = 25; })
+    .Empty("Няма намерени публикации!")
+)

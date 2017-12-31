@@ -47,11 +47,13 @@
             {
                 CategoryId = input.CategoryId,
                 Name = input.Name,
+                Alias = System.Web.HttpUtility.UrlEncode(input.Name),
                 Price = input.Price,
                 ShowOnHomePage = true,
                 ThumbImageId = input.ThumbImageId,
-                Type = input.Type
-            };
+                Type = input.Type,
+                SKUCode = input.SKUCode
+        };
 
             this.repository.Add(product);
             await this.repository.SaveAsync();
@@ -76,7 +78,8 @@
 
                 product.CategoryId = input.CategoryId;
             }
-           
+
+            product.Alias = System.Web.HttpUtility.UrlEncode(input.Name);
             product.Description = input.Description;
             product.MetaDescription = input.MetaDescripton;
             product.MetaKeyWords = input.MetaKeyWords;
@@ -84,6 +87,7 @@
             product.Price = input.Price;
             product.ShowOnHomePage = input.ShowOnHomePage;
             product.Type = input.Type;
+            product.SKUCode = input.SKUCode;
             await this.repository.SaveAsync();
             return product;
         }

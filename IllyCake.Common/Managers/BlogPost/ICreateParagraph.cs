@@ -4,7 +4,7 @@ using System.Text;
 
 namespace IllyCake.Common.Managers
 {
-    public interface IBlogPostCreateModel
+    public interface ICreateParagraph
     {
     }
 }

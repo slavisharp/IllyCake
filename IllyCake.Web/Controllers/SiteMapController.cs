@@ -9,11 +9,13 @@
     using System.Text;
     using System.Xml.Linq;
 
-    public class SiteMapController : BaseController
+    public class SiteMapController : Controller
     {
+        private AppSettings appSettings;
         private string webSiteDomain;
-        public SiteMapController(AppSettings appSettings) : base(appSettings)
+        public SiteMapController(AppSettings appSettings)
         {
+            this.appSettings = appSettings;
             this.webSiteDomain = appSettings.URLS.WebAddressDomain;
         }
 

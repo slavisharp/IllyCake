@@ -5,7 +5,9 @@
     public interface ICreatePorductModel
     {
         string Name { get; set; }
-        
+
+        string SKUCode { get; set; }
+
         decimal Price { get; set; }
         
         ProductType Type { get; set; }

@@ -6,12 +6,14 @@
     using IllyCake.Web.Models;
     using IllyCake.Common.Settings;
     using IllyCake.Common.Managers;
+    using IllyCake.Data.Models;
+    using Microsoft.AspNetCore.Identity;
 
     public class HomeController : BaseController
     {
         private IHomePageManager manager;
 
-        public HomeController(AppSettings appSettings, IHomePageManager homePageManager) : base(appSettings)
+        public HomeController(AppSettings appSettings, IHomePageManager homePageManager, UserManager<ApplicationUser> userManager) : base(appSettings, userManager)
         {
             this.manager = homePageManager;
         }

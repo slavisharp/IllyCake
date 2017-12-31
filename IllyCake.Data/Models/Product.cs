@@ -16,6 +16,14 @@
         public string Name { get; set; }
 
         [Required]
+        [MinLength(2), MaxLength(200)]
+        public string Alias { get; set; }
+
+        [Required]
+        [MinLength(2), MaxLength(10)]
+        public string SKUCode { get; set; }
+
+        [Required]
         public decimal Price { get; set; }
 
         public string Description { get; set; }

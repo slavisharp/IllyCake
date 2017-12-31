@@ -1,0 +1,73 @@
+﻿@model BlogPostCreateViewModel
+@using IllyCake.Data.Models;
+@{
+    ViewBag.Title = "Създаване на публикация";
+}
+<section>
+    <header>
+        <h2>Добавяне на нова публикация</h2>
+    </header>
+    <form class="inner-content" method="post" asp-area="Admin" asp-controller="BlogPosts" asp-action="Create" asp-antiforgery="true">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="form-group row">
+                    <label asp-for="Title" class="col-4 col-form-label required"></label>
+                    <div class="col-8">
+                        <input asp-for="Title" class="form-control" />
+                        <input type="hidden" asp-for="CreatorId" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Subtitle" class="col-4 col-form-label required"></label>
+                    <div class="col-8">
+                        <input asp-for="Subtitle" class="form-control" />
+                        <span asp-validation-for="Subtitle" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Alias" class="col-4 col-form-label required"></label>
+                    <div class="col-8">
+                        <input asp-for="Alias" class="form-control" />
+                        <span asp-validation-for="Alias" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="ShortDescription" class="col-4 col-form-label required"></label>
+                    <div class="col-8">
+                        <textarea asp-for="ShortDescription" type="number" class="form-control"></textarea>
+                        <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="EmbededVideo" class="col-4 col-form-label"></label>
+                    <div class="col-8">
+                        <textarea asp-for="EmbededVideo" type="number" class="form-control"></textarea>
+                        <span asp-validation-for="EmbededVideo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group row">
+                    <label for="blog-image-selection" class="col-4 col-form-label">Главно изображение</label>
+                    <div class="col-8 file-selection-container">
+                        <input id="blog-image-selection" data-target="#thumb-image-container" type="file" class="hidden" />
+                        <label for="blog-image-selection" class="file-selection-label">Избери файл</label>
+                        <span asp-validation-for="ThumbImageId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div id="thumb-image-container">
+                    <img class="img-fluid" src="" />
+                    <input type="hidden" name="ThumbImageId" value="@Model.ThumbImageId" />
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <input type="submit" value="Създай" class="btn btn-success" />
+        </div>
+    </form>
+</section>
+@section scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}

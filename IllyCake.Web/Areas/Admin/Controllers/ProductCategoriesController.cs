@@ -3,7 +3,9 @@
     using IllyCake.Common.Exeptions;
     using IllyCake.Common.Managers;
     using IllyCake.Common.Settings;
+    using IllyCake.Data.Models;
     using IllyCake.Web.Areas.Admin.ViewModels.ProductCategoryViewModels;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
     using System;
@@ -15,7 +17,7 @@
     {
         private IProductManager manager;
 
-        public ProductCategoriesController(AppSettings appSettings, IProductManager productManager) : base(appSettings)
+        public ProductCategoriesController(AppSettings appSettings, IProductManager productManager, UserManager<ApplicationUser> userManager) : base(appSettings, userManager)
         {
             this.manager = productManager;
         }

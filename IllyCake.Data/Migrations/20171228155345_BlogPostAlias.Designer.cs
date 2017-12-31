@@ -12,9 +12,10 @@ using System;
 namespace IllyCake.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171228155345_BlogPostAlias")]
+    partial class BlogPostAlias
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -459,7 +460,7 @@ namespace IllyCake.Web.Data.Migrations
 
                     b.Property<string>("Alias")
                         .IsRequired()
-                        .HasMaxLength(200);
+                        .HasMaxLength(100);
 
                     b.Property<int>("CategoryId");
 
@@ -485,10 +486,6 @@ namespace IllyCake.Web.Data.Migrations
 
                     b.Property<decimal>("Price");
 
-                    b.Property<string>("SKUCode")
-                        .IsRequired()
-                        .HasMaxLength(10);
-
                     b.Property<bool>("ShowOnHomePage");
 
                     b.Property<int>("ThumbImageId");
@@ -497,12 +494,7 @@ namespace IllyCake.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Alias")
-                        .IsUnique();
-
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("SKUCode");
 
                     b.HasIndex("ThumbImageId");
 

@@ -21,6 +21,7 @@
                     Price = x.Price,
                     ShowOnHomePage = x.ShowOnHomePage,
                     Type = x.Type,
+                    SKUCode = x.SKUCode,
                     OrderedCount = x.OrderItems.Where(i => i.OrderId != null).Sum(i => i.Quantity)
                 };
             }
