@@ -24,6 +24,16 @@
             return this.blogsRepository.All().Where(p => p.IsDeleted == false);
         }
 
+        public async Task<BlogPost> GetById(string id)
+        {
+            return await this.blogsRepository.GetByIdAsync(id);
+        }
+
+        public IQueryable<BlogPost> GetQueryById(string id)
+        {
+            return this.blogsRepository.All().Where(p => p.Id == id);
+        }
+
         public async Task<BlogPost> CreateBlogPost(ICreateBlogPost model)
         {
             BlogPost post = new BlogPost()
@@ -36,7 +46,8 @@
                 LastState = BlogPostStates.Draft,
                 UserId = model.CreatorId,
                 ViewCount = 0,
-                Subtitle = model.Subtitle
+                Subtitle = model.Subtitle,
+                Title = model.Title
             };
 
             BlogPostState state = new BlogPostState()

@@ -8,6 +8,10 @@
     {
         IQueryable<BlogPost> GetAll();
 
+        Task<BlogPost> GetById(string id);
+
+        IQueryable<BlogPost> GetQueryById(string id);
+
         Task<BlogPost> CreateBlogPost(ICreateBlogPost model);
 
         Task<BlogPost> UpdateBlogPost(IUpdateBlogPost model);

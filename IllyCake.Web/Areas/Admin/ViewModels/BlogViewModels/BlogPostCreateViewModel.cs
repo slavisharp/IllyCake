@@ -5,5 +5,7 @@
     public class BlogPostCreateViewModel : BlogPostBaseViewModel, ICreateBlogPost
     {
         public string CreatorId { get; set; }
+
+        public string ImageUrl { get; set; }
     }
 }

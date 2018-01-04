@@ -15,6 +15,9 @@
         [DisplayName("Създател")]
         public string CreatorName { get; set; }
 
+        [DisplayName("Създател")]
+        public string Email { get; set; }
+
         public DateTime Created { get; set; }
 
         public DateTime? Modified { get; set; }
@@ -29,7 +32,14 @@
                     Modified = x.Modified,
                     Id = x.Id,
                     CreatorName = x.User.FirstName + " " + x.User.LastName,
-                    
+                    Email = x.User.Email,
+                    Alias = x.Alias,
+                    //EmbededVideo = x.EmbedetVideo,
+                    LastState = x.LastState,
+                    //ShortDescription = x.ShortDescription,
+                    //Subtitle = x.Subtitle,
+                    //ThumbImageId = x.ThumbImageId,
+                    Title = x.Title
                 };
             }
         }

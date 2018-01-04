@@ -82,7 +82,7 @@
                     $deleteBtn = $img.find('.delete-gallery-image-btn');
 
                 $img.find('img').attr('src', data[i].relativePath).attr('alt', data[i].name);
-                if ($carouselInner.find('.carousel-item').length == 0) {
+                if ($carouselInner.find('.carousel-item').length === 0) {
                     $img.addClass('active');
                 }
 
