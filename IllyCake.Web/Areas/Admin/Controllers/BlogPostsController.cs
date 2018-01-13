@@ -7,6 +7,7 @@
     using IllyCake.Web.Areas.Admin.ViewModels.BlogViewModels;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -54,7 +55,36 @@
         [HttpGet]
         public IActionResult Edit(string id)
         {
-            return View();
+            var vm = this.manager.GetQueryById(id).Select(BlogPostEditViewModel.ExpressionFromBlogPost).FirstOrDefault();
+            if (vm == null)
+            {
+                return NotFound("Публикацията не е намерена");
+            }
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(BlogPostEditViewModel input)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //var entity = await this.manager.EditBlogPost(input);
+                    base.SetActionSuccessMessageInTempData("Информацията за публикацията е обновена.");
+                    return RedirectToAction("Edit", new { id = input.Id });
+                }
+                catch (Exception ex)
+                {
+                    TempData["error"] = ex.Message;
+                    return RedirectToAction("Edit", new { id = input.Id });
+                }
+            }
+            else
+            {
+                return View(input);
+            }
         }
     }
 }

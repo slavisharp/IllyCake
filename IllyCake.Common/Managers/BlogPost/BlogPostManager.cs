@@ -1,5 +1,6 @@
 ﻿namespace IllyCake.Common.Managers
 {
+    using IllyCake.Common.Exeptions;
     using IllyCake.Data.Models;
     using IllyCake.Data.Repository;
     using System;
@@ -85,9 +86,38 @@
             throw new NotImplementedException();
         }
 
-        public Task<BlogPost> UpdateBlogPost(IUpdateBlogPost model)
+        public async Task<BlogPost> UpdateBlogPost(IUpdateBlogPost model)
         {
-            throw new NotImplementedException();
+            var post = await this.GetById(model.Id);
+            if (post == null)
+            {
+                throw new EntityNotFoundException("");
+            }
+
+            post.Alias = model.Alias;
+            post.EmbedetVideo = model.EmbededVideo;
+            post.MetaDescription = model.MetaDescription;
+            post.MetaKeyWords = model.MetaKeyWords;
+            post.ShortDescription = model.ShortDescription;
+            post.ShowOnHomePage = model.ShowOnHomePage;
+            post.Subtitle = model.Subtitle;
+            post.ThumbImageId = model.ThumbImageId;
+            post.Title = model.Title;
+            if (post.LastState != model.State)
+            {
+                post.LastState = model.State;
+                var state = new BlogPostState()
+                {
+                    BlogPost = post,
+                    DateSet = DateTime.Now,
+                    State = model.State
+                };
+
+                await this.blogStatesRepository.AddAsync(state);
+            }
+
+            await this.blogsRepository.SaveAsync();
+            return post;
         }
 
         public Task<Paragraph> UpdateParagraph(IUpdateParagraph model)
