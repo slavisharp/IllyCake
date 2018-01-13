@@ -137,6 +137,18 @@ body {
   width: 1200px;
   margin: 0 auto;
 }
+.button {
+  display: block;
+  padding: 10px;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  background: #382b27;
+}
+.button:hover {
+  background: #433632;
+  transition: .25s;
+}
 header {
   display: flex;
   background: url('../resources/images/navBg.png') #382b27;
@@ -166,6 +178,7 @@ header .nav .nav-link.active {
   -webkit-box-shadow: inset 0px -10px 0px 0px rgba(255, 255, 255, 0.15);
   -moz-box-shadow: inset 0px -10px 0px 0px rgba(255, 255, 255, 0.15);
   box-shadow: inset 0px -10px 0px 0px rgba(255, 255, 255, 0.15);
+  transition: .25s;
 }
 header .nav .user-controls {
   text-align: center;
@@ -185,6 +198,7 @@ header .nav .user-controls a:hover {
   -webkit-box-shadow: inset 0px -10px 0px 0px rgba(255, 255, 255, 0.15);
   -moz-box-shadow: inset 0px -10px 0px 0px rgba(255, 255, 255, 0.15);
   box-shadow: inset 0px -10px 0px 0px rgba(255, 255, 255, 0.15);
+  transition: .25s;
 }
 header .nav .user-controls a .fa {
   font-size: 24px;
@@ -193,6 +207,61 @@ header .nav .user-controls a .fa {
   background: url('../resources/images/teaserBg.png') #ead4c2;
   height: 500px;
   animation: animatedBackground 120s linear infinite;
+}
+.teaser .teaser-products {
+  display: block;
+  padding: 18px 0;
+  box-sizing: border-box;
+}
+.teaser .teaser-products .row {
+  display: flex;
+  justify-content: center;
+}
+.teaser .teaser-products .row:nth-child(2) {
+  margin-top: -120px;
+}
+.teaser .teaser-products .row .product {
+  position: relative;
+}
+.teaser .teaser-products .row .product .product-preview {
+  display: none;
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  padding: 20px;
+  background: url('../resources/images/teaserProductBg.png') #d94854;
+  box-shadow: 0px 0px 5px 0px #000, inset 0px 0px 0px 10px rgba(255, 255, 255, 0.15);
+  z-index: 10;
+  cursor: pointer;
+  animation: fadeInFromNone 0.5s ease-out;
+  border-radius: 10px;
+}
+.teaser .teaser-products .row .product .product-preview h3,
+.teaser .teaser-products .row .product .product-preview p {
+  margin-top: 10px;
+  font-size: 24px;
+  text-align: center;
+  color: white;
+}
+.teaser .teaser-products .row .product .product-preview p {
+  margin-top: 0;
+  font-size: 14px;
+}
+.teaser .teaser-products .row .product.hovered .product-preview {
+  display: block;
+}
+.teaser .teaser-products .row .product.hovered .product-preview a:nth-of-type(1) {
+  margin: 10px 0 5px 0;
+}
+@keyframes fadeInFromNone {
+  0% {
+    display: block;
+    opacity: 0;
+  }
+  100% {
+    display: block;
+    opacity: 1;
+  }
 }
 @keyframes animatedBackground {
   from {

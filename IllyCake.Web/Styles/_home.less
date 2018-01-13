@@ -1,7 +1,77 @@
+@import '_vars.less';
+
 .teaser {
   background: url('../resources/images/teaserBg.png') #ead4c2; 
   height: 500px;
   animation: animatedBackground 120s linear infinite;
+
+  .teaser-products {
+    display: block;
+    padding: 18px 0;
+    box-sizing: border-box;
+
+    .row {
+      display: flex;
+      justify-content: center;
+
+      &:nth-child(2) {
+        margin-top: -120px;
+      }
+
+      .product {
+        position: relative;
+
+        .product-preview {
+          display: none;
+          position: absolute;
+          top: -20px;
+          left: -20px;
+          padding: 20px;
+          background: url('../resources/images/teaserProductBg.png') #d94854;
+          box-shadow: @teaserProductHover;
+          z-index: 10;
+          cursor: pointer;
+          animation: fadeInFromNone 0.5s ease-out;
+          border-radius: 10px;
+
+          h3,
+          p {
+            margin-top: 10px;
+            font-size: 24px;
+            text-align: center;
+            color: white;
+          }
+
+          p {
+            margin-top: 0;
+            font-size: 14px;
+          }
+        }
+
+        &.hovered {
+          .product-preview {
+            display: block;
+
+            a:nth-of-type(1) {
+              margin: 10px 0 5px 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeInFromNone {
+  0% {
+      display: block;
+      opacity: 0;
+  }
+
+  100% {
+      display: block;
+      opacity: 1;
+  }
 }
 
 @keyframes animatedBackground {
