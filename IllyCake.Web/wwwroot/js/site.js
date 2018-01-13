@@ -1,6 +1,8 @@
 $(function () {
-    'use strict';
-    
+  'use strict';
+  $('.product').hover(function () {
+    $(this).toggleClass('hovered');
+  });
 });
 $(function () {
     var Cart = function () {
