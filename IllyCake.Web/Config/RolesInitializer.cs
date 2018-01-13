@@ -14,9 +14,9 @@
 
             foreach (var role in roleNames)
             {
-                Task<bool> roleExists = roleManager.RoleExistsAsync(role);
-                roleExists.Wait();
-
+               Task<bool> roleExists = roleManager.RoleExistsAsync(role);
+               roleExists.Wait();
+               
                 if (!roleExists.Result)
                 {
                     Task<IdentityResult> roleResult = roleManager.CreateAsync(new IdentityRole(role));

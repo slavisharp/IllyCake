@@ -1,0 +1,41 @@
+﻿header {
+  display: flex;
+
+  .nav {
+    display: flex;
+    flex: 1;
+    background: grey;
+
+    .nav-link {
+      flex: 1;
+      list-style-type: none;
+      text-align: center;
+      border: 1px solid red;
+
+      a {
+        display: block;
+        text-decoration: none;
+        color: white;
+        line-height: 50px;
+      }
+    }
+    .user-controls {
+      text-align: center;
+      width: 52px;
+
+      a {
+        display: block;
+        text-decoration: none;
+        color: white;
+
+        .nav-icon:after {
+          display: block;
+          content: " ";
+          width: 52px;
+          height: 52px;
+        }
+      }
+
+    }
+  }
+} 

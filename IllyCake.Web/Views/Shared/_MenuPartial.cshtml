@@ -1,12 +1,33 @@
-﻿<ul class="nav navbar-nav">
-    <nav-link asp-controller="Home" asp-action="Index" class="nav-link">Начало</nav-link>
-    <nav-link asp-controller="Products" asp-action="Index" class="nav-link">Продукти</nav-link>
-    <nav-link asp-controller="Blog" asp-action="Index" class="nav-link">Блог</nav-link>
-    <nav-link asp-controller="Home" asp-action="About" class="nav-link">За нас</nav-link>
-    <nav-link asp-controller="Home" asp-action="Contact" class="nav-link">Контакти</nav-link>
-    @if (ViewBag.IsAdmin != null && (bool)ViewBag.IsAdmin == true)
-    {
-        <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Админ</a></li>
-    }
+﻿@using Microsoft.AspNetCore.Identity
+@using IllyCake.Data.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="nav navbar-nav">
+  <nav-link asp-controller="Home" asp-action="Index" class="nav-link">Начало</nav-link>
+  <nav-link asp-controller="Products" asp-action="Index" class="nav-link">Продукти</nav-link>
+  <nav-link asp-controller="Blog" asp-action="Index" class="nav-link">Блог</nav-link>
+  <nav-link asp-controller="Home" asp-action="About" class="nav-link">За нас</nav-link>
+  <nav-link asp-controller="Home" asp-action="Contact" class="nav-link">Контакти</nav-link>
+@if (SignInManager.IsSignedIn(User))
+{
+  <li class="nav-item">
+    <a class="nav-link" asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">@UserManager.GetUserName(User)!</a>
+  </li>
+  <li class="nav-item">
+    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+      <button type="submit" class="btn btn-link navbar-btn navb-link">Отписване</button>
+    </form>
+  </li>
+}
+else
+{
+  <li class="user-controls login"><a asp-area="" asp-controller="Account" asp-action="Register"><i class="nav-icons"></i></a></li>
+  <li class="user-controls register"><a asp-area="" asp-controller="Account" asp-action="Login"><i class="nav-icon"></i></a></li>
+}
 </ul>
-@await Html.PartialAsync("_LoginPartial")
+
+@if (ViewBag.IsAdmin != null && (bool)ViewBag.IsAdmin == true)
+{
+  <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Админ</a></li>
+}
