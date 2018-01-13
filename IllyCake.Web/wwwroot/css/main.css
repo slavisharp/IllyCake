@@ -230,7 +230,7 @@ header .nav .user-controls a .fa {
   left: -20px;
   padding: 20px;
   background: url('../resources/images/teaserProductBg.png') #d94854;
-  box-shadow: 0px 0px 5px 0px #000, inset 0px 0px 0px 10px rgba(255, 255, 255, 0.15);
+  box-shadow: 0px 0px 25px -5px #000, inset 0px 0px 0px 10px rgba(255, 255, 255, 0.15);
   z-index: 10;
   cursor: pointer;
   animation: fadeInFromNone 0.5s ease-out;
@@ -238,13 +238,11 @@ header .nav .user-controls a .fa {
 }
 .teaser .teaser-products .row .product .product-preview h3,
 .teaser .teaser-products .row .product .product-preview p {
-  margin-top: 10px;
   font-size: 24px;
   text-align: center;
   color: white;
 }
 .teaser .teaser-products .row .product .product-preview p {
-  margin-top: 0;
   font-size: 14px;
 }
 .teaser .teaser-products .row .product.hovered .product-preview {
