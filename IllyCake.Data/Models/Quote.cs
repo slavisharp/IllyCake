@@ -5,7 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class Quote : DeletableEntity, IAuditInfo
+    public class Quote : DeletableEntity, IAuditInfo, IKeyEntity<string>
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

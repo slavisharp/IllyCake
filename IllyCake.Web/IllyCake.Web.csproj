@@ -7,13 +7,13 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Runtime" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="2.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" PrivateAssets="All" />
-    <PackageReference Include="NonFactors.Grid.Core.Mvc6" Version="2.1.1" />
-    <PackageReference Include="NonFactors.Grid.Mvc6" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Runtime" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="2.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" PrivateAssets="All" />
+    <PackageReference Include="NonFactors.Grid.Core.Mvc6" Version="2.2.0" />
+    <PackageReference Include="NonFactors.Grid.Mvc6" Version="2.2.0" />
     <PackageReference Include="TagHelperSamples.Bootstrap" Version="2.0.30" />
   </ItemGroup>
 
@@ -29,7 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\ViewModels\BlogViewModels\" />
     <Folder Include="Areas\Admin\ViewModels\HomeViewModels\" />
     <Folder Include="Areas\Admin\ViewModels\QuoteViewModels\" />
     <Folder Include="ViewModels\HomePageViewModels\" />
@@ -386,6 +385,7 @@
     <None Include="wwwroot\lib\ckeditor\skins\moono-lisa\images\spinner.gif" />
     <None Include="wwwroot\lib\ckeditor\skins\moono-lisa\readme.md" />
     <None Include="wwwroot\lib\ckeditor\styles.js" />
+    <None Include="wwwroot\lib\sortable\sortable.js" />
   </ItemGroup>
 
 </Project>

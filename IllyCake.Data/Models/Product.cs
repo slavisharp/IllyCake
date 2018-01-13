@@ -6,7 +6,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class Product : DeletableEntity, IAuditInfo
+    public class Product : DeletableEntity, IAuditInfo, IKeyEntity<int>
     {
         [Key]
         public int Id { get; set; }
@@ -16,9 +16,23 @@
         public string Name { get; set; }
 
         [Required]
+        [MinLength(2), MaxLength(200)]
+        public string Alias { get; set; }
+
+        [Required]
+        [MinLength(2), MaxLength(10)]
+        public string SKUCode { get; set; }
+
+        [Required]
         public decimal Price { get; set; }
 
         public string Description { get; set; }
+
+        [MaxLength(160)]
+        public string MetaDescription { get; set; }
+
+        [MaxLength(200)]
+        public string MetaKeyWords { get; set; }
 
         [Required]
         public ProductType Type { get; set; }
@@ -46,7 +60,10 @@
         public virtual ICollection<OrderItem> OrderItems { get; set; }
         
         [InverseProperty("Product")]
-        public ICollection<ProductDiscountCoupon> DiscountCoupons { get; set; }
+        public virtual ICollection<ProductDiscountCoupon> DiscountCoupons { get; set; }
+
+        [InverseProperty("Product")]
+        public virtual ICollection<ProductVersion> ProductVersions { get; set; }
     }
 
     public enum ProductType

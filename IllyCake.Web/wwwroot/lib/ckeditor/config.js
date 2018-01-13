@@ -8,21 +8,22 @@ CKEDITOR.editorConfig = function( config ) {
 	config.language = 'bg';
     config.toolbarGroups = [
         { name: 'document', groups: ['mode', 'document', 'doctools'] },
-        { name: 'clipboard', groups: ['clipboard', 'undo'] },
-        { name: 'editing', groups: ['find', 'selection', 'spellchecker', 'editing'] },
-        { name: 'forms', groups: ['forms'] },
-        '/',
-        { name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
-        { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
+        { name: 'clipboard', groups: ['clipboard', 'undo', 'cleanup'] },
         { name: 'links', groups: ['links'] },
-        { name: 'insert', groups: ['insert'] },
-        '/',
-        { name: 'styles', groups: ['styles'] },
-        { name: 'colors', groups: ['colors'] },
-        { name: 'tools', groups: ['tools'] },
         { name: 'others', groups: ['others'] },
-        { name: 'about', groups: ['about'] }
+        { name: 'tools', groups: ['tools'] },
+        '/',
+        { name: 'editing', groups: ['find', 'selection', 'spellchecker', 'editing'] },
+        { name: 'basicstyles', groups: ['basicstyles'] },
+        { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
+        '/',
+        { name: 'insert', groups: ['insert'] },
+        { name: 'styles', groups: ['styles'] },
+        { name: 'colors', groups: ['colors'] }
     ];
 
-    config.removeButtons = 'Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Flash';
+    config.removeButtons = 'Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Flash,Print,SelectAll,Scayt,Replace,Language,PageBreak';
+
+    config.extraPlugins = 'uploadimage';
+    config.uploadUrl = '/Admin/Images/UploadPostImage';
 };

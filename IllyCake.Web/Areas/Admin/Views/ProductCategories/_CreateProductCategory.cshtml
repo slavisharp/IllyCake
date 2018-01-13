@@ -1,0 +1,25 @@
+﻿@model ProductCategoryCreateViewModel
+@{ 
+    Layout = null;
+}
+<form method="post" asp-area="Admin" asp-controller="ProductCategories" asp-action="Create" asp-antiforgery="true">
+    <div class="form-group row">
+        <div class="col-5">
+            <label asp-for="Name" class="required"></label>
+        </div>
+        <div class="col-7">
+            <input asp-for="Name" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-5">
+            <label asp-for="ShowOnHomePage"></label>
+        </div>
+        <div class="col-7 chechbox">
+            <input asp-for="ShowOnHomePage" class="chechbox" />
+        </div>
+    </div>
+    <div class="form-group text-center">
+        <input type="submit" value="Create" class="btn btn-success" />
+    </div>
+</form>

@@ -5,33 +5,15 @@
     using System.Linq;
     using System.Linq.Expressions;
 
-    public class ProductListViewModel
+    public class ProductListViewModel : ProductBaseViewModel
     {
-        public int Id { get; set; }
-
-        public string Name { get; set; }
-
-        public decimal Price { get; set; }
-
-        public ProductType Type { get; set; }
-
-        public string Category { get; set; }
-
-        public DateTime Created { get; set; }
-
-        public DateTime? Modified { get; set; }
-
-        public bool ShowOnHomePage { get; set; }
-
-        public int OrderedCount { get; set; }
-
-        public static Expression<Func<Product, ProductListViewModel>> FromProduct
+        public static Expression<Func<Product, ProductListViewModel>> ExpressionFromProduct
         {
             get
             {
                 return x => new ProductListViewModel()
                 {
-                    Category = x.Category.Name,
+                    CategoryName = x.Category.Name,
                     Created = x.Created,
                     Modified = x.Modified,
                     Id = x.Id,
@@ -39,6 +21,7 @@
                     Price = x.Price,
                     ShowOnHomePage = x.ShowOnHomePage,
                     Type = x.Type,
+                    SKUCode = x.SKUCode,
                     OrderedCount = x.OrderItems.Where(i => i.OrderId != null).Sum(i => i.Quantity)
                 };
             }

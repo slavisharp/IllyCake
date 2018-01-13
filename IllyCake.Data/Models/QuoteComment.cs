@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class QuoteComment : DeletableEntity, IAuditInfo
+    public class QuoteComment : DeletableEntity, IAuditInfo, IKeyEntity<int>
     {
         [Key]
         public int Id { get; set; }

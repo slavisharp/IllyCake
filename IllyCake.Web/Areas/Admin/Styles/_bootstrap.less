@@ -1,4 +1,5 @@
 ﻿@import "_variables.less";
+@import "mixins/mixins.less";
 
 .container{
     padding: 15px;
@@ -9,7 +10,8 @@
     padding: 0;
 
     .navbar-brand,
-    .navbar-text {
+    .navbar-text,
+    .navbar-toggler {
         color: @colorTextDefault;
     }
 
@@ -25,7 +27,7 @@
             }
         }
     }
-    
+
     .nav-item.active .nav-link,
     .nav-item:hover .nav-link {
         color: @colorTextDefault;
@@ -35,4 +37,44 @@
 .btn-success {
     background-color: @colorGreenBackground;
     border-color: @colorGreenBackground;
+}
+
+.btn {
+    .fa {
+        color: #FFF;
+    }
+
+    &.btn-xs {
+        padding: .125rem .4rem;
+        font-size: .875rem;
+        line-height: 1.5;
+        border-radius: 0;
+    }
+}
+
+.table {
+    a {
+        color: #212529;
+
+        &:hover{
+            color: #000;
+        }
+    }
+}
+
+.tab-content {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-top: none;
+}
+
+.toggle-on {
+    border : 1px solid #ddd;
+}
+
+.carousel {
+    .carousel-control-next,
+    .carousel-control-prev{
+        top: 30px;
+    }
 }

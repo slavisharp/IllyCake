@@ -3,6 +3,7 @@
 body {
     background: @colorBackground;
     font-family: 'Open Sans',sans-serif;
+    overflow-y: scroll;
 }
 
 a, button, .btn {
@@ -13,8 +14,8 @@ a, button, .btn {
     background: @colorForContent;
 
     .inner-content {
-        padding: 15px;
         background: @colorInnerContent;
+        padding: 15px;
     }
 }
 
@@ -22,9 +23,23 @@ a, button, .btn {
     display: none;
 }
 
-.table thead {
-    background: rgba(255,255,255,.5);
-    border: 0 none;
+.table {
+    thead {
+        background: rgba(255,255,255,.5);
+        border: 0 none;
+    }
+
+    tbody {
+        tr {
+            &:hover {
+                background: rgba(255,255,255,.25);
+            }
+
+            td {
+                border-top: 1px solid rgba(255,255,255,.5);
+            }
+        }
+    }
 }
 
 .file-selection-label {
@@ -35,4 +50,16 @@ a, button, .btn {
     text-align: center;
     text-overflow: ellipsis;
     width: 100%;
+}
+
+.required:after {
+    content: '*'
+}
+
+.border-right {
+    border-right: 1px solid;
+}
+
+.border-gray {
+    border-color: @colorLightGray;
 }

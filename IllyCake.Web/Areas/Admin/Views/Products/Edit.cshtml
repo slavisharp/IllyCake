@@ -1,0 +1,204 @@
+﻿@model ProductDetailsViewModel
+@{
+    ViewBag.Title = $"Edit {Model.Name}";
+    var categories = ViewBag.Categories as IEnumerable<SelectListItem>;
+    string activeTab = ViewBag.ActiveTab as string;
+}
+
+<section class="product-edit">
+    <header>
+        <h2>Редактирай "@Model.Name"</h2>
+    </header>
+    @await Html.PartialAsync("_ShowResultAlert", new ResultAlertViewModel(TempData["success"] as string, TempData["error"] as string, TempData["errors"] as IEnumerable<string>))
+    <form method="post" asp-area="Admin" asp-controller="Products" asp-action="Edit" asp-antiforgery="true">
+        <div class="inner-content">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link @(activeTab == "tab-1" ? "active" : string.Empty)" data-toggle="tab" href="#tab-1" role="tab">Основни Данни</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(activeTab == "tab-2" ? "active" : string.Empty)" data-toggle="tab" href="#tab-2" role="tab">Галерия</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane @(activeTab == "tab-1" ? "active" : string.Empty)" id="tab-1" role="tabpanel">
+                    <div class="row">
+                        <div class="col-12 col-md-7">
+                            <h4>Детайли</h4>
+                            <div class="form-group row">
+                                <label asp-for="Name" class="col-4 col-form-label required"></label>
+                                <div class="col-8">
+                                    <input asp-for="Name" class="form-control" />
+                                    <input asp-for="Id" type="hidden" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="SKUCode" class="col-4 col-form-label required"></label>
+                                <div class="col-8">
+                                    <input asp-for="SKUCode" class="form-control" />
+                                    <input asp-for="SKUCode" type="hidden" />
+                                    <span asp-validation-for="SKUCode" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="Price" class="col-4 col-form-label required"></label>
+                                <div class="col-8">
+                                    <input asp-for="Price" type="number" class="form-control" />
+                                    <span asp-validation-for="Price" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="Type" class="col-4 col-form-label required"></label>
+                                <div class="col-8">
+                                    <select asp-for="Type" asp-items="Html.GetEnumSelectList<ProductType>()" type="number" class="form-control"></select>
+                                    <span asp-validation-for="Type" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="CategoryId" class="col-4 col-form-label required"></label>
+                                <div class="col-8">
+                                    <select asp-for="CategoryId" asp-items="categories" type="number" class="form-control"></select>
+                                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="ShowOnHomePage" class="col-4 col-form-label required"></label>
+                                <div class="col-8">
+                                    <input asp-for="ShowOnHomePage" type="checkbox" class="form-control" data-toggle="toggle" />
+                                    <span asp-validation-for="ShowOnHomePage" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="MetaDescripton" class="col-4 col-form-label required"></label>
+                                <div class="col-8">
+                                    <textarea asp-for="MetaDescripton" class="form-control"></textarea>
+                                    <span asp-validation-for="MetaDescripton" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="MetaKeyWords" class="col-4 col-form-label required"></label>
+                                <div class="col-8">
+                                    <textarea asp-for="MetaKeyWords" class="form-control"></textarea>
+                                    <span asp-validation-for="MetaKeyWords" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-5">
+                            <div>
+                                <h4 class="d-inline-block">Варианти</h4>
+                                <a href="#" title="Добави Вариант" class="fa fa-plus fa-2x create-product-version-toggle pull-right" data-toggle="modal" data-target="#create-version-modal"></a>
+                            </div>
+                            <div class="product-versions-container">
+                                <div class="row row-header">
+                                    <div class="col col-6">
+                                        <strong>Име</strong>
+                                    </div>
+                                    <div class="col col-3">
+                                        <strong>Цена</strong>
+                                    </div>
+                                </div>
+                                @foreach (var version in Model.ProductVersions)
+                                {
+                                    <div class="row row-line-item product-version-item editable-row read-mode" data-action="UpdateProductVersion" data-controller="Products">
+                                        <input class="edit-mode-input edit-mode-input-key" name="Id" type="hidden" value="@version.Id" />
+                                        <div class="col col-6">
+                                            <input autocomplete="off" type="text" name="Name" value="@version.Name" class="form-control edit-mode-input" disabled="disabled" />
+                                        </div>
+                                        <div class="col col-3">
+                                            <input autocomplete="off" type="number" step="0.1" name="Price" value="@version.Price" class="form-control edit-mode-input" disabled="disabled" />
+                                        </div>
+                                        <div class="col col-3 text-center">
+                                            <a class="btn btn-primary btn-xs editable-row-toggle read-mode-only" title="Редактирай"><i class="fa fa-pencil"></i></a>
+                                            <a class="btn btn-success btn-xs editable-row-save edit-mode-only" title="Запази"><i class="fa fa-save"></i></a>
+                                            <a class="btn btn-secondary btn-xs editable-row-toggle edit-mode-only" title="Отказ"><i class="fa fa-close"></i></a>
+                                            <a class="btn btn-danger btn-xs editable-row-delete edit-mode-only" title="Изтрий!" data-action="DeleteProductVersion"><i class="fa fa-trash"></i></a>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row justify-content-md-center">
+                        <div class="col-12 col-md-8">
+                            <h4>
+                                <label asp-for="Description"></label>
+                            </h4>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                            <div>
+                                <textarea class="form-control" asp-for="Description"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="text-center">
+                        <input type="submit" class="btn btn-success" value="Запази промените" />
+                    </div>
+                </div>
+                <div class="tab-pane @(activeTab == "tab-2" ? "active" : string.Empty)" id="tab-2" role="tabpanel">
+                    <div class="row">
+                        <div class="col col-md-3 border-right border-gray">
+                            <div class="form-group thumb-image-edit">
+                                <div>
+                                    <strong>Главно изображение</strong>
+                                </div>
+                                <label for="thumb-image-upload">
+                                    <div class="image-preview" id="thumb-image-preview">
+                                        <img class="thumb-image" src="@Model.ThumbImage.Path" alt="@Model.ThumbImage.Name" />
+                                        <input type="hidden" asp-for="ThumbImage.Id" />
+                                        <input type="hidden" asp-for="ThumbImage.Path" />
+                                        <input type="hidden" asp-for="ThumbImage.Name" />
+                                        <div class="thumb-image-text">
+                                            <span>Натисни за качване на нова снимка</span>
+                                        </div>
+                                    </div>
+                                    <input type="file" class="form-control d-none" id="thumb-image-upload" data-target="#thumb-image-preview" />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col col-md-9">
+                            <div class="clearfix">
+                                <label><strong>Галерия</strong></label>
+                                <label class="btn btn-light pull-right" for="galery-image-upload">
+                                    Качи снимка
+                                    <input type="file" class="form-control d-none" id="galery-image-upload" multiple />
+                                </label>
+                            </div>
+                            <div id="product-images-carousel" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    @if (Model.GalleryImages != null && Model.GalleryImages.Any())
+                                    {
+                                        foreach (var item in Model.GalleryImages)
+                                        {
+                                            <div class="carousel-item @(item.Id == Model.GalleryImages.First().Id ? "active" : string.Empty)">
+                                                <img class="d-block w-100" src="@item.Path" alt="@item.Name">
+                                                <a class="btn btn-danger btn-sm delete-gallery-image-btn" data-image-id="@item.Id"><i class="fa fa-trash"></i></a>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                                <a class="carousel-control-prev" href="#product-images-carousel" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#product-images-carousel" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+<div class="modals">
+    @Html.Partial("_CreateProductVersion", new ProductVersionViewModel() { ProductId = Model.Id })
+</div>
+@section scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}

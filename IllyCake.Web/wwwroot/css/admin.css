@@ -1,6 +1,7 @@
 body {
   background: #32464D;
   font-family: 'Open Sans', sans-serif;
+  overflow-y: scroll;
 }
 a,
 button,
@@ -8,11 +9,11 @@ button,
   cursor: pointer;
 }
 .container {
-  background: rgba(255, 255, 255, 0.8);
+  background: #D6DADB;
 }
 .container .inner-content {
-  padding: 15px;
   background: #FFF;
+  padding: 15px;
 }
 .hidden {
   display: none;
@@ -20,6 +21,12 @@ button,
 .table thead {
   background: rgba(255, 255, 255, 0.5);
   border: 0 none;
+}
+.table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+.table tbody tr td {
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
 }
 .file-selection-label {
   border: 2px dashed #32464D;
@@ -30,6 +37,21 @@ button,
   text-overflow: ellipsis;
   width: 100%;
 }
+.required:after {
+  content: '*';
+}
+.border-right {
+  border-right: 1px solid;
+}
+.border-gray {
+  border-color: #EBEDED;
+}
+/* =============================================================================
+   Screen size variables
+   ========================================================================== */
+/* =============================================================================
+   Media queries for different screen sizes
+   ========================================================================== */
 .container {
   padding: 15px;
 }
@@ -38,7 +60,8 @@ button,
   padding: 0;
 }
 .navbar-custom .navbar-brand,
-.navbar-custom .navbar-text {
+.navbar-custom .navbar-text,
+.navbar-custom .navbar-toggler {
   color: #FFF;
 }
 .navbar-custom .navbar-nav .nav-link {
@@ -56,4 +79,122 @@ button,
 .btn-success {
   background-color: #5eba67;
   border-color: #5eba67;
+}
+.btn .fa {
+  color: #FFF;
+}
+.btn.btn-xs {
+  padding: .125rem .4rem;
+  font-size: .875rem;
+  line-height: 1.5;
+  border-radius: 0;
+}
+.table a {
+  color: #212529;
+}
+.table a:hover {
+  color: #000;
+}
+.tab-content {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-top: none;
+}
+.toggle-on {
+  border: 1px solid #ddd;
+}
+.carousel .carousel-control-next,
+.carousel .carousel-control-prev {
+  top: 30px;
+}
+body.dragging,
+body.dragging * {
+  cursor: move !important;
+}
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+ol.example li.placeholder {
+  position: relative;
+  /** More li styles **/
+}
+ol.example li.placeholder:before {
+  position: absolute;
+  /** Define arrowhead **/
+}
+.editable-row .edit-mode-input {
+  padding: 5px 5px 2px 5px;
+  background-color: white;
+  border-radius: 0;
+  border-color: #EBEDED;
+}
+.editable-row .edit-mode-input:disabled {
+  border-color: white;
+  background-color: transparent;
+}
+.editable-row.edit-mode .read-mode-only {
+  display: none;
+}
+.editable-row.edit-mode .edit-mode-only {
+  display: inline-block;
+}
+.editable-row.read-mode .read-mode-only {
+  display: inline-block;
+}
+.editable-row.read-mode .edit-mode-only {
+  display: none;
+}
+.row.row-header {
+  background-color: #EBEDED;
+  margin: 0;
+}
+.row.row-header .col {
+  padding: .5rem 1rem;
+}
+.row.row-line-item {
+  margin: 0;
+  border-bottom: 1px solid #EBEDED;
+}
+.row.row-line-item .col {
+  padding: .25rem .5rem;
+}
+.row.row-line-item.category-item .edit-mode-input {
+  border-color: #D6DADB;
+}
+.product-edit .thumb-image-edit {
+  text-align: center;
+}
+.product-edit .thumb-image-edit .image-preview {
+  position: relative;
+  padding-bottom: 50px;
+}
+.product-edit .thumb-image-edit .image-preview img {
+  max-width: 100%;
+  height: auto;
+  border: 4px solid #FFF;
+}
+.product-edit .thumb-image-edit .image-preview .thumb-image-text {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  width: 100%;
+}
+.product-edit .thumb-image-edit .image-preview:hover {
+  cursor: pointer;
+}
+.product-edit .thumb-image-edit .image-preview:hover img {
+  border-color: #D6DADB;
+  opacity: .9;
+}
+.product-edit .thumb-image-edit .image-preview:hover .thumb-image-text {
+  display: block;
+}
+.product-edit .carousel .carousel-item .delete-gallery-image-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
 }

@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class OrderItem : IAuditInfo
+    public class OrderItem : IAuditInfo, IKeyEntity<int>
     {
         [Key]
         public int Id { get; set; }
@@ -26,6 +26,12 @@
 
         [Required]
         public int Quantity { get; set; }
+
+        [Required]
+        public decimal Subtotal { get; set; }
+
+        [Required]
+        public decimal DiscountAmmunt { get; set; }
 
         [Required]
         public decimal FinalPrice { get; set; }

@@ -1,6 +1,6 @@
 ﻿<nav class="navbar navbar-expand-md navbar-custom">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <span><i class="fa fa-bars"></i></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav text-md-center nav-justified w-100">
@@ -22,6 +22,11 @@
             <li class="nav-item" asp-is-active-link asp-controller="Products">
                 <a class="nav-link" asp-area="Admin" asp-controller="Products" asp-action="Index">
                     <i class="fa fa-birthday-cake" aria-hidden="true"></i> Продукти
+                </a>
+            </li>
+            <li class="nav-item" asp-is-active-link asp-controller="ProductCategories">
+                <a class="nav-link" asp-area="Admin" asp-controller="ProductCategories" asp-action="Index">
+                    <i class="fa fa-object-group" aria-hidden="true"></i> Категории
                 </a>
             </li>
             <li class="nav-item" asp-is-active-link asp-controller="BlogPosts">

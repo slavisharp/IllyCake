@@ -5,7 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class ImageFile
+    public class ImageFile : IKeyEntity<int>
     {
         [Key]
         public int Id { get; set; }

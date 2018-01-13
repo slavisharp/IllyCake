@@ -2,8 +2,10 @@
 {
     using IllyCake.Common.Managers;
     using IllyCake.Common.Settings;
+    using IllyCake.Data.Models;
     using IllyCake.Web.ViewModels;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
     using System.IO;
@@ -13,7 +15,7 @@
     {
         private IImageManager imageManager;
 
-        public ImagesController(AppSettings settings, IImageManager imageManager) : base(settings)
+        public ImagesController(AppSettings appSettings, IImageManager imageManager, UserManager<ApplicationUser> userManager) : base(appSettings, userManager)
         {
             this.imageManager = imageManager;
         }

@@ -1,0 +1,39 @@
+﻿@model ProductVersionViewModel
+@{ 
+    Layout = null;
+}
+<div class="modal fade" id="create-version-modal" tabindex="-1" role="dialog" aria-labelledby="create-version-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form asp-action="AddProductVersion" asp-controller="Products" asp-area="Admin" asp-antiforgery="true" class="modal-content" id="create-version-form">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ecreate-version-modal-label">Добави вариант</h5>
+                <a class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+                <input type="hidden" asp-for="ProductId" />
+            </div>
+            <div class="modal-body">
+                <div class="row form-group">
+                    <div class="col-5">
+                        <label asp-for="Name"></label>
+                    </div>
+                    <div class="col-7">
+                        <input asp-for="Name" class="form-control" />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-5">
+                        <label asp-for="Price"></label>
+                    </div>
+                    <div class="col-7">
+                        <input asp-for="Price" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default" data-dismiss="modal">Затвори</a>
+                <button type="submit" class="btn btn-primary">Добави</button>
+            </div>
+        </form>
+    </div>
+</div>
