@@ -128,23 +128,32 @@ table {
 }
 body {
   font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .text-center {
   text-align: center;
 }
+.wrapper {
+  width: 1200px;
+  margin: 0 auto;
+}
 header {
   display: flex;
+  background: url('../resources/images/navBg.png') #382b27;
+  background-size: cover;
 }
 header .nav {
   display: flex;
   flex: 1;
-  background: grey;
+  font-weight: bold;
 }
 header .nav .nav-link {
   flex: 1;
   list-style-type: none;
   text-align: center;
-  border: 1px solid red;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 header .nav .nav-link a {
   display: block;
@@ -152,18 +161,44 @@ header .nav .nav-link a {
   color: white;
   line-height: 50px;
 }
+header .nav .nav-link:hover,
+header .nav .nav-link.active {
+  -webkit-box-shadow: inset 0px -10px 0px 0px rgba(255, 255, 255, 0.15);
+  -moz-box-shadow: inset 0px -10px 0px 0px rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0px -10px 0px 0px rgba(255, 255, 255, 0.15);
+}
 header .nav .user-controls {
   text-align: center;
   width: 52px;
 }
 header .nav .user-controls a {
-  display: block;
+  display: flex;
+  padding: 0 0 4px 0;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-around;
+  box-sizing: border-box;
   text-decoration: none;
   color: white;
 }
-header .nav .user-controls a .nav-icon:after {
-  display: block;
-  content: " ";
-  width: 52px;
-  height: 52px;
+header .nav .user-controls a:hover {
+  -webkit-box-shadow: inset 0px -10px 0px 0px rgba(255, 255, 255, 0.15);
+  -moz-box-shadow: inset 0px -10px 0px 0px rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0px -10px 0px 0px rgba(255, 255, 255, 0.15);
+}
+header .nav .user-controls a .fa {
+  font-size: 24px;
+}
+.teaser {
+  background: url('../resources/images/teaserBg.png') #ead4c2;
+  height: 500px;
+  animation: animatedBackground 120s linear infinite;
+}
+@keyframes animatedBackground {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
 }

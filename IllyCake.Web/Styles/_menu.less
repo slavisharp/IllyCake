@@ -1,16 +1,22 @@
-﻿header {
+﻿@state: inset 0px -10px 0px 0px rgba(255,255,255, .15);
+
+header {
   display: flex;
+  background: url('../resources/images/navBg.png') #382b27;
+  background-size: cover;
 
   .nav {
     display: flex;
     flex: 1;
-    background: grey;
+    font-weight: bold;
 
     .nav-link {
       flex: 1;
       list-style-type: none;
       text-align: center;
-      border: 1px solid red;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
 
       a {
         display: block;
@@ -18,21 +24,37 @@
         color: white;
         line-height: 50px;
       }
+
+      &:hover,
+      &.active {
+        -webkit-box-shadow: @state;
+        -moz-box-shadow: @state;
+        box-shadow: @state;
+      }
+
     }
     .user-controls {
       text-align: center;
       width: 52px;
 
       a {
-        display: block;
+        display: flex;
+        padding: 0 0 4px 0;
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-around;
+        box-sizing: border-box;
         text-decoration: none;
         color: white;
 
-        .nav-icon:after {
-          display: block;
-          content: " ";
-          width: 52px;
-          height: 52px;
+        &:hover {
+          -webkit-box-shadow: @state;
+          -moz-box-shadow: @state;
+          box-shadow: @state;
+        }
+        
+        .fa {
+          font-size: 24px;
         }
       }
 
