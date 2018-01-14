@@ -130,6 +130,10 @@ body {
   font-size: 14px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+h1 {
+  font-size: 42px;
+  text-align: center;
+}
 .text-center {
   text-align: center;
 }
@@ -203,6 +207,7 @@ header .nav .user-controls a:hover {
 header .nav .user-controls a .fa {
   font-size: 24px;
 }
+/* Teaser section START */
 .teaser {
   background: url('../resources/images/teaserBg.png') #ead4c2;
   height: 500px;
@@ -212,6 +217,7 @@ header .nav .user-controls a .fa {
   display: block;
   padding: 18px 0;
   box-sizing: border-box;
+  background-size: 50%;
 }
 .teaser .teaser-products .row {
   display: flex;
@@ -251,6 +257,17 @@ header .nav .user-controls a .fa {
 .teaser .teaser-products .row .product.hovered .product-preview a:nth-of-type(1) {
   margin: 10px 0 5px 0;
 }
+/* Teaser section END */
+/* About section START */
+.about {
+  margin-top: 30px;
+}
+.about p {
+  text-align: center;
+}
+/* About section END */
+/* Blogpost section START */
+/* Blogpost section END */
 @keyframes fadeInFromNone {
   0% {
     display: block;

@@ -1,7 +1,8 @@
 @import '_vars.less';
 
+/* Teaser section START */
 .teaser {
-  background: url('../resources/images/teaserBg.png') #ead4c2; 
+  background: url('../resources/images/teaserBg.png') #ead4c2;
   height: 500px;
   animation: animatedBackground 120s linear infinite;
 
@@ -9,6 +10,7 @@
     display: block;
     padding: 18px 0;
     box-sizing: border-box;
+    background-size: 50%;
 
     .row {
       display: flex;
@@ -59,7 +61,21 @@
     }
   }
 }
+/* Teaser section END */
 
+/* About section START */
+.about { 
+  margin-top: 30px;
+
+  p {
+    text-align: center
+  }
+}
+/* About section END */
+
+/* Blogpost section START */
+
+/* Blogpost section END */
 @keyframes fadeInFromNone {
   0% {
       display: block;
