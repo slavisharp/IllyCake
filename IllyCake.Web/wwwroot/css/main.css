@@ -231,6 +231,7 @@ header .nav .user-controls a .fa {
 }
 .teaser .teaser-products .row .product {
   position: relative;
+  margin: 0 15px;
 }
 .teaser .teaser-products .row .product .product-preview {
   display: none;

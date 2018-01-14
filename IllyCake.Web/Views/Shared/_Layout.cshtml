@@ -27,7 +27,9 @@
     <section class="container body-content">
         @RenderBody()
     </section>
-    <footer></footer>
+    <footer>
+        @await Html.PartialAsync("_FooterPartial")
+    </footer>
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
