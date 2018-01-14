@@ -66,32 +66,12 @@
             return post;
         }
 
-        public Task<Paragraph> CreateParagraph(ICreateParagraph model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<BlogPost> DeleteBlogPost(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Paragraph> DeleteParagraph(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task MoveParagraph(int id, int delta)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<BlogPost> UpdateBlogPost(IUpdateBlogPost model)
         {
             var post = await this.GetById(model.Id);
             if (post == null)
             {
-                throw new EntityNotFoundException("");
+                throw new EntityNotFoundException("Публикацията не е намерена!");
             }
 
             post.Alias = model.Alias;
@@ -120,9 +100,122 @@
             return post;
         }
 
-        public Task<Paragraph> UpdateParagraph(IUpdateParagraph model)
+        public async Task<BlogPost> DeleteBlogPost(string id)
+        {
+            var post = await this.GetById(id);
+            if (post == null)
+            {
+                throw new EntityNotFoundException("Публикацията не е намерена!");
+            }
+
+            this.blogsRepository.Delete(post);
+            await this.blogsRepository.SaveAsync();
+            return post;
+        }
+
+        public async Task<Paragraph> GetParagraphById(int id)
+        {
+            return await this.paragraphsRepository.GetByIdAsync(id);
+        }
+
+        public IQueryable<Paragraph> GetParagraphsForBlog(string blogId)
+        {
+            return this.paragraphsRepository.All().Where(p => p.BlogPostId == blogId);
+        }
+
+        public async Task<Paragraph> CreateParagraph(ICreateParagraph model)
+        {
+            var post = await this.GetById(model.BlogId);
+            if (post == null)
+            {
+                throw new EntityNotFoundException("Публикацията не е намерена!");
+            }
+
+            int position = this.paragraphsRepository.All().Where(p => p.BlogPostId == model.BlogId).Count() + 1;
+            var paragraph = new Paragraph()
+            {
+                BlogPost = post,
+                BlogPostId = model.BlogId,
+                CssClassList = model.CssClassList,
+                EmbedVideoHtml = model.EmbedVideoHtml,
+                Position = position,
+                SpecialContentPosition = model.SpecialContentPosition,
+                Type = model.Type,
+                Text = model.Text
+            };
+
+            await this.paragraphsRepository.AddAsync(paragraph);
+            await this.paragraphsRepository.SaveAsync();
+            return paragraph;
+        }
+
+        public Task MoveParagraph(int id, int delta)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<Paragraph> UpdateParagraph(IUpdateParagraph model)
+        {
+            var paragraph = await this.paragraphsRepository.GetByIdAsync(model.Id);
+            if (paragraph == null)
+            {
+                throw new EntityNotFoundException("Секцията не е намерена!");
+            }
+
+            paragraph.CssClassList = model.CssClassList;
+            paragraph.EmbedVideoHtml = model.EmbedVideoHtml;
+            paragraph.ImageId = model.ThumbImageId;
+            paragraph.SpecialContentPosition = model.SpecialContentPosition;
+            paragraph.Text = model.Text;
+            paragraph.Type = model.Type;
+
+            await this.paragraphsRepository.SaveAsync();
+            return paragraph;
+        }
+
+        public async Task<Paragraph> DeleteParagraph(int id)
+        {
+            var paragaph = await this.GetParagraphById(id);
+            if (paragaph == null)
+            {
+                throw new EntityNotFoundException("Секцията не е намерена!");
+            }
+
+            var paragraphsToLower = this.paragraphsRepository.All().Where(p => p.BlogPostId == paragaph.BlogPostId && p.Position > paragaph.Position).ToList();
+            foreach (var item in paragraphsToLower)
+            {
+                item.Position--;
+            }
+
+            this.paragraphsRepository.Delete(paragaph);
+            await this.paragraphsRepository.SaveAsync();
+            return paragaph;
+        }
+
+        public async Task<Paragraph> CreateBlankParagraph(string blogId)
+        {
+            var post = await this.GetById(blogId);
+            if (post == null)
+            {
+                throw new EntityNotFoundException("Публикацията не е намерена!");
+            }
+
+            int position = this.paragraphsRepository.All().Where(p => p.BlogPostId == blogId).Count() + 1;
+            var paragraph = new Paragraph()
+            {
+                BlogPost = post,
+                BlogPostId = blogId,
+                CssClassList = null,
+                EmbedVideoHtml = null,
+                Position = position,
+                SpecialContentPosition = SpecialContentPosition.Left,
+                Type = ParagraphType.TextOnly,
+                Text = $"Секция {position}"
+            };
+
+            await this.paragraphsRepository.AddAsync(paragraph);
+            await this.paragraphsRepository.SaveAsync();
+            return paragraph;
         }
     }
 }

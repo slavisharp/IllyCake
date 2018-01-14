@@ -55,7 +55,7 @@
         {
             var vm = this.manager.GetQueryById(id).Select(ProductDetailsViewModel.ExpressionFromProduct).FirstOrDefault();
             SetProductCategoriesList();
-            ViewBag.ActiveTab = "tab-1";
+            ViewBag.ActiveTab = tab;
             return View(vm);
         }
 

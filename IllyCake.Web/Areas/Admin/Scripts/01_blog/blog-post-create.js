@@ -3,11 +3,16 @@
         var formData = new FormData(),
             $this = $(this),
             files = $this.get(0).files,
+            id = $this.data('id'),
             $target = $($this.data('target')),
             value = $this.val();
 
         for (var i = 0; i < files.length; i++) {
             formData.append(files[i].name, files[i]);
+        }
+
+        if (id !== undefined) {
+            formData.append("blogPostId", id);
         }
 
         $.ajax({

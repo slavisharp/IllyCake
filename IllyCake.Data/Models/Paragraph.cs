@@ -1,5 +1,6 @@
 ﻿namespace IllyCake.Data.Models
 {
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public class Paragraph : IKeyEntity<int>
@@ -35,6 +36,7 @@
 
     public enum ParagraphType
     {
+        [DisplayName("Само текст")]
         TextOnly = 1,
         WithImage = 2,
         WithVideo = 3

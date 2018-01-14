@@ -1,66 +1,22 @@
 $(function () {
-    $('#blog-image-selection').change(function () {
-        var formData = new FormData(),
-            $this = $(this),
-            files = $this.get(0).files,
-            $target = $($this.data('target')),
-            value = $this.val();
-
-        for (var i = 0; i < files.length; i++) {
-            formData.append(files[i].name, files[i]);
-        }
-
-        $.ajax({
-            data: formData,
-            contentType: false,
-            processData: false,
-            type: 'POST',
-            url: '/Admin/Images/UploadBlogPostMainImage'
-        })
-            .done(function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    var imgSource = data[i].relativePath,
-                        id = data[i].id,
-                        $imgTag = $('<img class="img-fluid"  src="' + imgSource + '" />'),
-                        $idInput = $('<input type="hidden" name="ThumbImageId"/>'),
-                        $imgUrlInput = $('<input type="hidden" name="ImageUrl"/>');
-                    if ($this.val()) {
-                        var imageName = $this.val().substr($this.val().lastIndexOf('\\') + 1);
-                        $this.closest('.file-selection-container').find('.file-selection-label').html(imageName);
-                    }
-
-                    $imgUrlInput.val(data[i].relativePath);
-                    $idInput.val(id);
-                    $target.html($idInput);
-                    $imgTag.hide();
-                    $target.append($imgTag);
-                    $target.append($imgUrlInput);
-                    $imgTag.fadeIn();
-                }
-            })
-            .fail(function (err) {
-                console.log(err);
-            });
-    });
-});
-$(function () {
-
-});
-$(function () {
     'use strict';
 
     $('.mvc-grid').mvcgrid();
     toastr.options.closeButton = true;
 });
 $(function () {
-    $('.editable-row-toggle').click(function () {
+    attachEditableRow($('body'));
+});
+
+function attachEditableRow($parent) {
+    $parent.find('.editable-row-toggle').click(function () {
         var $this = $(this),
             $parent = $this.closest('.editable-row');
 
         toggleEditMode($parent);
     });
 
-    $('.editable-row .editable-row-save').click(function () {
+    $parent.find('.editable-row .editable-row-save').click(function () {
         var $this = $(this),
             $parent = $this.closest('.editable-row'),
             token = $('input[name="__RequestVerificationToken"]').val(),
@@ -92,7 +48,7 @@ $(function () {
         });
     });
 
-    $('.editable-row .editable-row-delete').click(function () {
+    $parent.find('.editable-row .editable-row-delete').click(function () {
         var $this = $(this),
             $parent = $this.closest('.editable-row'),
             id = $parent.find('.edit-mode-input-key').val(),
@@ -112,21 +68,21 @@ $(function () {
             toastr.error(response.status, response.responseText);
         });
     });
+}
 
-    function toggleEditMode($parent) {
-        if ($parent.hasClass('read-mode')) {
-            $parent.find('.edit-mode-only').removeClass('hidden');
-            $parent.find('.read-mode-only').addClass('hidden');
-            $parent.find('.edit-mode-input').attr('disabled', false);
-            $parent.removeClass('read-mode').addClass('edit-mode');
-        } else {
-            $parent.find('.edit-mode-only').addClass('hidden');
-            $parent.find('.read-mode-only').removeClass('hidden');
-            $parent.find('.edit-mode-input').attr('disabled', 'disabled');
-            $parent.removeClass('edit-mode').addClass('read-mode');
-        }
+function toggleEditMode($parent) {
+    if ($parent.hasClass('read-mode')) {
+        $parent.find('.edit-mode-only').removeClass('hidden');
+        $parent.find('.read-mode-only').addClass('hidden');
+        $parent.find('.edit-mode-input').attr('disabled', false);
+        $parent.removeClass('read-mode').addClass('edit-mode');
+    } else {
+        $parent.find('.edit-mode-only').addClass('hidden');
+        $parent.find('.read-mode-only').removeClass('hidden');
+        $parent.find('.edit-mode-input').attr('disabled', 'disabled');
+        $parent.removeClass('edit-mode').addClass('read-mode');
     }
-});
+}
 $(function () {
     $.fn.mvcgrid.lang = {
             Text: {
@@ -166,6 +122,83 @@ $(function () {
             Or: 'Или'
         }
     };
+});
+$(function () {
+    $('#blog-image-selection').change(function () {
+        var formData = new FormData(),
+            $this = $(this),
+            files = $this.get(0).files,
+            id = $this.data('id'),
+            $target = $($this.data('target')),
+            value = $this.val();
+
+        for (var i = 0; i < files.length; i++) {
+            formData.append(files[i].name, files[i]);
+        }
+
+        if (id !== undefined) {
+            formData.append("blogPostId", id);
+        }
+
+        $.ajax({
+            data: formData,
+            contentType: false,
+            processData: false,
+            type: 'POST',
+            url: '/Admin/Images/UploadBlogPostMainImage'
+        })
+            .done(function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var imgSource = data[i].relativePath,
+                        id = data[i].id,
+                        $imgTag = $('<img class="img-fluid"  src="' + imgSource + '" />'),
+                        $idInput = $('<input type="hidden" name="ThumbImageId"/>'),
+                        $imgUrlInput = $('<input type="hidden" name="ImageUrl"/>');
+                    if ($this.val()) {
+                        var imageName = $this.val().substr($this.val().lastIndexOf('\\') + 1);
+                        $this.closest('.file-selection-container').find('.file-selection-label').html(imageName);
+                    }
+
+                    $imgUrlInput.val(data[i].relativePath);
+                    $idInput.val(id);
+                    $target.html($idInput);
+                    $imgTag.hide();
+                    $target.append($imgTag);
+                    $target.append($imgUrlInput);
+                    $imgTag.fadeIn();
+                }
+            })
+            .fail(function (err) {
+                console.log(err);
+            });
+    });
+});
+$(function () {
+    $('.add-paragrpaph-btn').click(function () {
+        var id = $('#Id').val(),
+            token = $('input[name="__RequestVerificationToken"]').val(),
+            data = {
+                blogId: id,
+                __RequestVerificationToken: token
+            };
+        $.ajax({
+            url: '/Admin/BlogPosts/CreateParagraph',
+            method: 'POST',
+            data: data,
+            traditional: true
+        }).done(function (html) {
+            var $paragraph = $(html);
+            attachEditableRow($paragraph)
+            $('#paragraphs-wrapper').append($paragraph)
+        }).fail(function (response) {
+            toastr.error(response.status, response.responseText);
+        });
+    });
+
+    var ckEditorFields = $('.paragraph #Text');
+    if (ckEditorFields.length > 0) {
+        CKEDITOR.replace('Text');
+    }
 });
 $(function () {
     $('.sortable-categories').sortable({
@@ -251,8 +284,10 @@ $(function () {
     });
 });
 $(function () {
-    CKEDITOR.replace('Description');
-
+    if ($('#Description').length > 0) {
+        CKEDITOR.replace('Description');
+    }
+    
     $('.delete-gallery-image-btn').click(function (e) {
         e.preventDefault();
         deleteGalerryImage($(this));

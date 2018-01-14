@@ -1,0 +1,44 @@
+﻿@model ParagraphEditViewModel
+@{ 
+    Layout = null;
+}
+<div class="paragraph paragraph-form editable-row read-mode" data-area="Admin" data-controller="BlogPosts" data-action="UpdateParagraph" data-position="@Model.Position">
+    <input class="edit-mode-input edit-mode-input-key" type="hidden" asp-for="Id" value="@Model.Id" />
+    <input class="edit-mode-input" type="hidden" asp-for="BlogId" value="@Model.BlogId" />
+    <div class="row align-items-center">
+        <div class="col-6 col-md-3 form-group">
+            <label asp-for="Type"></label>
+        </div>
+        <div class="col-6 col-md-3 form-group">
+            <select asp-for="Type" asp-items="Html.GetEnumSelectList<ParagraphType>()" type="number" class="form-control edit-mode-input" disabled="disabled"></select>
+        </div>
+        <div class="col-6 col-md-3 form-group">
+            <label asp-for="SpecialContentPosition"></label>
+        </div>
+        <div class="col-6 col-md-3 form-group">
+            <select asp-for="SpecialContentPosition" asp-items="Html.GetEnumSelectList<SpecialContentPosition>()" type="number" class="form-control edit-mode-input" disabled="disabled"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col form-group">
+            <textarea asp-for="Text" class="form-control edit-mode-input"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6 form-group">
+            <label asp-for="ThumbImageId"></label>
+            <input class="edit-mode-input" type="hidden" asp-for="ThumbImageId" disabled="disabled" />
+        </div>
+        <div class="cols-12 col-md-6 form-group">
+            <label asp-for="EmbedVideoHtml"></label>
+            <textarea asp-for="EmbedVideoHtml" class="form-control edit-mode-input" disabled="disabled"></textarea>
+        </div>
+    </div>
+    <div>
+        <a href="#" class="btn btn-primary editable-row-toggle read-mode-only">Edit <i class="fa fa-pencil"></i></a>
+        <a href="#" class="btn btn-success editable-row-save edit-mode-only">Save <i class="fa fa-save"></i></a>
+        <a href="#" class="btn btn-secondary editable-row-toggle edit-mode-only">Cancel <i class="fa fa-close"></i></a>
+        <a href="#" class="btn btn-danger editable-row-delete edit-mode-only pull-right" data-action="DeleteParagraph">Delete <i class="fa fa-delete"></i></a>
+    </div>
+</div>
+<hr />

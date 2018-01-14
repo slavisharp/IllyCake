@@ -1,6 +1,8 @@
 ﻿$(function () {
-    CKEDITOR.replace('Description');
-
+    if ($('#Description').length > 0) {
+        CKEDITOR.replace('Description');
+    }
+    
     $('.delete-gallery-image-btn').click(function (e) {
         e.preventDefault();
         deleteGalerryImage($(this));

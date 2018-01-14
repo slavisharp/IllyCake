@@ -1,12 +1,16 @@
 ﻿$(function () {
-    $('.editable-row-toggle').click(function () {
+    attachEditableRow($('body'));
+});
+
+function attachEditableRow($parent) {
+    $parent.find('.editable-row-toggle').click(function () {
         var $this = $(this),
             $parent = $this.closest('.editable-row');
 
         toggleEditMode($parent);
     });
 
-    $('.editable-row .editable-row-save').click(function () {
+    $parent.find('.editable-row .editable-row-save').click(function () {
         var $this = $(this),
             $parent = $this.closest('.editable-row'),
             token = $('input[name="__RequestVerificationToken"]').val(),
@@ -38,7 +42,7 @@
         });
     });
 
-    $('.editable-row .editable-row-delete').click(function () {
+    $parent.find('.editable-row .editable-row-delete').click(function () {
         var $this = $(this),
             $parent = $this.closest('.editable-row'),
             id = $parent.find('.edit-mode-input-key').val(),
@@ -58,18 +62,18 @@
             toastr.error(response.status, response.responseText);
         });
     });
+}
 
-    function toggleEditMode($parent) {
-        if ($parent.hasClass('read-mode')) {
-            $parent.find('.edit-mode-only').removeClass('hidden');
-            $parent.find('.read-mode-only').addClass('hidden');
-            $parent.find('.edit-mode-input').attr('disabled', false);
-            $parent.removeClass('read-mode').addClass('edit-mode');
-        } else {
-            $parent.find('.edit-mode-only').addClass('hidden');
-            $parent.find('.read-mode-only').removeClass('hidden');
-            $parent.find('.edit-mode-input').attr('disabled', 'disabled');
-            $parent.removeClass('edit-mode').addClass('read-mode');
-        }
+function toggleEditMode($parent) {
+    if ($parent.hasClass('read-mode')) {
+        $parent.find('.edit-mode-only').removeClass('hidden');
+        $parent.find('.read-mode-only').addClass('hidden');
+        $parent.find('.edit-mode-input').attr('disabled', false);
+        $parent.removeClass('read-mode').addClass('edit-mode');
+    } else {
+        $parent.find('.edit-mode-only').addClass('hidden');
+        $parent.find('.read-mode-only').removeClass('hidden');
+        $parent.find('.edit-mode-input').attr('disabled', 'disabled');
+        $parent.removeClass('edit-mode').addClass('read-mode');
     }
-});
+}

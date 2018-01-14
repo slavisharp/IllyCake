@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IllyCake.Common.Managers
+﻿namespace IllyCake.Common.Managers
 {
-    public class IUpdateParagraph
+    public interface IUpdateParagraph : ICreateParagraph
     {
+        int Id { get; set; }
     }
 }

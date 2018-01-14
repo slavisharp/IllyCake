@@ -12,11 +12,13 @@
 
         IQueryable<BlogPost> GetQueryById(string id);
 
+        IQueryable<Paragraph> GetParagraphsForBlog(string blogId);
+
         Task<BlogPost> CreateBlogPost(ICreateBlogPost model);
 
         Task<BlogPost> UpdateBlogPost(IUpdateBlogPost model);
 
-        Task<BlogPost> DeleteBlogPost(int id);
+        Task<BlogPost> DeleteBlogPost(string id);
 
         Task<Paragraph> CreateParagraph(ICreateParagraph model);
 
@@ -25,5 +27,7 @@
         Task MoveParagraph(int id, int delta);
 
         Task<Paragraph> DeleteParagraph(int id);
+
+        Task<Paragraph> CreateBlankParagraph(string blogId);
     }
 }

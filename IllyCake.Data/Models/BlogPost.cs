@@ -57,5 +57,7 @@
         public string MetaKeyWords { get; set; }
         
         public virtual ICollection<BlogPostState> BlogPostStates { get; set; }
+
+        public virtual ICollection<Paragraph> Paragraphs { get; set; }
     }
 }
