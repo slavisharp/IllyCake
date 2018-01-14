@@ -129,9 +129,11 @@ table {
 body {
   font-size: 14px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #382b27;
 }
 h1 {
-  font-size: 42px;
+  margin-bottom: 30px;
+  font-size: 48px;
   text-align: center;
 }
 .text-center {
@@ -148,6 +150,7 @@ h1 {
   text-align: center;
   text-decoration: none;
   background: #382b27;
+  cursor: pointer;
 }
 .button:hover {
   background: #433632;
@@ -267,6 +270,68 @@ header .nav .user-controls a .fa {
 }
 /* About section END */
 /* Blogpost section START */
+.blog-posts .blog-posts-heading {
+  margin-top: 30px;
+  font-size: 30px;
+  text-align: center;
+}
+.blog-posts article {
+  margin-top: 30px;
+  height: 340px;
+  box-sizing: border-box;
+}
+.blog-posts article .image {
+  position: relative;
+  float: left;
+  width: 600px;
+  height: 100%;
+  overflow: hidden;
+}
+.blog-posts article .image img {
+  position: absolute;
+  width: 110%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.blog-posts article .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  float: right;
+  padding: 30px;
+  width: 600px;
+  height: 100%;
+  box-sizing: border-box;
+  border: 1px solid #382b27;
+  border-left: 0px;
+}
+.blog-posts article .content h2 {
+  font-size: 30px;
+}
+.blog-posts article .content .button {
+  background-color: #d94854;
+  width: 50%;
+}
+.blog-posts article .content .button:hover {
+  background-color: #d86a73;
+}
+.blog-posts article.left-aligned .image {
+  float: right;
+}
+.blog-posts article.left-aligned .content {
+  float: left;
+  border: 0;
+  border: 1px solid #382b27;
+  border-right: 0;
+}
+.blog-posts article.left-aligned .content h2,
+.blog-posts article.left-aligned .content p {
+  text-align: right;
+}
+.blog-posts article.left-aligned .content .button {
+  margin-left: auto;
+}
 /* Blogpost section END */
 @keyframes fadeInFromNone {
   0% {

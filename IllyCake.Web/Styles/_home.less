@@ -74,7 +74,82 @@
 /* About section END */
 
 /* Blogpost section START */
+.blog-posts {
+  .blog-posts-heading {
+    margin-top: 30px;
+    font-size: 30px;
+    text-align: center;
+  }
 
+  article {
+    margin-top: 30px;
+    height: 340px;
+    box-sizing: border-box;
+
+    .image {
+      position: relative;
+      float: left;
+      width: 600px;
+      height: 100%;
+      overflow: hidden;
+
+      img {
+        position: absolute;
+        width: 110%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      float: right;
+      padding: 30px;
+      width: 600px;
+      height: 100%;
+      box-sizing: border-box;
+      border: 1px solid #382b27;
+      border-left: 0px;
+
+      h2 {
+        font-size: 30px;
+      }
+
+      .button {
+        background-color: #d94854;
+        width: 50%;
+        
+        &:hover {
+          background-color: #d86a73;
+        }
+      }
+    }
+    &.left-aligned {
+      .image {
+        float: right;
+      }
+    
+      .content {
+        float: left;
+        border: 0;
+        border: 1px solid #382b27;
+        border-right: 0;
+
+        h2,
+        p {
+          text-align: right;
+        }
+        
+        .button {
+          margin-left: auto;
+        }
+      }
+    }
+  }
+}
 /* Blogpost section END */
 @keyframes fadeInFromNone {
   0% {
