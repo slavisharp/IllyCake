@@ -1,10 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IllyCake.Common.Managers
+﻿namespace IllyCake.Common.Managers
 {
-    public interface IUpdateBlogPost
+    using IllyCake.Data.Models;
+
+    public interface IUpdateBlogPost : ICreateBlogPost
     {
+        string Id { get; set; }
+
+        BlogPostStates State { get; set; }
+        
+        string MetaDescription { get; set; }
+        
+        string MetaKeyWords { get; set; }
+
+        bool ShowOnHomePage { get; set; }
     }
 }
