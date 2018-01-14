@@ -5,10 +5,10 @@
 
 <div class="wrapper">
   <ul class="nav navbar-nav">
-    <nav-link asp-controller="Home" asp-action="Index" class="nav-link">Начало</nav-link>
+    <nav-link asp-controller="Home" asp-action="Index" class="nav-link"><i class="fa fa-home" aria-hidden="true"></i> Начало</nav-link>
     <nav-link asp-controller="Products" asp-action="Index" class="nav-link">Мъфини</nav-link>
-    <nav-link asp-controller="Blog" asp-action="Index" class="nav-link">Блог</nav-link>
-    <nav-link asp-controller="Home" asp-action="About" class="nav-link">За нас</nav-link>
+    <nav-link asp-controller="Blog" asp-action="Index" class="nav-link"><i class="fa fa-book" aria-hidden="true"></i> Блог</nav-link>
+    <nav-link asp-controller="Home" asp-action="About" class="nav-link"><i class="fa fa-info-circle" aria-hidden="true"></i> За нас</nav-link>
     @if (SignInManager.IsSignedIn(User))
     {
       <li class="nav-item">

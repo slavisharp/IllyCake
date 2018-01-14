@@ -180,6 +180,9 @@ header .nav .nav-link a {
   color: white;
   line-height: 50px;
 }
+header .nav .nav-link a i {
+  margin-right: 5px;
+}
 header .nav .nav-link:hover,
 header .nav .nav-link.active {
   -webkit-box-shadow: inset 0px -10px 0px 0px rgba(255, 255, 255, 0.15);
