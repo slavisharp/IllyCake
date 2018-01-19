@@ -65,6 +65,13 @@
         [DisplayName("Изображение")]
         public int? ThumbImageId { get; set; }
 
+        // RUNTIME
+
+        /// <summary>
+        /// Shows if paragraph has any video content set to it
+        /// </summary>
+        public bool HasVideo { get { return !string.IsNullOrWhiteSpace(this.EmbedVideoHtml); } }
+
         public static Expression<Func<Paragraph, ParagraphEditViewModel>> ExpressionFromParagraph
         {
             get

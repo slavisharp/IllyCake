@@ -46,6 +46,13 @@ button,
 .border-gray {
   border-color: #EBEDED;
 }
+.no-padding {
+  padding: 0 !important;
+}
+.label-for-select {
+  padding-top: .5rem;
+  margin: 0;
+}
 /* =============================================================================
    Screen size variables
    ========================================================================== */
@@ -197,4 +204,29 @@ ol.example li.placeholder:before {
   position: absolute;
   top: 0;
   right: 0;
+}
+.paragraph {
+  padding: 10px;
+}
+.paragraph.edit-mode {
+  background: #EBEDED;
+}
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
+}
+.video-container.no-content {
+  padding-bottom: 0;
+}
+.video-container iframe,
+.video-container object,
+.video-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }

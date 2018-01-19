@@ -18,13 +18,15 @@
         private IRepository<BlogPost> blogPostRepository;
         private IRepository<ProductImage> productImageRepository;
         private IRepository<Product> productRepository;
+        private IRepository<Paragraph> paragraphRepository;
 
         public ImageManager(AppSettings settings, 
                             IHostingEnvironment env, 
                             IRepository<ImageFile> repo, 
                             IRepository<Product> productRepository,
                             IRepository<BlogPost> blogPostRepo,
-                            IRepository<ProductImage> productImageRepository)
+                            IRepository<ProductImage> productImageRepository,
+                            IRepository<Paragraph> paragraphRepo)
         {
             this.settings = settings;
             this.env = env;
@@ -32,6 +34,7 @@
             this.blogPostRepository = blogPostRepo;
             this.productImageRepository = productImageRepository;
             this.productRepository = productRepository;
+            this.paragraphRepository = paragraphRepo;
         }
         
         public async Task<ImageFile> AddArticleImageAsync(string fileName, string contentType, long length, byte[] imageBytes)
@@ -78,9 +81,9 @@
             return image;
         }
 
-        public async Task<ImageFile> AddBlogPostMainImageAsync(string fileName, string contentType, long length, byte[] imageBytes, int? blogPostId)
+        public async Task<ImageFile> AddBlogPostMainImageAsync(string fileName, string contentType, long length, byte[] imageBytes, string blogPostId)
         {
-            var image = await AddProductImageAsync(fileName, contentType, length, imageBytes);
+            var image = await AddImageAsync(this.settings.URLS.BlogImagesRelativePath, this.settings.URLS.BlogImagesFileRelativePath, fileName, contentType, length, imageBytes);
             if (blogPostId != null)
             {
                 var blogPost = await this.blogPostRepository.GetByIdAsync(blogPostId);
@@ -94,6 +97,22 @@
             return image;
         }
 
+        public async Task<ImageFile> AddParagraphImageAsync(string fileName, string contentType, long length, byte[] imageBytes, int? paragraphId)
+        {
+            var image = await AddImageAsync(this.settings.URLS.BlogImagesRelativePath, this.settings.URLS.BlogImagesFileRelativePath, fileName, contentType, length, imageBytes);
+            if (paragraphId != null)
+            {
+                Paragraph paragraph = await this.paragraphRepository.GetByIdAsync(paragraphId);
+                if (paragraph != null)
+                {
+                    paragraph.Image = image;
+                    await this.productRepository.SaveAsync();
+                }
+            }
+
+            return image;
+        }
+        
         public async Task<ImageFile> AddQuoteImageAsync(string fileName, string contentType, long length, byte[] imageBytes)
         {
             return await AddImageAsync(
@@ -105,13 +124,7 @@
             return await AddImageAsync(
                 this.settings.URLS.ProductImagesRelativePath, this.settings.URLS.ProductImagesFileRelativePath, fileName, contentType, length, imageBytes);
         }
-
-        private async Task<ImageFile> AddBlogPostImageAsync(string fileName, string contentType, long length, byte[] imageBytes)
-        {
-            return await AddImageAsync(
-                this.settings.URLS.BlogImagesRelativePath, this.settings.URLS.BlogImagesFileRelativePath, fileName, contentType, length, imageBytes);
-        }
-
+        
         private async Task<ImageFile> AddImageAsync(string relativeWebPath, string relativeFilePath, string fileName, string contentType, long length, byte[] imageBytes)
         {
             string extension = this.GetFileNameExtension(fileName);

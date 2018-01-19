@@ -144,7 +144,7 @@
             try
             {
                 await this.manager.DeleteParagraph(id);
-                return Json(new { success = "Секция е изтрита!" });
+                return Json(new { success = "Секцията е изтрита!" });
             }
             catch (EntityNotFoundException ex)
             {

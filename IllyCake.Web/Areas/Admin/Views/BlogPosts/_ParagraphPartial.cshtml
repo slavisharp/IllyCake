@@ -1,5 +1,5 @@
 ﻿@model ParagraphEditViewModel
-@{ 
+@{
     Layout = null;
 }
 <div class="paragraph paragraph-form editable-row read-mode" data-area="Admin" data-controller="BlogPosts" data-action="UpdateParagraph" data-position="@Model.Position">
@@ -7,13 +7,13 @@
     <input class="edit-mode-input" type="hidden" asp-for="BlogId" value="@Model.BlogId" />
     <div class="row align-items-center">
         <div class="col-6 col-md-3 form-group">
-            <label asp-for="Type"></label>
+            <label asp-for="Type" class="label-for-select"></label>
         </div>
         <div class="col-6 col-md-3 form-group">
             <select asp-for="Type" asp-items="Html.GetEnumSelectList<ParagraphType>()" type="number" class="form-control edit-mode-input" disabled="disabled"></select>
         </div>
         <div class="col-6 col-md-3 form-group">
-            <label asp-for="SpecialContentPosition"></label>
+            <label asp-for="SpecialContentPosition" class="label-for-select"></label>
         </div>
         <div class="col-6 col-md-3 form-group">
             <select asp-for="SpecialContentPosition" asp-items="Html.GetEnumSelectList<SpecialContentPosition>()" type="number" class="form-control edit-mode-input" disabled="disabled"></select>
@@ -21,17 +21,43 @@
     </div>
     <div class="row">
         <div class="col form-group">
-            <textarea asp-for="Text" class="form-control edit-mode-input"></textarea>
+            <textarea asp-for="Text" id="paragraph-text-@Model.Id" class="form-control paragraph-text-edit edit-mode-input"></textarea>
         </div>
     </div>
     <div class="row">
         <div class="col-12 col-md-6 form-group">
-            <label asp-for="ThumbImageId"></label>
+            <label>Изображение</label>
+            <label for="paragraph-image-@Model.Id" class="edit-mode-only file-selection-label">Избери изображение</label>
             <input class="edit-mode-input" type="hidden" asp-for="ThumbImageId" disabled="disabled" />
+            <input class="paragraph-image-file-input hidden" type="file" id="paragraph-image-@Model.Id" />
+            <div class="paragraph-image-preview">
+                @if (Model.ThumbImage != null)
+                {
+                    <img src="@Model.ThumbImage.Path" alt="@Model.ThumbImage.Name" class="img-fluid" />
+                }
+                else
+                {
+                    <img src="" alt="" class="img-fluid hidden" />
+                }
+            </div>
         </div>
         <div class="cols-12 col-md-6 form-group">
             <label asp-for="EmbedVideoHtml"></label>
-            <textarea asp-for="EmbedVideoHtml" class="form-control edit-mode-input" disabled="disabled"></textarea>
+            <textarea asp-for="EmbedVideoHtml" class="form-control video-edit-input edit-mode-input edit-mode-only" disabled="disabled"></textarea>
+            @if (Model.HasVideo)
+            {
+                <div class="video-container">
+                    @if (!string.IsNullOrWhiteSpace(Model.EmbedVideoHtml))
+                    {
+                        @Html.Raw(Model.EmbedVideoHtml);
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="video-container no-content"></div>
+            }
+
         </div>
     </div>
     <div>

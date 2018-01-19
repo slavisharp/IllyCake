@@ -22,13 +22,13 @@
 
     public enum BlogPostStates
     {
-        [DisplayName("Чернова")]
+        [Display(Name = "Чернова")]
         Draft = 1,
 
-        [DisplayName("Публикуван")]
+        [Display(Name = "Публикуван")]
         Published = 2,
 
-        [DisplayName("Архивиран")]
+        [Display(Name = "Архивиран")]
         Archived = 3
     }
 }

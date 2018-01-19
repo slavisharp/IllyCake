@@ -1,4 +1,5 @@
-﻿$(function () {
+﻿/* ------ BLOG POSTS ----- */
+$(function () {
     $('#blog-image-selection').change(function () {
         var formData = new FormData(),
             $this = $(this),

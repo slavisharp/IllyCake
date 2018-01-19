@@ -93,7 +93,7 @@
         }
         
         [HttpPost]
-        public async Task<IActionResult> UploadBlogPostMainImage(int? blogPostId = null)
+        public async Task<IActionResult> UploadBlogPostMainImage(string blogPostId = null)
         {
             var images = this.Request.Form.Files;
             if (images == null || images.Count == 0)
@@ -111,6 +111,31 @@
                 }
 
                 var imageEntity = await this.imageManager.AddBlogPostMainImageAsync(image.FileName, image.ContentType, image.Length, imageBytes, blogPostId);
+                imagesResult.Add(new ImageFileViewModel() { Id = imageEntity.Id, Name = imageEntity.Name, RelativePath = imageEntity.Path });
+            }
+
+            return Json(imagesResult);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadParagraphImage(int? paragraphId = null)
+        {
+            var images = this.Request.Form.Files;
+            if (images == null || images.Count == 0)
+            {
+                return BadRequest("Няма избрани файлове!");
+            }
+
+            byte[] imageBytes = null;
+            IList<ImageFileViewModel> imagesResult = new List<ImageFileViewModel>(images.Count);
+            foreach (var image in images)
+            {
+                using (BinaryReader reader = new BinaryReader(image.OpenReadStream()))
+                {
+                    imageBytes = reader.ReadBytes((int)image.Length);
+                }
+
+                var imageEntity = await this.imageManager.AddParagraphImageAsync(image.FileName, image.ContentType, image.Length, imageBytes, paragraphId);
                 imagesResult.Add(new ImageFileViewModel() { Id = imageEntity.Id, Name = imageEntity.Name, RelativePath = imageEntity.Path });
             }
 

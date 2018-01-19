@@ -3,7 +3,8 @@
 });
 
 function attachEditableRow($parent) {
-    $parent.find('.editable-row-toggle').click(function () {
+    $parent.find('.editable-row-toggle').click(function (e) {
+        e.preventDefault();
         var $this = $(this),
             $parent = $this.closest('.editable-row');
 

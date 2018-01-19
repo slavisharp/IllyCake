@@ -10,6 +10,7 @@
         Task<ImageFile> AddProductGalleryImageAsync(string fileName, string contentType, long length, byte[] imageBytes, int? productId);
         Task<ImageFile> AddArticleImageAsync(string fileName, string contentType, long length, byte[] imageBytes);
         Task<ProductImage> DeleteProductImageAsync(int productId, int imageId);
-        Task<ImageFile> AddBlogPostMainImageAsync(string fileName, string contentType, long length, byte[] imageBytes, int? blogPostId);
+        Task<ImageFile> AddBlogPostMainImageAsync(string fileName, string contentType, long length, byte[] imageBytes, string blogPostId);
+        Task<ImageFile> AddParagraphImageAsync(string fileName, string contentType, long length, byte[] imageBytes, int? paragraphId);
     }
 }

@@ -36,16 +36,25 @@
 
     public enum ParagraphType
     {
-        [DisplayName("Само текст")]
+        [Display(Name = "Само текст")]
         TextOnly = 1,
+        [Display(Name = "С изображение")]
         WithImage = 2,
-        WithVideo = 3
+        [Display(Name = "С видео")]
+        WithVideo = 3,
+        [Display(Name = "Само изображение")]
+        ImageOnly = 4,
+        [Display(Name = "Само видео")]
+        VideoOnly = 5
     }
 
     public enum SpecialContentPosition
     {
+        [Display(Name = "В ляво")]
         Left = 1,
+        [Display(Name = "В дясно")]
         Right = 2,
+        [Display(Name = "В средата")]
         Center = 3
     }
 }

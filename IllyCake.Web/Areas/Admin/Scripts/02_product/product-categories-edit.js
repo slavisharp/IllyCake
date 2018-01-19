@@ -1,4 +1,5 @@
-﻿$(function () {
+﻿/* ------ PRODUCTS ----- */
+$(function () {
     $('.sortable-categories').sortable({
         containerSelector: 'div.sortable,ol,ul',
         itemSelector: 'div.row, li',

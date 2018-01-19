@@ -17,7 +17,7 @@
                 <a class="nav-link @(activeTab == "tab-2" ? "active" : string.Empty)" data-toggle="tab" href="#tab-2" role="tab">Съдържание</a>
             </li>
         </ul>
-        <div class="tab-content">
+        <div class="tab-content no-padding">
             <div class="tab-pane @(activeTab == "tab-1" ? "active" : string.Empty)" id="tab-1" role="tabpanel">
                 <form method="post" asp-area="Admin" asp-controller="BlogPosts" asp-action="Edit" asp-antiforgery="true">
                     <div class="row">
