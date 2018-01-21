@@ -8,6 +8,8 @@
     using IllyCake.Common.Managers;
     using IllyCake.Data.Models;
     using Microsoft.AspNetCore.Identity;
+    using IllyCake.Web.ViewModels.HomePageViewModels;
+    using System.Linq;
 
     public class HomeController : BaseController
     {
@@ -20,7 +22,13 @@
 
         public IActionResult Index()
         {
-            return View();
+            var homeVm = new HomePageViewModel()
+            {
+                BlogPosts = this.manager.HomePageBlogsQuery().OrderByDescending(p => p.Created).Select().Take(3),
+                Products = this.manager.HomePageProductsQuery().OrderBy(p => p.Category.Name).Select()
+            };
+
+            return View(homeVm);
         }
 
         public IActionResult About()

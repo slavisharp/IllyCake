@@ -3,6 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
+    // NOT IN USER FOR NOW
     public class HomePage : IAuditInfo, IKeyEntity<int>
     {
         [Key]

@@ -2,59 +2,27 @@
 {
     using IllyCake.Data.Models;
     using IllyCake.Data.Repository;
-    using System;
-    using System.Threading.Tasks;
     using System.Linq;
 
     public class HomePageManager : IHomePageManager
     {
-        private IRepository<HomePage> repository;
+        private IRepository<Product> productsRepository;
+        private IRepository<BlogPost> blogsRepository;
 
-        public HomePageManager(IRepository<HomePage> repo)
+        public HomePageManager(IRepository<Product> productsRepo, IRepository<BlogPost> blogsRepo)
         {
-            this.repository = repo;
+            this.productsRepository = productsRepo;
+            this.blogsRepository = blogsRepo;
         }
 
-        public IRepository<HomePage> Repository => this.repository;
-
-        public HomePage Create(IHomePageCreateModel input)
+        public IQueryable<BlogPost> HomePageBlogsQuery()
         {
-            throw new NotImplementedException();
+            return this.blogsRepository.All().Where(p => !p.IsDeleted && p.LastState == BlogPostStates.Published && p.ShowOnHomePage);
         }
 
-        public Task<HomePage> CreateAsync(IHomePageCreateModel input)
+        public IQueryable<Product> HomePageProductsQuery()
         {
-            throw new NotImplementedException();
-        }
-
-        public bool Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<HomePage> Search(IHomePageSearchModel search)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IQueryable<HomePage>> SearchAsync(IHomePageSearchModel search)
-        {
-            throw new NotImplementedException();
-        }
-
-        public HomePage Update(IHomePageUpdateModel input)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<HomePage> UpdateAsync(IHomePageUpdateModel input)
-        {
-            throw new NotImplementedException();
+            return this.productsRepository.All().Where(p => !p.IsDeleted && p.ShowOnHomePage);
         }
     }
 }
