@@ -4,31 +4,30 @@
 @inject UserManager<ApplicationUser> UserManager
 
 <div class="wrapper">
-  <ul class="nav navbar-nav">
-    <nav-link asp-controller="Home" asp-action="Index" class="nav-link"><i class="fa fa-home" aria-hidden="true"></i> Начало</nav-link>
-    <nav-link asp-controller="Products" asp-action="Index" class="nav-link">Мъфини</nav-link>
-    <nav-link asp-controller="Blog" asp-action="Index" class="nav-link"><i class="fa fa-book" aria-hidden="true"></i> Блог</nav-link>
-    <nav-link asp-controller="Home" asp-action="About" class="nav-link"><i class="fa fa-info-circle" aria-hidden="true"></i> За нас</nav-link>
-    @if (SignInManager.IsSignedIn(User))
-    {
-      <li class="nav-item">
-        <a class="nav-link" asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">@UserManager.GetUserName(User)!</a>
-      </li>
-      <li class="nav-item">
-        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
-          <button type="submit" class="btn btn-link navbar-btn navb-link">Отписване</button>
-        </form>
-      </li>
-    }
-    else
-    {
-      <li class="user-controls login"><a asp-area="" asp-controller="Account" asp-action="Register"><i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
-      <li class="user-controls register"><a asp-area="" asp-controller="Account" asp-action="Login"><i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
-    }
-  </ul>
+    <ul class="nav navbar-nav">
+        <nav-link asp-controller="Home" asp-action="Index" class="nav-link"><i class="fa fa-home" aria-hidden="true"></i> Начало</nav-link>
+        <nav-link asp-controller="Products" asp-action="Index" class="nav-link">Мъфини</nav-link>
+        <nav-link asp-controller="Blog" asp-action="Index" class="nav-link"><i class="fa fa-book" aria-hidden="true"></i> Блог</nav-link>
+        <nav-link asp-controller="Home" asp-action="About" class="nav-link"><i class="fa fa-info-circle" aria-hidden="true"></i> За нас</nav-link>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            @if (ViewBag.IsAdmin != null && (bool)ViewBag.IsAdmin == true)
+            {
+                <nav-link asp-area="Admin" asp-controller="Home" asp-action="Index" class="nav-link"><i class="fa fa-lock" aria-hidden="true"></i> Админ</nav-link>
+            }
+            <li class="user-controls">
+                <a class="nav-link" asp-area="" asp-controller="Manage" asp-action="Index" title="Manage"><i class="fa fa-user" aria-hidden="true"></i></a>
+            </li>
+            <li class="user-controls">
+                <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+                    <button type="submit" class="btn btn-link navbar-btn navb-link"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+                </form>
+            </li>
+        }
+        else
+        {
+            <li class="user-controls login"><a asp-area="" asp-controller="Account" asp-action="Register"><i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
+            <li class="user-controls register"><a asp-area="" asp-controller="Account" asp-action="Login"><i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
+        }
+    </ul>
 </div>
-
-@if (ViewBag.IsAdmin != null && (bool)ViewBag.IsAdmin == true)
-{
-  <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Админ</a></li>
-}
