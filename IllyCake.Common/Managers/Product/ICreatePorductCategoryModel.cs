@@ -4,6 +4,8 @@
     {
         string Name { get; set; }
 
+        string Alias { get; set; }
+
         bool ShowOnHomePage { get; set; }
     }
 }

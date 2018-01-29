@@ -13,6 +13,11 @@
         [MaxLength(100, ErrorMessage = "Името на продукта не трябва да бъде дълго повече от 100 символа!")]
         public string Name { get; set; }
 
+        [DisplayName("URL псевдоним")]
+        [Required(ErrorMessage = "Полето е задължително")]
+        [MaxLength(100, ErrorMessage = "Псевдонимa на продукта не трябва да бъде дълго повече от 100 символа!")]
+        public string Alias { get; set; }
+
         [Required(ErrorMessage = StaticStringValues.REQUIRED_FIELD)]
         [MinLength(2, ErrorMessage = "Кода трябва да е дълъг поне 2 символа!")]
         [MaxLength(10, ErrorMessage = "Кода не трябва да е по-дълъг от 10 символа!")]

@@ -57,7 +57,7 @@
         }
 
         [HttpGet]
-        public IActionResult Edit(string id, string tab = "tab-2")
+        public IActionResult Edit(string id, string tab = "tab-1")
         {
             var vm = this.manager.GetQueryById(id).Select(BlogPostEditViewModel.ExpressionFromBlogPost).FirstOrDefault();
             if (vm == null)

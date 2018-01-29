@@ -46,6 +46,7 @@
                     CategoryId = x.CategoryId,
                     Created = x.Created,
                     Modified = x.Modified,
+                    Alias = x.Alias,
                     Id = x.Id,
                     Name = x.Name,
                     Price = x.Price,

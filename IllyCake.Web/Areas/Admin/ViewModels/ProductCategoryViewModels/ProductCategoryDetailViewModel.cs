@@ -10,6 +10,8 @@
 
         public string Name { get; set; }
 
+        public string Alias { get; set; }
+
         public bool ShowOnHomePage { get; set; }
 
         public int Position { get; set; }
@@ -21,6 +23,7 @@
                 return x => new ProductCategoryDetailViewModel()
                 {
                     Name = x.Name,
+                    Alias = x.Alias,
                     Id = x.Id,
                     Position = x.Position,
                     ShowOnHomePage = x.ShowOnHomePage

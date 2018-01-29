@@ -29,10 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Scripts\03_order\" />
     <Folder Include="Areas\Admin\ViewModels\HomeViewModels\" />
     <Folder Include="Areas\Admin\ViewModels\QuoteViewModels\" />
-    <Folder Include="ViewModels\HomePageViewModels\" />
-    <Folder Include="ViewModels\ProductViewModels\" />
+    <Folder Include="Scripts\page\" />
     <Folder Include="wwwroot\images\blog\" />
     <Folder Include="wwwroot\images\product\" />
     <Folder Include="wwwroot\images\home\" />

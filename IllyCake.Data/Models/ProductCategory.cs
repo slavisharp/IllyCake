@@ -14,6 +14,10 @@
         public string Name { get; set; }
 
         [Required]
+        [MaxLength(100)]
+        public string Alias { get; set; }
+
+        [Required]
         public bool ShowOnHomePage { get; set; }
 
         [Required]

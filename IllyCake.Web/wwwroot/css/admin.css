@@ -110,6 +110,9 @@ button,
 .toggle-on {
   border: 1px solid #ddd;
 }
+.toggle-off {
+  border: 1px solid #ddd;
+}
 .carousel .carousel-control-next,
 .carousel .carousel-control-prev {
   top: 30px;

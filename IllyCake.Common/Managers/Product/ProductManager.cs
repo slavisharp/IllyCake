@@ -79,7 +79,7 @@
                 product.CategoryId = input.CategoryId;
             }
 
-            product.Alias = System.Web.HttpUtility.UrlEncode(input.Name);
+            product.Alias = System.Web.HttpUtility.UrlEncode(input.Alias);
             product.Description = input.Description;
             product.MetaDescription = input.MetaDescripton;
             product.MetaKeyWords = input.MetaKeyWords;
@@ -148,6 +148,7 @@
             var category = new ProductCategory()
             {
                 Name = input.Name,
+                Alias = System.Web.HttpUtility.UrlEncode(input.Alias),
                 ShowOnHomePage = input.ShowOnHomePage,
                 Position = position
             };
@@ -166,6 +167,7 @@
             }
 
             if (category.Name != input.Name) category.Name = input.Name;
+            if (category.Alias != input.Alias) category.Alias = System.Web.HttpUtility.UrlEncode(input.Alias);
             if (category.ShowOnHomePage != input.ShowOnHomePage) category.ShowOnHomePage = input.ShowOnHomePage;
             await this.repository.SaveAsync();
             return category;

@@ -32,6 +32,7 @@
         public bool ShowOnHomePage { get; set; }
 
         [Required]
+        [DisplayName("Статус")]
         public BlogPostStates State { get; set; }
 
         [MaxLength(160)]
@@ -63,6 +64,7 @@
                     ThumbImageId = x.ThumbImageId,
                     Title = x.Title,
                     ImageUrl = x.ThumbImage.Path,
+                    State = x.LastState,
                     CreatorId = x.UserId,
                     ShowOnHomePage = x.ShowOnHomePage,
                     Paragraphs = x.Paragraphs.Select(p => new ParagraphEditViewModel()

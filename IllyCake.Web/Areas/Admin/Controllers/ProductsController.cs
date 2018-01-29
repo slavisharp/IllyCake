@@ -72,7 +72,15 @@
                 }
                 catch (Exception ex)
                 {
-                    TempData["error"] = ex.Message;
+                    if (ex.InnerException != null)
+                    {
+                        TempData["error"] = ex.InnerException.Message;
+                    }
+                    else
+                    {
+                        TempData["error"] = ex.Message;
+                    }
+                    
                     return RedirectToAction("Edit", new { id = input.Id });
                 }
             }

@@ -1,76 +1,23 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model HomePageViewModel
+@section meta {
+    <title>Foca Fresco</title>
+    <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.">
+    <meta name="keywords" content="Lorem,ipsum,dolor,sit,amet">
+    <meta name="author" content="Foca Fresco">
 }
-
 <section class="teaser">
-  <div class="wrapper">
-    <section class="teaser-products">
-      <div class="row">
-        <div class="product">
-          <img src="/resources/images/example2.png" />
-          <div class="product-preview">
-            <img src="/resources/images/example2.png" />
-            <h3>Лорем ипсум</h3>
-            <p>99.99лв.</p>
-            <a class="button" href="#">Детайли <i class="fa fa-info-circle" aria-hidden="true"></i></i></a>
-            <a class="button" href="#">Добави в количката   <i class="fa fa-cart-plus" aria-hidden="true"></i></a>
-          </div>
-        </div>
-        <div class="product">
-          <img src="/resources/images/example.png" />
-          <div class="product-preview">
-            <img src="/resources/images/example.png" />
-            <h3>Лорем ипсум</h3>
-            <p>99.99лв.</p>
-            <a class="button" href="#">Детайли <i class="fa fa-info-circle" aria-hidden="true"></i></i></a>
-            <a class="button" href="#">Добави в количката <i class="fa fa-cart-plus" aria-hidden="true"></i></a>
-          </div>
-        </div>
-        <div class="product">
-          <img src="/resources/images/example.png" />
-          <div class="product-preview">
-            <img src="/resources/images/example.png" />
-            <h3>Лорем ипсум</h3>
-            <p>99.99лв.</p>
-            <a class="button" href="#">Детайли <i class="fa fa-info-circle" aria-hidden="true"></i></i></a>
-            <a class="button" href="#">Добави в количката <i class="fa fa-cart-plus" aria-hidden="true"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="product">
-          <img src="/resources/images/example.png" />
-          <div class="product-preview">
-            <img src="/resources/images/example.png" />
-            <h3>Лорем ипсум</h3>
-            <p>99.99лв.</p>
-            <a class="button" href="#">Детайли <i class="fa fa-info-circle" aria-hidden="true"></i></i></a>
-            <a class="button" href="#">Добави в количката <i class="fa fa-cart-plus" aria-hidden="true"></i></a>
-          </div>
-        </div>
-        <div class="product">
-          <img src="/resources/images/example.png" />
-          <div class="product-preview">
-            <img src="/resources/images/example.png" />
-            <h3>Лорем ипсум</h3>
-            <p>99.99лв.</p>
-            <a class="button" href="#">Детайли <i class="fa fa-info-circle" aria-hidden="true"></i></i></a>
-            <a class="button" href="#">Добави в количката <i class="fa fa-cart-plus" aria-hidden="true"></i></a>
-          </div>
-        </div>
-        <div class="product">
-          <img src="/resources/images/example.png" />
-          <div class="product-preview">
-            <img src="/resources/images/example.png" />
-            <h3>Лорем ипсум</h3>
-            <p>99.99лв.</p>
-            <a class="button" href="#">Детайли <i class="fa fa-info-circle" aria-hidden="true"></i></i></a>
-            <a class="button" href="#">Добави в количката <i class="fa fa-cart-plus" aria-hidden="true"></i></a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+    <div class="wrapper">
+        <section class="teaser-products">
+            @for (int i = 0; i < Model.Products.Count; i += 3)
+            {
+                <div class="row">
+                    @await Html.PartialAsync("_ProductHomeItem", Model.Products[i])
+                    @await Html.PartialAsync("_ProductHomeItem", Model.Products[i + 1])
+                    @await Html.PartialAsync("_ProductHomeItem", Model.Products[i + 2])
+                </div>
+            }
+        </section>
+    </div>
 </section>
 <section class="about">
     <div class="wrapper">
@@ -88,56 +35,10 @@
 <section class="blog-posts">
     <div class="wrapper">
         <h2 class="blog-posts-heading">Последни публикации от блога:</h2>
-        <article>
-            <div class="image">
-                <img src="/resources/images/exampleBlog.jpg">
-            </div>
-            <div class="content">
-                <h2>Lorem Ipsum Heading</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                    officia deserunt mollit anim id est laborum.
-                </p>
-                <a class="button">Прочети повече <i class="fa fa-book" aria-hidden="true"></i></a>
-            </div>
-        </article>
-        <article class="left-aligned">
-            <div class="image">
-                <img src="/resources/images/exampleBlog2.png">
-            </div>
-            <div class="content">
-                <h2>Lorem Ipsum Heading</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                    officia deserunt mollit anim id est laborum.
-                </p>
-                <a class="button">Прочети повече <i class="fa fa-book" aria-hidden="true"></i></a>
-            </div>
-        </article>
-        <article>
-            <div class="image">
-                <img src="/resources/images/exampleBlog3.png">
-            </div>
-            <div class="content">
-                <h2>Lorem Ipsum Heading</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                    officia deserunt mollit anim id est laborum.
-                </p>
-                <a class="button">Прочети повече <i class="fa fa-book" aria-hidden="true"></i></a>
-            </div>
-        </article>
+        @for (int i = 0; i < Model.BlogPosts.Count; i++)
+        {
+            Model.BlogPosts[i].PositionClass = i % 2 == 0 ? "" : "left-aligned";
+            @await Html.PartialAsync("_BlogPostListItemPartial", Model.BlogPosts[i])
+        }
     </div>
 </section>

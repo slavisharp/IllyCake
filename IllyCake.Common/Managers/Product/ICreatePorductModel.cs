@@ -6,6 +6,8 @@
     {
         string Name { get; set; }
 
+        string Alias { get; set; }
+
         string SKUCode { get; set; }
 
         decimal Price { get; set; }

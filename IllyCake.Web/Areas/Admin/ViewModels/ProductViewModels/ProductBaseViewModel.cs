@@ -18,6 +18,12 @@
         public string Name { get; set; }
 
         [Required(ErrorMessage = StaticStringValues.REQUIRED_FIELD)]
+        [MinLength(2, ErrorMessage = "Псевдонима трябва да е дълъг поне 2 символа!")]
+        [MaxLength(100, ErrorMessage = "Псевдонима не трябва да е по-дълъг от 100 символа!")]
+        [DisplayName("URL псевдоним")]
+        public string Alias { get; set; }
+
+        [Required(ErrorMessage = StaticStringValues.REQUIRED_FIELD)]
         [MinLength(2, ErrorMessage = "Кода трябва да е дълъг поне 2 символа!")]
         [MaxLength(10, ErrorMessage = "Кода не трябва да е по-дълъг от 10 символа!")]
         [DisplayName("Каталожен №")]

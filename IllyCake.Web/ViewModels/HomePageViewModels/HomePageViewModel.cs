@@ -1,13 +1,13 @@
 ﻿namespace IllyCake.Web.ViewModels.HomePageViewModels
 {
-    using IllyCake.Web.Areas.Admin.ViewModels.BlogViewModels;
-    using IllyCake.Web.Areas.Admin.ViewModels.ProductViewModels;
+    using IllyCake.Web.ViewModels.BlogPostViewModels;
+    using IllyCake.Web.ViewModels.ProductViewModels;
     using System.Collections.Generic;
 
     public class HomePageViewModel
     {
-        public IEnumerable<BlogPostListViewModel> BlogPosts { get; set; }
+        public IList<BlogPostListViewModel> BlogPosts { get; set; }
 
-        public IEnumerable<ProductListViewModel> Products { get; set; }
+        public IList<ProductListViewModel> Products { get; set; }
     }
 }

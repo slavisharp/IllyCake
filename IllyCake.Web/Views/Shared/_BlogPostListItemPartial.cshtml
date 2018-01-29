@@ -1,0 +1,19 @@
+﻿@model BlogPostListViewModel
+@{
+    Layout = null;
+}
+
+<article class="@Model.PositionClass">
+    <div class="image">
+        <img src="@Model.Image.RelativePath" alt="@Model.Image.Name">
+    </div>
+    <div class="content">
+        <h2>@Model.Title</h2>
+        <p>
+            @Html.Raw(Model.ShortDescription)
+        </p>
+        <a class="button" asp-controller="Blog" asp-action="Details" asp-route-alias="@Model.Alias">
+            Прочети повече <i class="fa fa-book" aria-hidden="true"></i>
+        </a>
+    </div>
+</article>

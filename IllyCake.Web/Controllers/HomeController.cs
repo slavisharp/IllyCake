@@ -1,21 +1,22 @@
 ﻿namespace IllyCake.Web.Controllers
 {
-    using System.Diagnostics;
-    using Microsoft.AspNetCore.Mvc;
-    
-    using IllyCake.Web.Models;
-    using IllyCake.Common.Settings;
     using IllyCake.Common.Managers;
+    using IllyCake.Common.Settings;
     using IllyCake.Data.Models;
-    using Microsoft.AspNetCore.Identity;
+    using IllyCake.Web.Models;
+    using IllyCake.Web.ViewModels.BlogPostViewModels;
     using IllyCake.Web.ViewModels.HomePageViewModels;
+    using IllyCake.Web.ViewModels.ProductViewModels;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Diagnostics;
     using System.Linq;
 
     public class HomeController : BaseController
     {
         private IHomePageManager manager;
 
-        public HomeController(AppSettings appSettings, IHomePageManager homePageManager, UserManager<ApplicationUser> userManager) : base(appSettings, userManager)
+        public HomeController(AppSettings appSettings, UserManager<ApplicationUser> userManager, IHomePageManager homePageManager) : base(appSettings, userManager)
         {
             this.manager = homePageManager;
         }
@@ -24,8 +25,8 @@
         {
             var homeVm = new HomePageViewModel()
             {
-                BlogPosts = this.manager.HomePageBlogsQuery().OrderByDescending(p => p.Created).Select().Take(3),
-                Products = this.manager.HomePageProductsQuery().OrderBy(p => p.Category.Name).Select()
+                BlogPosts = this.manager.HomePageBlogsQuery().OrderByDescending(p => p.Created).Select(BlogPostListViewModel.ExpressionFromBlogPost).Take(3).ToList(),
+                Products = this.manager.HomePageProductsQuery().OrderByDescending(p => p.Created).Select(ProductListViewModel.ExpressionFromProduct).Take(6).ToList()
             };
 
             return View(homeVm);

@@ -34,6 +34,13 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label asp-for="Alias" class="col-4 col-form-label required"></label>
+                                <div class="col-8">
+                                    <input asp-for="Alias" class="form-control" />
+                                    <span asp-validation-for="Alias" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label asp-for="SKUCode" class="col-4 col-form-label required"></label>
                                 <div class="col-8">
                                     <input asp-for="SKUCode" class="form-control" />
@@ -77,7 +84,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label asp-for="MetaKeyWords" class="col-4 col-form-label required"></label>
+                                <label asp-for="MetaKeyWords" class="col-4 col-form-label"></label>
                                 <div class="col-8">
                                     <textarea asp-for="MetaKeyWords" class="form-control"></textarea>
                                     <span asp-validation-for="MetaKeyWords" class="text-danger"></span>
@@ -123,7 +130,7 @@
                     <div class="row justify-content-md-center">
                         <div class="col-12 col-md-8">
                             <h4>
-                                <label asp-for="Description"></label>
+                                <label asp-for="Description" class="required"></label>
                             </h4>
                             <span asp-validation-for="Description" class="text-danger"></span>
                             <div>

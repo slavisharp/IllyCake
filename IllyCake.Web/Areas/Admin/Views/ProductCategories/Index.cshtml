@@ -14,13 +14,16 @@
     <div class="col col-1 text-center">
         №
     </div>
-    <div class="col col-6">
+    <div class="col col-4">
         Име
+    </div>
+    <div class="col col-3">
+        URL
     </div>
     <div class="col col-2 text-center">
         Home Page
     </div>
-    <div class="col col-3">
+    <div class="col col-2">
         Редактирай
     </div>
 </div>
@@ -33,13 +36,16 @@
                 <span class="position">@category.Position</span>
                 <input class="edit-mode-input edit-mode-input-key" name="Id" type="hidden" value="@category.Id" />
             </div>
-            <div class="col col-6">
+            <div class="col col-4">
                 <input class="form-control edit-mode-input" name="Name" type="text" value="@category.Name" disabled="disabled" />
+            </div>
+            <div class="col col-3">
+                <input class="form-control edit-mode-input" name="Alias" type="text" value="@category.Alias" disabled="disabled" />
             </div>
             <div class="col col-2 text-center">
                 <input class="checkbox edit-mode-input" name="ShowOnHomePage" type="checkbox" checked="@category.ShowOnHomePage" value="true" disabled="disabled" />
             </div>
-            <div class="col col-3">
+            <div class="col col-2">
                 <a title="Редактирай" class="btn btn-primary editable-row-toggle read-mode-only"><i class="fa fa-pencil"></i></a>
                 <a title="Запази" class="btn btn-success editable-row-save edit-mode-only"><i class="fa fa-floppy-o"></i></a>
                 <a title="Отказ" class="btn btn-warning editable-row-toggle edit-mode-only"><i class="fa fa-ban"></i></a>

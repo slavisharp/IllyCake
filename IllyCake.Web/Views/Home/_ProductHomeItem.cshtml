@@ -1,0 +1,16 @@
+﻿@model ProductListViewModel
+@{
+    Layout = null;
+}
+<div class="product">
+    <img src="@Model.Image.RelativePath" alt="@Model.Image.Name" />
+    <div class="product-preview">
+        <img src="@Model.Image.RelativePath" alt="@Model.Image.Name" />
+        <h3>@Model.Name</h3>
+        <p>@(Model.Price)лв.</p>
+        <a class="button" asp-action="Details" asp-controller="Products" asp-route-category="@Model.CategoryAlias" asp-route-alias="@Model.Alias">
+            Детайли <i class="fa fa-info-circle" aria-hidden="true"></i>
+        </a>
+        <a class="button button-add-to-cart" href="#">Добави в количката <i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+    </div>
+</div>
