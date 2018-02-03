@@ -5,7 +5,7 @@
 
     public static class ApplicationServicesConfig
     {
-        internal static void ConfigureAppServices(IServiceCollection services)
+        internal static void ConfigureAppManagers(IServiceCollection services)
         {
             services.AddTransient<IHomePageManager, HomePageManager>();
             services.AddTransient<IBlogPostManager, BlogPostManager>();

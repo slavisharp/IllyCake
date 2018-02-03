@@ -1,0 +1,42 @@
+﻿@model EmailViewModel
+@{
+    ViewData["Title"] = "Изпрати Имейл";
+}
+
+<section class="product-edit">
+    <header>
+        <h2>Състави Имейл</h2>
+    </header>
+    @await Html.PartialAsync("_ShowResultAlert", new ResultAlertViewModel(TempData["success"] as string, TempData["error"] as string, TempData["errors"] as IEnumerable<string>))
+    <form method="post" asp-area="Admin" asp-controller="Home" asp-action="Email" asp-antiforgery="true">
+        <div class="form-group row">
+            <label asp-for="RecieverEmail" class="col-4 col-form-label required"></label>
+            <div class="col-8">
+                <input asp-for="RecieverEmail" class="form-control" />
+                <span asp-validation-for="RecieverEmail" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="Subject" class="col-4 col-form-label required"></label>
+            <div class="col-8">
+                <input asp-for="Subject" class="form-control" />
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="Body" class="col-4 col-form-label"></label>
+            <div class="col-8">
+                <textarea asp-for="Body" class="form-control"></textarea>
+                <span asp-validation-for="Body" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="text-center">
+            <input type="submit" value="Изпрати" class="btn btn-primary" />
+        </div>
+    </form>
+</section>
+@section  scripts {
+    <script>
+        CKEDITOR.replace('Body');
+    </script>
+}

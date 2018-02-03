@@ -1,4 +1,6 @@
-﻿namespace IllyCake.Common.Settings
+﻿using System.Collections.Generic;
+
+namespace IllyCake.Common.Settings
 {
     public class AppSettings
     {
@@ -7,6 +9,8 @@
         public string[] UserRoles { get; set; }
 
         public URLSettings URLS { get; set; }
+
+        public EmailSettings EmailSettings { get; set; }
     }
 
     public class URLSettings
@@ -28,6 +32,19 @@
         public string QuoteImagesRelativePath { get; set; }
 
         public string QuoteImagesFileRelativePath { get; set; }
+    }
+
+    public class EmailSettings
+    {
+        public string PrimaryDomain { get; set; }
+
+        public int PrimaryPort { get; set; }
+
+        public string UsernameEmail { get; set; }
+
+        public string From { get; set; }
+
+        public IEnumerable<string> CCList { get; set; }
     }
 
     public static class StaticStringValues
