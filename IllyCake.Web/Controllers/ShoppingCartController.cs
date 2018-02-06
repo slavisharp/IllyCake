@@ -21,7 +21,7 @@
         [HttpGet]
         public IActionResult Index()
         {
-            string cartId = this.HttpContext.Session.Get<string>(base.appSettings.ShoppingCartSessionKey);
+            string cartId = this.HttpContext.Session.Get<string>(base.AppSettings.ShoppingCartSessionKey);
             ShoppingCartViewModel cartModel = new ShoppingCartViewModel(cartManager.GetCart(cartId));
             return View(cartModel);
         }
@@ -30,11 +30,11 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddProduct(AddProductViewModel input)
         {
-            string cartId = this.HttpContext.Session.Get<string>(base.appSettings.ShoppingCartSessionKey);
+            string cartId = this.HttpContext.Session.Get<string>(base.AppSettings.ShoppingCartSessionKey);
             if (cartId == null)
             {
                 cartId = await this.cartManager.CreateCartAsync();
-                this.HttpContext.Session.Set(base.appSettings.ShoppingCartSessionKey, cartId);
+                this.HttpContext.Session.Set(base.AppSettings.ShoppingCartSessionKey, cartId);
             }
 
             ShoppingCartViewModel cartModel = new ShoppingCartViewModel(await this.cartManager.AddProductAsync(cartId, input));
@@ -45,7 +45,7 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateProduct(UpdateProductViewModel input)
         {
-            string cartId = this.HttpContext.Session.Get<string>(base.appSettings.ShoppingCartSessionKey);
+            string cartId = this.HttpContext.Session.Get<string>(base.AppSettings.ShoppingCartSessionKey);
             ShoppingCartViewModel cartModel = null;
             if (cartId == null)
             {
@@ -66,7 +66,7 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveProduct(int orderItemId)
         {
-            string cartId = this.HttpContext.Session.Get<string>(base.appSettings.ShoppingCartSessionKey);
+            string cartId = this.HttpContext.Session.Get<string>(base.AppSettings.ShoppingCartSessionKey);
             if (cartId == null)
             {
                 return BadRequest("Shopping cart is not initialized!");
@@ -80,7 +80,7 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Clear()
         {
-            string cartId = this.HttpContext.Session.Get<string>(base.appSettings.ShoppingCartSessionKey);
+            string cartId = this.HttpContext.Session.Get<string>(base.AppSettings.ShoppingCartSessionKey);
             if (cartId == null)
             {
                 return BadRequest("Shopping cart is not initialized!");

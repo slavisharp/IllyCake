@@ -5,8 +5,6 @@
 
     public interface ICartResult
     {
-        decimal Total { get; set; }
-
         IQueryable<OrderItem> LineItems { get; set; }
     }
 }

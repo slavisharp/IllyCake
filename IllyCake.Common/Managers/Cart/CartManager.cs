@@ -1,12 +1,20 @@
 ﻿namespace IllyCake.Common.Managers
 {
+    using IllyCake.Data.Models;
+    using IllyCake.Data.Repository;
     using System.Threading.Tasks;
 
     public class CartManager : ICartManager
     {
-        public CartManager()
-        {
+        private IRepository<OrderItem> orderItemRepository;
+        private IRepository<Product> productRepository;
+        private IRepository<ShoppingCart> cartRepository;
 
+        public CartManager(IRepository<ShoppingCart> cartRepo, IRepository<OrderItem> orderItemRepo, IRepository<Product> productRepo)
+        {
+            this.orderItemRepository = orderItemRepo;
+            this.productRepository = productRepo;
+            this.cartRepository = cartRepo;
         }
 
         public Task<ICartResult> AddProductAsync(string cartId, IAddProductToCart model)

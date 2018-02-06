@@ -1,7 +1,6 @@
 ﻿namespace IllyCake.Web.Controllers
 {
     using IllyCake.Common.Settings;
-    using IllyCake.Data;
     using IllyCake.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -11,8 +10,9 @@
     public class BaseController : Controller
     {
         private ApplicationUser currentUser;
-        protected AppSettings appSettings;
         private UserManager<ApplicationUser> userManager;
+        private AppSettings appSettings;
+        private bool isAdmin;
 
         public BaseController(AppSettings appSettings, UserManager<ApplicationUser> userManager)
         {
@@ -20,9 +20,11 @@
             this.userManager = userManager;
         }
 
-        protected bool IsAdmin { get; set; }
+        protected bool IsAdmin { get { return this.isAdmin; } }
 
-        protected async Task<ApplicationUser> GetCurrentUser()
+        protected AppSettings AppSettings { get { return this.appSettings; } }
+
+        protected async Task<ApplicationUser> GetCurrentUserAsync()
         {
             if (currentUser == null)
             {
@@ -35,7 +37,7 @@
         public override void OnActionExecuted(ActionExecutedContext context)
         {
             base.OnActionExecuted(context);
-            this.IsAdmin = base.User != null && base.User.IsInRole(this.appSettings.AdminRole);
+            this.isAdmin = base.User != null && base.User.IsInRole(this.AppSettings.AdminRole);
             ViewBag.IsAdmin = this.IsAdmin;
         }
     }

@@ -33,7 +33,7 @@
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var user = await base.GetCurrentUser();
+            var user = await base.GetCurrentUserAsync();
             var vm = new BlogPostCreateViewModel();
             if (user != null)
             {
