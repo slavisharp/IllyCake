@@ -11,6 +11,8 @@ namespace IllyCake.Common.Settings
         public URLSettings URLS { get; set; }
 
         public EmailSettings EmailSettings { get; set; }
+
+        public string ShoppingCartSessionKey { get; set; }
     }
 
     public class URLSettings

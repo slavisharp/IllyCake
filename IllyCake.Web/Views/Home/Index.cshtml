@@ -8,12 +8,19 @@
 <section class="teaser">
     <div class="wrapper">
         <section class="teaser-products">
-            @for (int i = 0; i < Model.Products.Count; i += 3)
+
+            @for (int i = 0; i < Model.Products.Count; i++)
             {
                 <div class="row">
-                    @await Html.PartialAsync("_ProductHomeItem", Model.Products[i])
-                    @await Html.PartialAsync("_ProductHomeItem", Model.Products[i + 1])
-                    @await Html.PartialAsync("_ProductHomeItem", Model.Products[i + 2])
+                    @await Html.PartialAsync("_ProductHomeItem", Model.Products[i++])
+                    @if (i < Model.Products.Count)
+                    {
+                        @await Html.PartialAsync("_ProductHomeItem", Model.Products[i++])
+                    }
+                    @if (i < Model.Products.Count)
+                    {
+                        @await Html.PartialAsync("_ProductHomeItem", Model.Products[i])
+                    }
                 </div>
             }
         </section>

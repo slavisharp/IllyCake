@@ -38,7 +38,7 @@
             {
                 if (ModelState.IsValid)
                 {
-                    await this.emailService.SendActionResultEmailAsync(input.RecieverEmail, input.Subject, "Home/About", null);
+                    // await this.emailService.SendActionResultEmailAsync(input.RecieverEmail, input.Subject, "Home/About", null);
                     await this.emailService.SendEmailAsync(input.RecieverEmail, input.Subject, input.Body);
                     TempData["success"] = "Имейла е изпратен!";
                 }
