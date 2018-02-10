@@ -1,14 +1,16 @@
 ﻿namespace IllyCake.Common.Managers
 {
+    using IllyCake.Data.Models;
+    using System.Linq;
     using System.Threading.Tasks;
 
     public interface ICartManager
     {
-        ICartResult GetCart(string cartId);
+        IQueryable<OrderItem> GetCart(string cartSessionId);
         Task<string> CreateCartAsync();
-        Task<ICartResult> AddProductAsync(string cartId, IAddProductToCart model);
-        Task<ICartResult> UpdateProductAsync(string cartId, IUpdateProductToCart model);
-        Task<ICartResult> RemoveProductAsync(string cartId, int orderItemId);
-        Task<ICartResult> ClearShoppingCart(string cartId);
+        Task<IQueryable<OrderItem>> AddProductAsync(string cartSessionId, IAddProductToCart model);
+        Task<IQueryable<OrderItem>> UpdateProductAsync(string cartSessionId, IUpdateProductToCart model);
+        Task<IQueryable<OrderItem>> RemoveProductAsync(string cartSessionId, int orderItemId);
+        Task ClearShoppingCartAsync(string cartSessionId);
     }
 }

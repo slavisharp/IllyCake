@@ -13,7 +13,7 @@
         public virtual Product Product { get; set; }
 
         public int? ShoppingCartId { get; set; }
-        public virtual ShoppingCart GetShoppingCart { get; set; }
+        public virtual ShoppingCart ShoppingCart { get; set; }
 
         public int? OrderId { get; set; }
         public virtual Order Order { get; set; }

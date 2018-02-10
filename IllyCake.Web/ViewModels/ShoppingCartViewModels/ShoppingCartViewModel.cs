@@ -2,13 +2,19 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using IllyCake.Common.Managers;
+    using IllyCake.Data.Models;
 
     public class ShoppingCartViewModel
     {
-        public ShoppingCartViewModel(ICartResult cartResult)
+        public ShoppingCartViewModel()
         {
-            this.LineItems = cartResult.LineItems.Select(ShoppingCartLineItem.ExpressionFromOrderItem).ToList();
+            LineItems = new List<ShoppingCartLineItem>();
+            Total = 0;
+        }
+
+        public ShoppingCartViewModel(IQueryable<OrderItem> cartResult)
+        {
+            this.LineItems = cartResult.Select(ShoppingCartLineItem.ExpressionFromOrderItem).ToList();
             this.Total = this.LineItems.Sum(i => i.FinalPrice);
         }
 

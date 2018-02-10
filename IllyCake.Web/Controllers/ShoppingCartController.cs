@@ -1,5 +1,6 @@
 ﻿namespace IllyCake.Web.Controllers
 {
+    using IllyCake.Common.Exeptions;
     using IllyCake.Common.Managers;
     using IllyCake.Common.Settings;
     using IllyCake.Data.Models;
@@ -30,15 +31,22 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddProduct(AddProductViewModel input)
         {
-            string cartId = this.HttpContext.Session.Get<string>(base.AppSettings.ShoppingCartSessionKey);
-            if (cartId == null)
+            string carSessiontId = this.HttpContext.Session.Get<string>(base.AppSettings.ShoppingCartSessionKey);
+            if (carSessiontId == null)
             {
-                cartId = await this.cartManager.CreateCartAsync();
-                this.HttpContext.Session.Set(base.AppSettings.ShoppingCartSessionKey, cartId);
+                carSessiontId = await this.cartManager.CreateCartAsync();
+                this.HttpContext.Session.Set(base.AppSettings.ShoppingCartSessionKey, carSessiontId);
             }
 
-            ShoppingCartViewModel cartModel = new ShoppingCartViewModel(await this.cartManager.AddProductAsync(cartId, input));
-            return Json(cartModel);
+            try
+            {
+                ShoppingCartViewModel cartModel = new ShoppingCartViewModel(await this.cartManager.AddProductAsync(carSessiontId, input));
+                return Json(cartModel);
+            }
+            catch (EntityNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpPost]
@@ -56,7 +64,14 @@
             }
             else
             {
-                cartModel = new ShoppingCartViewModel(await this.cartManager.UpdateProductAsync(cartId, input));
+                try
+                {
+                    cartModel = new ShoppingCartViewModel(await this.cartManager.UpdateProductAsync(cartId, input));
+                }
+                catch (EntityNotFoundException ex)
+                {
+                    return NotFound(ex.Message);
+                }
             }
 
             return Json(cartModel);
@@ -72,8 +87,15 @@
                 return BadRequest("Shopping cart is not initialized!");
             }
 
-            ShoppingCartViewModel cartModel = new ShoppingCartViewModel(await this.cartManager.RemoveProductAsync(cartId, orderItemId));
-            return Json(cartModel);
+            try
+            {
+                ShoppingCartViewModel cartModel = new ShoppingCartViewModel(await this.cartManager.RemoveProductAsync(cartId, orderItemId));
+                return Json(cartModel);
+            }
+            catch (EntityNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpPost]
@@ -86,7 +108,8 @@
                 return BadRequest("Shopping cart is not initialized!");
             }
 
-            ShoppingCartViewModel cartModel = new ShoppingCartViewModel(await this.cartManager.ClearShoppingCart(cartId));
+            await this.cartManager.ClearShoppingCartAsync(cartId);
+            ShoppingCartViewModel cartModel = new ShoppingCartViewModel();
             return Json(cartModel);
         }
     }
