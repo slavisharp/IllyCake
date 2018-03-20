@@ -31,7 +31,7 @@
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Categories = this.manager.GetAllProductCategories().Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() });
+            ViewBag.Categories = this.manager.GetAllCategories().Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() });
             return View(new ProductCreateViewModel() { Type = ProductType.Muffin, Price = 0 });
         }
 
@@ -155,7 +155,7 @@
 
         private void SetProductCategoriesList()
         {
-            ViewBag.Categories = this.manager.GetAllProductCategories().Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() });
+            ViewBag.Categories = this.manager.GetAllCategories().Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() });
         }
     }
 }

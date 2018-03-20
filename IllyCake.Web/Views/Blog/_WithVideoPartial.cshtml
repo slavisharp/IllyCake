@@ -1,0 +1,25 @@
+﻿@model ParagraphViewModel
+@{
+    Layout = null;
+}
+<div class="row blog-posts-paragrpaph @Model.CssClassList">
+    @if (Model.SpecialContentPosition == IllyCake.Data.Models.SpecialContentPosition.Left)
+    {
+        <div class="col blog-post-video">
+            @Html.Raw(Model.EmbededVideo)
+        </div>
+        <div class="col">
+            @Html.Raw(Model.Text)
+        </div>
+    }
+    else
+    {
+        <div class="col">
+            @Html.Raw(Model.Text)
+        </div>
+        <div class="col blog-post-video">
+            @Html.Raw(Model.EmbededVideo)
+        </div>
+    }
+    @Html.Raw(Model.Text)
+</div>

@@ -1,0 +1,20 @@
+﻿@model BlogPostViewModel
+@section Meta{
+    <title>@Model.Title</title>
+    <meta name="description" content="@Model.MetaDescription">
+    <meta name="keywords" content="@Model.MetaKeywords">
+    <meta name="author" content="@Model.PublisherName">
+}
+<section class="blog-post">
+    <header class="blog-post-header">
+        <h1>@Model.Title</h1>
+        <div class="blog-post-description">
+            @Html.Raw(Model.ShortDescription)
+        </div>
+    </header>
+    @foreach (var item in Model.Paragraphs)
+    {
+        string partialName = string.Format("_{0}Partial", item.LayoutType);
+        @await Html.PartialAsync(partialName, item)
+    }
+</section>

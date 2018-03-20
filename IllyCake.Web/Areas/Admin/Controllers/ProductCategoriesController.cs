@@ -25,7 +25,7 @@
         [HttpGet]
         public IActionResult Index()
         {
-            var vm = this.manager.GetAllProductCategories().Select(ProductCategoryDetailViewModel.ExpressionFromProductCategory).ToList();
+            var vm = this.manager.GetAllCategories().Select(ProductCategoryDetailViewModel.ExpressionFromProductCategory).ToList();
             return View(vm);
         }
 

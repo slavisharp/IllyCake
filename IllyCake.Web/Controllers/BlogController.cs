@@ -3,8 +3,10 @@
     using IllyCake.Common.Managers;
     using IllyCake.Common.Settings;
     using IllyCake.Data.Models;
+    using IllyCake.Web.ViewModels.BlogPostViewModels;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using System.Linq;
 
     public class BlogController : BaseController
     {
@@ -19,14 +21,30 @@
         [Route("blog")]
         public IActionResult Index()
         {
-            return View();
+            var vm = this.blogManager
+                .GetAllPublished()
+                .OrderByDescending(p => p.Created)
+                .Select(BlogPostListViewModel.ExpressionFromBlogPost)
+                .ToList();
+
+            return View(vm);
         }
 
         [HttpGet]
         [Route("blog/{alias}")]
         public IActionResult Details(string alias)
         {
-            return View();
+            var vm = this.blogManager
+                .GetQueryByAlias(alias)
+                .Select(BlogPostViewModel.ExpressionDetailsFromBlogPost)
+                .FirstOrDefault();
+
+            if (vm == null)
+            {
+                return NotFound("Публикацията не е намерена!");
+            }
+
+            return View(vm);
         }
     }
 }

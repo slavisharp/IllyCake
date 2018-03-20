@@ -8,9 +8,13 @@
     {
         IQueryable<BlogPost> GetAll();
 
+        IQueryable<BlogPost> GetAllPublished();
+
         Task<BlogPost> GetById(string id);
 
         IQueryable<BlogPost> GetQueryById(string id);
+
+        IQueryable<BlogPost> GetQueryByAlias(string alias);
 
         IQueryable<Paragraph> GetParagraphsForBlog(string blogId);
 

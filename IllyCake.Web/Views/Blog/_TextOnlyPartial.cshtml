@@ -1,0 +1,7 @@
+﻿@model ParagraphViewModel
+@{ 
+    Layout = null;
+}
+<div class="blog-post-paragrpaph @Model.CssClassList">
+    @Html.Raw(Model.Text)
+</div>

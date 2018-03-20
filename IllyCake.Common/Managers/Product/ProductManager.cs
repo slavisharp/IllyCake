@@ -30,15 +30,20 @@
         {
             return this.repository.All().Where(p => p.Id == id);
         }
+        
+        public IQueryable<Product> GetQueryByAlias(string alias, string category)
+        {
+            return this.repository.All().Where(p => p.Alias == alias && p.Category.Alias == category);
+        }
 
         public IQueryable<Product> GetAll()
         {
             return this.repository.All().Where(p => !p.IsDeleted);
         }
 
-        public IQueryable<ProductCategory> GetAllProductCategories()
+        public IQueryable<ProductCategory> GetAllCategories()
         {
-            return this.categoryRepository.All().Where(c => !c.IsDeleted).OrderBy(c => c.Position);
+            return this.categoryRepository.All().Where(c => !c.IsDeleted);
         }
 
         public async Task<Product> CreateProduct(ICreatePorductModel input)
@@ -182,7 +187,7 @@
             }
             
             int newPosition = category.Position + positionDelta;
-            IQueryable<ProductCategory> siblingsQuery = this.GetAllProductCategories().Where(c => c.Id != category.Id).OrderBy(c => c.Id);
+            IQueryable<ProductCategory> siblingsQuery = this.GetAllCategories().Where(c => c.Id != category.Id).OrderBy(c => c.Id);
             if (positionDelta > 0)
             {
                 var siblings = siblingsQuery.Where(s => s.Position <= newPosition && s.Position > category.Position).ToList();

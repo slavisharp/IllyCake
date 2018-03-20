@@ -25,6 +25,11 @@
             return this.blogsRepository.All().Where(p => p.IsDeleted == false);
         }
 
+        public IQueryable<BlogPost> GetAllPublished()
+        {
+            return this.blogsRepository.All().Where(p => p.IsDeleted == false && p.LastState == BlogPostStates.Published);
+        }
+
         public async Task<BlogPost> GetById(string id)
         {
             return await this.blogsRepository.GetByIdAsync(id);
@@ -33,6 +38,11 @@
         public IQueryable<BlogPost> GetQueryById(string id)
         {
             return this.blogsRepository.All().Where(p => p.Id == id);
+        }
+        
+        public IQueryable<BlogPost> GetQueryByAlias(string alias)
+        {
+            return this.blogsRepository.All().Where(p => p.Alias == alias);
         }
 
         public async Task<BlogPost> CreateBlogPost(ICreateBlogPost model)

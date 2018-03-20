@@ -27,6 +27,14 @@
             return View(cartModel);
         }
 
+        [HttpGet]
+        public IActionResult CartPartial()
+        {
+            string cartId = this.HttpContext.Session.Get<string>(base.AppSettings.ShoppingCartSessionKey);
+            ShoppingCartViewModel cartModel = new ShoppingCartViewModel(cartManager.GetCart(cartId));
+            return PartialView("_ShoppingCartPartial", cartModel);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddProduct(AddProductViewModel input)

@@ -8,7 +8,6 @@
 <section class="teaser">
     <div class="wrapper">
         <section class="teaser-products">
-
             @for (int i = 0; i < Model.Products.Count; i++)
             {
                 <div class="row">
@@ -28,7 +27,9 @@
 </section>
 <section class="about">
     <div class="wrapper">
-        <h1>Foca fresco:</h1>
+        <header>
+            <h1>Foca fresco:</h1>
+        </header>
         <p>
             Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
             architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
@@ -41,7 +42,9 @@
 </section>
 <section class="blog-posts">
     <div class="wrapper">
-        <h2 class="blog-posts-heading">Последни публикации от блога:</h2>
+        <header class="blog-posts-heading">
+            <h2>Последни публикации от блога:</h2>
+        </header>
         @for (int i = 0; i < Model.BlogPosts.Count; i++)
         {
             Model.BlogPosts[i].PositionClass = i % 2 == 0 ? "" : "left-aligned";

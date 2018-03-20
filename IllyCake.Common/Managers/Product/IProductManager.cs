@@ -8,11 +8,13 @@
     {
         IQueryable<Product> GetAll();
 
-        IQueryable<ProductCategory> GetAllProductCategories();
+        IQueryable<ProductCategory> GetAllCategories();
 
         Task<Product> GetById(int id);
 
         IQueryable<Product> GetQueryById(int id);
+
+        IQueryable<Product> GetQueryByAlias(string alias, string category);
 
         Task<Product> CreateProduct(ICreatePorductModel input);
 

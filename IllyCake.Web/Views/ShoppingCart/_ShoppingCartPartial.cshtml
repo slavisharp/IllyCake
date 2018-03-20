@@ -1,0 +1,18 @@
+﻿@model ShoppingCartViewModel
+@{ 
+    Layout = null;
+}
+
+<div class="shopping-cart">
+    @foreach (var item in Model.LineItems)
+    {
+        <div class="shopping-cart-line-item">
+            <span>@item.ProductName</span>
+            <span>x @item.Quantity</span>
+            <span>@item.FinalPrice</span>
+        </div>
+    }
+    <div class="shopping-cart-totals">
+        <span>@Model.Total лв.</span>
+    </div>
+</div>
