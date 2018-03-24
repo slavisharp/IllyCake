@@ -60,6 +60,11 @@
                   );
 
                 routes.MapRoute(
+                    name: "products-details",
+                    defaults: new { controller = "Products", action = "Details" },
+                    template: "produkti/{category}/{alias}");
+
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{alias?}");
             });

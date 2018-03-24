@@ -5,7 +5,7 @@
     <meta name="keywords" content="@Model.MetaKeywords">
     <meta name="author" content="@Model.PublisherName">
 }
-<section class="blog-post">
+<article class="blog-post">
     <header class="blog-post-header">
         <h1>@Model.Title</h1>
         <div class="blog-post-description">
@@ -17,4 +17,4 @@
         string partialName = string.Format("_{0}Partial", item.LayoutType);
         @await Html.PartialAsync(partialName, item)
     }
-</section>
+</article>

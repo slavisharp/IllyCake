@@ -156,17 +156,17 @@ h1 {
   background: #433632;
   transition: .25s;
 }
-header {
+.main-menu {
   display: flex;
   background: url('../resources/images/navBg.png') #382b27;
   background-size: cover;
 }
-header .nav {
+.main-menu .nav {
   display: flex;
   flex: 1;
   font-weight: bold;
 }
-header .nav .nav-link {
+.main-menu .nav .nav-link {
   flex: 1;
   list-style-type: none;
   text-align: center;
@@ -174,27 +174,27 @@ header .nav .nav-link {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
-header .nav .nav-link a {
+.main-menu .nav .nav-link a {
   display: block;
   text-decoration: none;
   color: white;
   line-height: 50px;
 }
-header .nav .nav-link a i {
+.main-menu .nav .nav-link a i {
   margin-right: 5px;
 }
-header .nav .nav-link:hover,
-header .nav .nav-link.active {
+.main-menu .nav .nav-link:hover,
+.main-menu .nav .nav-link.active {
   -webkit-box-shadow: inset 0px -10px 0px 0px rgba(255, 255, 255, 0.15);
   -moz-box-shadow: inset 0px -10px 0px 0px rgba(255, 255, 255, 0.15);
   box-shadow: inset 0px -10px 0px 0px rgba(255, 255, 255, 0.15);
   transition: .25s;
 }
-header .nav .user-controls {
+.main-menu .nav .user-controls {
   text-align: center;
   width: 52px;
 }
-header .nav .user-controls a {
+.main-menu .nav .user-controls a {
   display: flex;
   padding: 0 0 4px 0;
   height: 100%;
@@ -204,13 +204,13 @@ header .nav .user-controls a {
   text-decoration: none;
   color: white;
 }
-header .nav .user-controls a:hover {
+.main-menu .nav .user-controls a:hover {
   -webkit-box-shadow: inset 0px -10px 0px 0px rgba(255, 255, 255, 0.15);
   -moz-box-shadow: inset 0px -10px 0px 0px rgba(255, 255, 255, 0.15);
   box-shadow: inset 0px -10px 0px 0px rgba(255, 255, 255, 0.15);
   transition: .25s;
 }
-header .nav .user-controls a .fa {
+.main-menu .nav .user-controls a .fa {
   font-size: 24px;
 }
 /* Teaser section START */

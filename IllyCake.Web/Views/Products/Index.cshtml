@@ -5,5 +5,25 @@
     <meta name="keywords" content="">
     <meta name="author" content="">
 }
-
-<h2>Index</h2>
+@foreach (var category in Model)
+{
+    <section class="product-category">
+        <header class="product-category-header">
+            <h2>@category.Name</h2>
+        </header>
+        <div class="row">
+            @foreach (var product in category.Products)
+            {
+                <div class="product col col-md-4">
+                    <img src="@product.Image.RelativePath" alt="@product.Image.Name" />
+                    <h3>@product.Name</h3>
+                    <p>@(product.Price)лв.</p>
+                    <a class="button" asp-action="Details" asp-controller="Products" asp-route-category="@product.CategoryAlias" asp-route-alias="@product.Alias">
+                        Детайли <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    </a>
+                    <a class="button button-add-to-cart" href="#">Добави в количката <i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+                </div>
+            }
+        </div>
+    </section>
+}
